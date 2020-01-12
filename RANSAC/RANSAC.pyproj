@@ -25,6 +25,9 @@
     <Compile Include="GenerateNoisyLine.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PlotLineOnNumpyArray.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RANSAC.py" />
   </ItemGroup>
   <ItemGroup>
