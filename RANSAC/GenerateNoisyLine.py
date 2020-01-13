@@ -22,7 +22,7 @@ image_noisy=skimage.util.random_noise(img,mode="s&p",seed=None, clip=True,salt_v
 #
 num_points=30
 image_with_line=plotter.PlotLineOnArray (image_noisy,img_width/2,img_height/2,20,20,num_points)
-YOU WERE HERE, THE LINE IS PLOTTING WELL
+
 image_result=image_with_line
 
 #
