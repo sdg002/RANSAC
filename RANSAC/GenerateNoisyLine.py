@@ -21,7 +21,11 @@ image_noisy=skimage.util.random_noise(img,mode="s&p",seed=None, clip=True,salt_v
 #Generate a straight line
 #
 num_points=30
-image_with_line=plotter.PlotLineOnArray (image_noisy,img_width/2,img_height/2,20,20,num_points)
+start_x=img_width * 0.8
+start_y=img_height * 0.8
+end_x= img_width * 0.2
+end_y=img_height * 0.2
+image_with_line=plotter.PlotLineOnArray (image_noisy,start_x,start_y,end_x,end_y,num_points)
 
 image_result=image_with_line
 
