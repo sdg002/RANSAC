@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>GenerateNoisyLine.py</StartupFile>
+    <StartupFile>RANSAC.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,10 +25,19 @@
     <Compile Include="GenerateNoisyLine.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="LineModel.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlotLineOnNumpyArray.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Point.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RANSAC.py" />
+    <Compile Include="RansacHelper.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="out\" />

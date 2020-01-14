@@ -33,7 +33,7 @@ image_result=image_with_line
 #Save the image to disk
 #
 folder_script=os.path.dirname(__file__)
-filename="Numpy.BlankImage.%d.png" % img_back_color
+filename="NoisyImage.%d.png" % img_back_color
 file_result=os.path.join(folder_script,"./out/",filename)
 skimage.io.imsave(file_result,image_result)
 #
