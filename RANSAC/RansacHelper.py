@@ -16,9 +16,14 @@ class RansacHelper(object):
     #
     #Should be called once to set the full list of data points
     #
-    def add_points(self,points):
+    def add_points(self,points:list):
         self._complete_list_of_points.extend(points)
         pass
+    #
+    #Get the collection of points
+    #
+    def get_points(self):
+        return self._complete_list_of_points
 
     #
     #Main algorithm
@@ -29,7 +34,7 @@ class RansacHelper(object):
         best_model=None
         while (iter < self.max_iterations):
             iter+=1
-            random_points=self.get_random_points()
+            random_points=self.select_random_points()
             temp_model=self.create_model(random_points)
             inliers=self.get_inliers_from_model(temp_model,random_points)
             if (len(inliers) < self.threshold_inlier_count):
@@ -49,7 +54,7 @@ class RansacHelper(object):
     def compute_average_distance(self,model:lm.LineModel,points:list):
         lst_distances=list()
         for pt in points:
-            distance=model.get_distance(pt)
+            distance=model.compute_distance(pt)
             lst_distances.append(distance)
         mean=statistics.mean(lst_distances)
         return mean
@@ -61,7 +66,7 @@ class RansacHelper(object):
         for pt in self._complete_list_of_points:
             if ((pt in points_old_inliers) == True):
                 continue
-            distance_from_model:float=model.get_distance(pt)
+            distance_from_model:float=model.compute_distance(pt)
             if (distance_from_model > self.threshold_error):
                 continue
             lst_inliers.append(pt)
@@ -69,7 +74,7 @@ class RansacHelper(object):
     #
     #Gets a random selection of points from the full data set
     #
-    def get_random_points(self):
+    def select_random_points(self):
         #Temporary implementation only
         lst=random.choices(population=self._complete_list_of_points,k=self.min_points_for_model)
         return lst

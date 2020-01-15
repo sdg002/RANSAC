@@ -11,6 +11,9 @@
     <OutputPath>.</OutputPath>
     <Name>RANSAC</Name>
     <RootNamespace>RANSAC</RootNamespace>
+    <TestFramework>unittest</TestFramework>
+    <UnitTestPattern>test*.py</UnitTestPattern>
+    <UnitTestRootDirectory>.</UnitTestRootDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +39,10 @@
     </Compile>
     <Compile Include="RANSAC.py" />
     <Compile Include="RansacHelper.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test_LineModel.py" />
+    <Compile Include="test_RansacHelper.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
