@@ -34,7 +34,7 @@ class RansacHelper(object):
         best_model=None
         while (iter < self.max_iterations):
             iter+=1
-            random_points=self.select_random_points()
+            random_points=self.select_random_points(self.min_points_for_model)
             temp_model=self.create_model(random_points)
             inliers=self.get_inliers_from_model(temp_model,random_points)
             if (len(inliers) < self.threshold_inlier_count):
@@ -72,11 +72,15 @@ class RansacHelper(object):
             lst_inliers.append(pt)
         return lst_inliers
     #
-    #Gets a random selection of points from the full data set
+    #Returns the specified count of random selection of points from the full data set
     #
-    def select_random_points(self):
+    def select_random_points(self,count:int):
         #Temporary implementation only
-        lst=random.choices(population=self._complete_list_of_points,k=self.min_points_for_model)
+        count_original=len(self._complete_list_of_points)
+        if (count >= count_original):
+            message="The count of random points:%d canot exceed length of original list:%d" % (count,count_original)
+            raise Exception(message)
+        lst=random.choices(population=self._complete_list_of_points,k=count)
         return lst
     #
     #Find the best line which fits the specified points

@@ -17,15 +17,19 @@ class Test_test_1(unittest.TestCase):
         pass
 
     def test_GetRandomPoints(self):
-        helper=rh.RansacHelper()
+        helper1=rh.RansacHelper()
         lst=list()
         lst.append(pt.Point(0,0))
         lst.append(pt.Point(1,1))
         lst.append(pt.Point(2,2))
         lst.append(pt.Point(3,3))
-        helper.add_points(lst)
-        rnd_pts=helper.select_random_points()#rename this method
-        self.fail("Not implemented")
+        helper1.add_points(lst)
+        rnd_pts=helper1.select_random_points(2)
+        self.assertEquals(len(rnd_pts), 2)
+        for rnd_pt in rnd_pts:
+            is_member=(rnd_pt in lst)
+            print("ID of random pt=%d" % rnd_pt.ID)
+            self.assertEqual(is_member,True)
 
 if __name__ == '__main__':
     unittest.main()
