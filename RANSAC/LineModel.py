@@ -14,7 +14,7 @@ class LineModel:
     #
     #Compute distance of the point from the model line
     #
-    def get_distance(self,point:pt.Point):
+    def compute_distance(self,point:pt.Point):
         numerator=self.A*point.X + self.B*point.Y + self.C
         denominator=math.sqrt(self.A*self.A + self.B*self.B)
         distance=math.fabs( numerator/denominator)
