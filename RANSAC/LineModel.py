@@ -1,4 +1,5 @@
 import Point as pt
+import math
 class LineModel:
     """Describes the equation of a straight line in ax+by+c format"""
     def __init__ (self, a:float,b:float,c:float):
@@ -14,5 +15,8 @@ class LineModel:
     #Compute distance of the point from the model line
     #
     def get_distance(self,point:pt.Point):
-        return 1.1 #TO BE DONE
+        numerator=self.A*point.X + self.B*point.Y + self.C
+        denominator=math.sqrt(self.A*self.A + self.B*self.B)
+        distance=math.fabs( numerator/denominator)
+        return distance
 
