@@ -14,6 +14,7 @@ class RansacHelper(object):
         self.min_points_for_model:float=0
         # 'threshold_error' is the threshold distance from a line for a point to be classified as an inlier
         self.threshold_error:float=0
+        self.threshold_inlier_count:float=0
 
     #
     #Should be called once to set the full list of data points
@@ -34,26 +35,39 @@ class RansacHelper(object):
         iter=0
         best_error=9999
         best_model=None
+        count_of_better_models=0
         while (iter < self.max_iterations):
+            print("-------------------------------------")
             iter+=1
+            print("Iteration=%d" % iter)
             random_points=self.select_random_points(self.min_points_for_model)
+            print("Found %d random points" % len(random_points))
             temp_model=self.create_model(random_points)
+            print("Built model %s using %d random points" % (temp_model,len(random_points)))
             inliers=self.get_inliers_from_model(temp_model,random_points)
+            print("Found %d inliers" % (len(inliers)))
             if (len(inliers) < self.threshold_inlier_count):
+                print("   Skipping because of poor inlier count (less than %d)" % (self.threshold_inlier_count))
                 continue
+            print("   Taking mini-model because of good inlier count (gt %d)" % (self.threshold_inlier_count))
             lst_new=list()
             lst_new.extend(random_points)
             lst_new.extend(inliers)
             better_model=self.create_model(lst_new)
+            print("Built better model %s using %d random points" % (better_model, len(lst_new)) )
             average_distance=self.compute_average_distance(better_model,lst_new)
             if (average_distance < best_error):
                 best_model=temp_model
                 best_error=average_distance
+                count_of_better_models+=1
+                print("    Taking better model. Error=%f    Count of models=%d" % (average_distance,count_of_better_models))
+            else:
+                print("    Skipping better model. Error=%f    Count of models=%d" % (average_distance,count_of_better_models))
 
         return best_model
         pass
 
-    def compute_average_distance(self,model:lm.LineModel,points:list):
+    def compute_average_distance(self,model:lm.LineModel,points:list) -> float:
         lst_distances=list()
         for pt in points:
             distance=model.compute_distance(pt)
@@ -63,7 +77,7 @@ class RansacHelper(object):
     #
     #Get all points from master list (not used for model building) within error threshold
     #
-    def get_inliers_from_model(self,model:lm.LineModel,points_old_inliers:list):
+    def get_inliers_from_model(self,model:lm.LineModel,points_old_inliers:list) -> list:
         lst_inliers=list()
         for pt in self._complete_list_of_points:
             if ((pt in points_old_inliers) == True):

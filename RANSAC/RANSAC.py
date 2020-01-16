@@ -25,7 +25,7 @@ for x in range(0,image_shape[1]):
 #
 #begin RANSAC
 #
-ransac_maxiterations=30
+ransac_maxiterations=3000
 ransac_minpoints=20
 ransac_threshold=5
 ransac_mininliers=10
@@ -39,6 +39,8 @@ helper.add_points(lst_all_points)
 model=helper.run()
 
 #Display the model , you could render over the original picture
-    
+print("-------------------------------------")
+print("RANSAC-complete")    
+print("Found model %s" % (model))
 pass
 

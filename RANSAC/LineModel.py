@@ -7,9 +7,9 @@ class LineModel:
         self.B=b
         self.C=c
         pass
-    A=0
-    B=0
-    C=0
+    def __str__(self):
+        display= ("A=%f B=%f C=%f") % (self.A,self.B,self.C)
+        return display
 
     #
     #Compute distance of the point from the model line
