@@ -9,9 +9,6 @@ class Point:
         self.ID=Point.idcounter+1
         Point.idcounter+=1
     def __str__(self):
-        s="x=%d y=%d" % (self.X,self.Y)
+        s="ID=%d x=%d y=%d" % (self.ID,self.X,self.Y)
         return s
-    ID=0
-    X=0
-    Y=0
 

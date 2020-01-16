@@ -2,16 +2,18 @@ import Point as pt
 import statistics 
 import LineModel as lm
 import random
+import numpy as np
+from sklearn.linear_model import LinearRegression
 
 class RansacHelper(object):
     """Encapsulates RANSAC logic"""
-    _complete_list_of_points=list()
     def __init__ (self):
         pass
-    max_iterations=0
-    min_points_for_model=0
-    # 'threshold_error' is the threshold distance from a line for a point to be classified as an inlier
-    threshold_error:float=0
+        self._complete_list_of_points:list=list()
+        self.max_iterations:float=0
+        self.min_points_for_model:float=0
+        # 'threshold_error' is the threshold distance from a line for a point to be classified as an inlier
+        self.threshold_error:float=0
 
     #
     #Should be called once to set the full list of data points
@@ -85,7 +87,44 @@ class RansacHelper(object):
     #
     #Find the best line which fits the specified points
     #
-    def create_model(self,points):
+    def create_model(self,points:list):
         #temporary implementation
         model=lm.LineModel(10,20,30)
+
+        #https://www.varsitytutors.com/hotmath/hotmath_help/topics/line-of-best-fit
+
+        mean_x=0
+        mean_y=0
+        for p in points:
+            mean_x+=p.X
+            mean_y+=p.Y
+        mean_x=mean_x/len(points)
+        mean_y=mean_y/len(points)
+
+        slope_numerator=0
+        slope_denominator=0
+        slope=0
+        #use the formula for least squares
+        for p in points:
+            slope_numerator+=(p.X-mean_x)*(p.Y-mean_y)
+            slope_denominator+=(p.X-mean_x)*(p.X-mean_x)
+
+        if (slope_denominator < 0.001):
+            raise Exception("Vertical lines are not yet handled")
+        
+        slope=slope_numerator/slope_denominator
+        y_intercept=mean_y - (slope * mean_x)
+
+        line_a=slope
+        line_b=-1
+        line_c=y_intercept
+        #  standard form of line equation
+        #  ------------------------------
+        #   y=mx+c
+        #   mx  -   y   +   c=0
+        #   ax  +   by  +   c=0
+        #   slope= -a/b
+        #   yint= -c/b
+        #        
+        model=lm.LineModel(line_a,line_b,line_c)
         return model
