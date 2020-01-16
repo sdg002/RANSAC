@@ -42,6 +42,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="test_LineModel.py" />
+    <Compile Include="test_Point.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="test_RansacHelper.py">
       <SubType>Code</SubType>
     </Compile>
