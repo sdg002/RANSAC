@@ -50,9 +50,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="input\" />
     <Folder Include="out\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="input\NoisyImage_1.png" />
     <Content Include="out\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

@@ -3,6 +3,8 @@ import statistics
 import LineModel as lm
 import random
 import numpy as np
+import math
+
 from sklearn.linear_model import LinearRegression
 
 class RansacHelper(object):
@@ -60,7 +62,7 @@ class RansacHelper(object):
                 best_model=temp_model
                 best_error=average_distance
                 count_of_better_models+=1
-                print("    Taking better model. Error=%f    Count of models=%d" % (average_distance,count_of_better_models))
+                print("    Taking better model. Error=%f    Count of models=%d Polar=%s" % (average_distance,count_of_better_models,best_model.display_polar()))
             else:
                 print("    Skipping better model. Error=%f    Count of models=%d" % (average_distance,count_of_better_models))
 
@@ -123,7 +125,7 @@ class RansacHelper(object):
             slope_numerator+=(p.X-mean_x)*(p.Y-mean_y)
             slope_denominator+=(p.X-mean_x)*(p.X-mean_x)
 
-        if (slope_denominator < 0.001):
+        if (math.fabs(slope_denominator) < 0.001):
             raise Exception("Vertical lines are not yet handled")
         
         slope=slope_numerator/slope_denominator

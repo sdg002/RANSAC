@@ -9,8 +9,8 @@ import Point as pt
 
 
 folder_script=os.path.dirname(__file__)
-filename="Numpy.BlankImage.255.png"
-file_noisy_line=os.path.join(folder_script,"./out/",filename)
+filename="NoisyImage_1.png"
+file_noisy_line=os.path.join(folder_script,"./input/",filename)
 np_image=skimage.io.imread(file_noisy_line,as_gray=True)
 #
 #Iterate over all cells of the NUMPY array and convert to array of Point classes
@@ -41,6 +41,6 @@ model=helper.run()
 #Display the model , you could render over the original picture
 print("-------------------------------------")
 print("RANSAC-complete")    
-print("Found model %s" % (model))
+print("Found model %s , polar=%s" % (model,model.display_polar()))
 pass
 
