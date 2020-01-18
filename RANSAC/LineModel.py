@@ -65,8 +65,6 @@ class LineModel:
         distance_origin=self.compute_distance(origin)
         deg_per_radian=90*2/math.pi;
         angle=self.get_inclination() * deg_per_radian; 
-        #TODO Y and X intercept
-        #TODO TEST THIS, YOU CHANGED THE ABLGE
 
         #   slope= -a/b
         #   yint= -c/b

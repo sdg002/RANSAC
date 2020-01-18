@@ -17,7 +17,7 @@ def create_points_from_numpyimage(arr_image:np.ndarray):
         for y in range(0,image_ht):
             #print("x=%d y=%d" % (x,y))
             #Change coordinate system
-            y_cartesian=image_ht - y
+            y_cartesian=image_ht - y -1
             p=pt.Point(x,y_cartesian)
             lst.append(p)
     return lst
