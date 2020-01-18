@@ -1,6 +1,7 @@
 import unittest
 import RansacHelper as rh
 import Point as pt
+import math
 
 class Test_test_1(unittest.TestCase):
     def test_AddPoints(self):
@@ -50,7 +51,11 @@ class Test_test_1(unittest.TestCase):
         lst.append(pt.Point(5,1))
         lst.append(pt.Point(5,2))
         model=helper1.create_model(lst)
-        self.fail("vertical lines not yet implemented")
+        expected_xintercept=5
+        actual_xintercept=-model.C/model.A
+        self.assertAlmostEqual(actual_xintercept,expected_xintercept)
+
+        self.assertAlmostEqual(model.B,0)
 
     def test_create_model_horizontal_through_y_equal_5(self):
         pass

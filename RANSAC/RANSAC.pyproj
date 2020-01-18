@@ -48,6 +48,12 @@
     <Compile Include="test_RansacHelper.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="test_Util.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Util.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="input\" />
@@ -55,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="input\NoisyImage_1.png" />
+    <Content Include="input\Util_unittest.png" />
     <Content Include="out\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

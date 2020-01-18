@@ -102,12 +102,10 @@ class RansacHelper(object):
         return lst
     #
     #Find the best line which fits the specified points
+    #Use the least squares best fit
+    #https://www.varsitytutors.com/hotmath/hotmath_help/topics/line-of-best-fit
     #
     def create_model(self,points:list):
-        #temporary implementation
-        model=lm.LineModel(10,20,30)
-
-        #https://www.varsitytutors.com/hotmath/hotmath_help/topics/line-of-best-fit
 
         mean_x=0
         mean_y=0
@@ -126,7 +124,14 @@ class RansacHelper(object):
             slope_denominator+=(p.X-mean_x)*(p.X-mean_x)
 
         if (math.fabs(slope_denominator) < 0.001):
-            raise Exception("Vertical lines are not yet handled")
+            #perpendicular line
+            x_intercept=mean_x
+            #equation   (1)x + (0)y + (-xintercept) + 1
+            vertical_line_a=1
+            vertical_line_b=0
+            vertical_line_c=-x_intercept
+            model=lm.LineModel(vertical_line_a,vertical_line_b,vertical_line_c)
+            return model
         
         slope=slope_numerator/slope_denominator
         y_intercept=mean_y - (slope * mean_x)
