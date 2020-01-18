@@ -1,7 +1,10 @@
 import Point as pt
 import math
+
+
 class LineModel:
     """Describes the equation of a straight line in ax+by+c format"""
+    SMALL=0.001
     def __init__ (self, a:float,b:float,c:float):
         self.A=a
         self.B=b
@@ -20,6 +23,7 @@ class LineModel:
         denominator=math.sqrt(self.A*self.A + self.B*self.B)
         distance=math.fabs( numerator/denominator)
         return distance
+
     def get_slope(self):
         if (math.fabs( self.B ) < 0.001):
             raise Exception("Infinit slope")
@@ -36,10 +40,39 @@ class LineModel:
             slope=-self.A/self.B
             angle=math.atan(slope)
             return angle
+    #
+    #Gets the Y intercept of the line, if infinite then math.inf
+    #
+    def yintercept(self):
+        intercept=math.inf
+        if (math.fabs(self.B) > LineModel.SMALL):
+            intercept=-self.C/self.B;
+        return intercept
+    #
+    #Gets the X intercept of the line, if infinite then math.inf
+    #
+    def xintercept(self):
+        intercept=math.inf
+        if (math.fabs(self.A) > LineModel.SMALL):
+            intercept=-self.C/self.A
+        return intercept
 
+    #
+    #Create a friendly display which shows all attributes of the Line
+    #
     def display_polar(self):
         origin=pt.Point(0,0)
         distance_origin=self.compute_distance(origin)
-        angle=self.get_inclination();
-        display=("POLAR radius=%f  angle=%f" % (distance_origin,angle))
+        deg_per_radian=90*2/math.pi;
+        angle=self.get_inclination() * deg_per_radian; 
+        #TODO Y and X intercept
+        #TODO TEST THIS, YOU CHANGED THE ABLGE
+
+        #   slope= -a/b
+        #   yint= -c/b
+        #   xint= -c/a
+        y_intercept=self.yintercept()
+        x_intercept=self.xintercept()
+
+        display=("POLAR radius=%f  angle=%f     y_int=%s    x_int=%s" % (distance_origin,angle,y_intercept,x_intercept))
         return display

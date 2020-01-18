@@ -34,5 +34,51 @@ class Test_LineModel(unittest.TestCase):
         self.assertEqual(distance_actual,distance_expected)
         pass
 
+    def test_x_y_intercept_45_degrees_0_0(self):
+        line=lm.LineModel(-1,1,0)
+        xintercept_actual=line.xintercept()
+        xintercept_expected=0
+        yintercept_actual=line.yintercept()
+        yintercept_expected=0
+
+        self.assertEqual(xintercept_actual,xintercept_expected)
+        self.assertEqual(yintercept_actual,yintercept_expected)
+
+    def test_x_y_intercept_45_degrees_1_0(self):
+        line=lm.LineModel(-1,1,1)
+        xintercept_actual=line.xintercept()
+        xintercept_expected=1
+        yintercept_actual=line.yintercept()
+        yintercept_expected=-1
+
+        self.assertEqual(xintercept_actual,xintercept_expected)
+        self.assertEqual(yintercept_actual,yintercept_expected)
+
+    def test_x_y_intercept_90_degrees_5_inf(self):
+        line=lm.LineModel(1,0,-5)
+        xintercept_actual=line.xintercept()
+        xintercept_expected=5
+        yintercept_actual=line.yintercept()
+        yintercept_expected=math.inf
+
+        self.assertEqual(xintercept_actual,xintercept_expected)
+        self.assertEqual(yintercept_actual,yintercept_expected)
+
+    def test_x_y_intercept_0_degrees_inf_5(self):
+        line=lm.LineModel(0,1,-5)
+        xintercept_actual=line.xintercept()
+        xintercept_expected=math.inf
+        yintercept_actual=line.yintercept()
+        yintercept_expected=5
+
+        self.assertEqual(xintercept_actual,xintercept_expected)
+        self.assertEqual(yintercept_actual,yintercept_expected)
+
+    def test_display_polar(self):
+        line=lm.LineModel(-1,1,1)
+        s=line.display_polar()
+        print(s)
+
+
 if __name__ == '__main__':
     unittest.main()
