@@ -11,7 +11,6 @@ import Util
 
 folder_script=os.path.dirname(__file__)
 filename="NoisyImage_1.png"
-#filename="tiny.png"
 file_noisy_line=os.path.join(folder_script,"./input/",filename)
 np_image=skimage.io.imread(file_noisy_line,as_gray=True)
 #
@@ -22,7 +21,7 @@ lst_all_points=Util.create_points_from_numpyimage(np_image)
 #
 #begin RANSAC
 #
-ransac_maxiterations=3000
+ransac_maxiterations=4000
 ransac_minpoints=20
 ransac_threshold=5
 ransac_mininliers=10

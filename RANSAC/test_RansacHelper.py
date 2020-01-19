@@ -2,6 +2,9 @@ import unittest
 import RansacHelper as rh
 import Point as pt
 import math
+import os
+import skimage
+import Util
 
 class Test_test_1(unittest.TestCase):
     def test_AddPoints(self):
@@ -91,6 +94,35 @@ class Test_test_1(unittest.TestCase):
         expected_yintercept=0
         self.assertAlmostEqual(actual_slope,expected_slope)
         self.assertAlmostEqual(actual_yintercept,expected_yintercept)
+
+    def test_run_with_very_simple_image(self):
+        #get a list of points
+        folder_script=os.path.dirname(__file__)
+        filename="Ransac_UnitTest.png"
+        file_noisy_line=os.path.join(folder_script,"./input/",filename)
+        np_image=skimage.io.imread(file_noisy_line,as_gray=True)
+        lst_points=Util.create_points_from_numpyimage(np_image)
+
+        #initialize RansalHelper
+        helper1=rh.RansacHelper()
+        helper1.add_points(lst_points)
+        helper1.max_iterations=30
+        helper1.min_points_for_model=4
+        helper1.threshold_error=10
+        helper1.threshold_inlier_count=3
+        result_model=helper1.run()
+        x_intercept=result_model.xintercept()
+        y_intercept=result_model.yintercept()
+        self.assertTrue ( x_intercept > 30)
+        self.assertTrue ( x_intercept < 50)
+
+        self.assertTrue ( y_intercept > 20)
+        self.assertTrue ( y_intercept < 35)
+
+
+        #invoke the run method
+
+
 
 if __name__ == '__main__':
     unittest.main()

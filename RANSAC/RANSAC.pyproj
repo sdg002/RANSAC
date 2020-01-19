@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="input\NoisyImage_1.png" />
+    <Content Include="input\Ransac_UnitTest.png" />
     <Content Include="input\Util_unittest.png" />
     <Content Include="out\Readme.txt" />
   </ItemGroup>

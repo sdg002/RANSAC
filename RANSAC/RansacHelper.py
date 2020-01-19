@@ -45,7 +45,7 @@ class RansacHelper(object):
             random_points=self.select_random_points(self.min_points_for_model)
             print("Found %d random points" % len(random_points))
             temp_model=self.create_model(random_points)
-            print("Built model %s using %d random points" % (temp_model,len(random_points)))
+            print("Built model %s using %d random points" % (temp_model.display_polar(),len(random_points)))
             inliers=self.get_inliers_from_model(temp_model,random_points)
             print("Found %d inliers" % (len(inliers)))
             if (len(inliers) < self.threshold_inlier_count):
@@ -71,8 +71,8 @@ class RansacHelper(object):
 
     def compute_average_distance(self,model:lm.LineModel,points:list) -> float:
         lst_distances=list()
-        for pt in points:
-            distance=model.compute_distance(pt)
+        for p in points:
+            distance=model.compute_distance(p)
             lst_distances.append(distance)
         mean=statistics.mean(lst_distances)
         return mean
@@ -81,13 +81,13 @@ class RansacHelper(object):
     #
     def get_inliers_from_model(self,model:lm.LineModel,points_old_inliers:list) -> list:
         lst_inliers=list()
-        for pt in self._complete_list_of_points:
-            if ((pt in points_old_inliers) == True):
+        for p in self._complete_list_of_points:
+            if ((p in points_old_inliers) == True):
                 continue
-            distance_from_model:float=model.compute_distance(pt)
+            distance_from_model:float=model.compute_distance(p)
             if (distance_from_model > self.threshold_error):
                 continue
-            lst_inliers.append(pt)
+            lst_inliers.append(p)
         return lst_inliers
     #
     #Returns the specified count of random selection of points from the full data set
