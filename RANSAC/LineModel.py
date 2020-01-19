@@ -1,5 +1,6 @@
 import Point as pt
 import math
+from typing import List, Set, Dict, Tuple, Optional
 
 
 class LineModel:
@@ -74,3 +75,40 @@ class LineModel:
 
         display=("POLAR radius=%f  angle=%f     y_int=%s    x_int=%s" % (distance_origin,angle,y_intercept,x_intercept))
         return display
+
+#
+#This function will generate points using the specified line model within the bounds of x1,y1 and x2,y2
+#Returns an array of Point class instances
+#
+def generate_points_from_line(model:LineModel,x1:float,y1:float,x2:float,y2:float)->List[pt.Point]:
+    lst_points:List[pt.Point]=list()
+    if (math.fabs(model.B) < LineModel.SMALL):
+        #
+        #Perp line
+        #
+        min_y=min(y1,y2)
+        max_y=max(y1,y2)
+        start_y=min_y
+        while (start_y <= max_y):
+            #ax+by+c=0
+            #x=(-c-by)/a
+            x=(-model.C - 0)/model.A
+            pt_new=pt.Point(x,start_y)
+            lst_points.append(pt_new)
+            start_y+=1
+    else:
+        #
+        #All other points
+        #
+        min_x=min(x1,x2)
+        max_x=max(x1,x2)
+        start_x=min_x
+        while (start_x <= max_x):
+            #ax+by+c=0
+            #y= (-c -ax)/b
+            y=(model.C - model.A*start_x)/model.B
+            pt_new=pt.Point(start_x,y)
+            lst_points.append(pt_new)
+            start_x+=1
+    return lst_points
+ 

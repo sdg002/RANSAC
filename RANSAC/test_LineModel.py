@@ -79,6 +79,34 @@ class Test_LineModel(unittest.TestCase):
         s=line.display_polar()
         print(s)
 
+    def test_generate_points_from_line_45_degrees_passing_through_0_0(self):
+        line=lm.LineModel(-1,1,0)
+        x1=20
+        x2=40
+        y1=10
+        y2=30
+        new_points=lm.generate_points_from_line(line,x1,y1,x2,y2)
+        for p in new_points:
+            print("Testing point=%s" % (p))
+            self.assertTrue(p.X >= x1)
+            self.assertTrue(p.X <= x2)
+            #self.assertTrue(p.Y >= y1)
+            #self.assertTrue(p.Y <= y2)
+
+    #
+    #In this test we are testing a vertical line. 
+    #
+    def test_generate_points_from_line_90_degrees_passing_through_5_0(self):
+        line=lm.LineModel(1,0,-5)
+        x1=20
+        x2=40
+        y1=10
+        y2=30
+        new_points=lm.generate_points_from_line(line,x1,y1,x2,y2)
+        for p in new_points:
+            print("Testing point=%s" % (p))
+            self.assertTrue(p.Y >= y1)
+            self.assertTrue(p.Y <= y2)
 
 if __name__ == '__main__':
     unittest.main()
