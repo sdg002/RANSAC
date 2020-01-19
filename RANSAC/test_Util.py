@@ -3,6 +3,7 @@ import Util
 import numpy as np
 import os
 import skimage
+import Point
 
 class Test_test_Util(unittest.TestCase):
     #
@@ -31,6 +32,37 @@ class Test_test_Util(unittest.TestCase):
             else:
                raise Exception("Point '%s' was not expected." % (pt_any))
 
+
+    
+    def test_when_points_are_superimposed_over_image_array_and_saved_the_new_image_must_contain_the_new_points(self):
+        folder_script=os.path.dirname(__file__)
+        filename="Util_unittest.png"
+        file_noisy_line=os.path.join(folder_script,"./input/",filename)
+        np_image=skimage.io.imread(file_noisy_line,as_gray=False)
+        file_result=os.path.join(folder_script,"./out/",filename)
+        new_points=list()
+        #
+        #Superimpose some points
+        #
+        new_points.append(Point.Point(0,0))
+        new_points.append(Point.Point(2,2))
+        new_points.append(Point.Point(3,3))
+        new_points.append(Point.Point(4,4))
+        color_red=100
+        color_green=255
+        color_blue=90
+        np_newimage=Util.superimpose_points_on_image(np_image,new_points,color_red,color_green,color_blue)
+        skimage.io.imsave(file_result,np_newimage)
+        #Read the image back and test the points
+        np_newimage2=skimage.io.imread(file_result,as_gray=False)
+        height=np_newimage.shape[0]
+        for p in new_points:
+            x=p.X
+            y=height-p.Y-1
+            self.assertEqual(np_newimage2[y][x][0],color_red)
+            self.assertEqual(np_newimage2[y][x][1],color_green)
+            self.assertEqual(np_newimage2[y][x][2],color_blue)
+        pass
 
 if __name__ == '__main__':
     unittest.main()
