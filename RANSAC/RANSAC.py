@@ -6,6 +6,8 @@ import os
 import RansacHelper as ransachelper
 import Point as pt
 import Util
+import datetime
+import LineModel
 
 
 
@@ -38,6 +40,18 @@ model=helper.run()
 print("-------------------------------------")
 print("RANSAC-complete")    
 print("Found model %s , polar=%s" % (model,model.display_polar()))
+#
+#Generate an output image with the model line 
+#
+now=datetime.datetime.now()
+filename_result=("result-%s.png") % now.strftime("%Y-%m-%d-%H-%M-%S")
+file_result=os.path.join(folder_script,"./out/",filename_result)
+#Load input image into array
+np_image_result=skimage.io.imread(file_noisy_line,as_gray=False)
+new_points=LineModel.generate_points_from_line(model,0,0,np_image_result.shape[1]-1,np_image_result.shape[0]-1)
+np_superimposed=Util.superimpose_points_on_image(np_image_result,new_points,100,255,100)
+#Save new image
+skimage.io.imsave(file_result,np_superimposed)
 
 #TODO YOU WILL NEED TO RENDER THE LINE
 #TODO YOU WILL NEED TO ASSESS HOW MANY POINTS ARE INLINERS

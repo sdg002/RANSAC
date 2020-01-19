@@ -106,7 +106,7 @@ def generate_points_from_line(model:LineModel,x1:float,y1:float,x2:float,y2:floa
         while (start_x <= max_x):
             #ax+by+c=0
             #y= (-c -ax)/b
-            y=(model.C - model.A*start_x)/model.B
+            y=(-model.C - model.A*start_x)/model.B
             pt_new=pt.Point(start_x,y)
             lst_points.append(pt_new)
             start_x+=1

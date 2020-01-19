@@ -31,13 +31,18 @@ def create_points_from_numpyimage(arr_image:np.ndarray):
 #Draws the specified collection of points over the numpy array
 #The coordinate system of the point will be transformed from Cartesian(bottom-left) to Image(top-left)
 #
-def superimpose_points_on_image(arr_image:np.ndarray, points,red:int,green:int,blue:int):
-    width=arr_image.shape[1]
-    height=arr_image.shape[0]
+def superimpose_points_on_image(arr_image_input:np.ndarray, points,red:int,green:int,blue:int):
+    width=arr_image_input.shape[1]
+    height=arr_image_input.shape[0]
     arr_new=np.zeros([height,width,3])
     for p in points:
-        x=p.X
-        y=height-p.Y-1
+        x:int=round(p.X)
+        y:int=round(height-p.Y-1)
+        if (x<0 or x >= width ):
+            continue
+        if (y<0 or y >= height ):
+            continue
+
         arr_new[y][x][0]=red
         arr_new[y][x][1]=green
         arr_new[y][x][2]=blue
