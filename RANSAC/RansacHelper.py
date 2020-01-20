@@ -59,12 +59,12 @@ class RansacHelper(object):
             print("Built better model %s using %d random points" % (better_model, len(lst_new)) )
             average_distance=self.compute_average_distance(better_model,lst_new)
             if (average_distance < best_error):
+                print("    Taking better model. Error=%f, Best error=%f,   Count of models=%d Polar=%s" % (average_distance,best_error,count_of_better_models,temp_model.display_polar()))
                 best_model=temp_model
                 best_error=average_distance
                 count_of_better_models+=1
-                print("    Taking better model. Error=%f    Count of models=%d Polar=%s" % (average_distance,count_of_better_models,best_model.display_polar()))
             else:
-                print("    Skipping better model. Error=%f    Count of models=%d" % (average_distance,count_of_better_models))
+                print("    Skipping better model. This Error=%f, Best error=%f,    Count of models=%d" % (average_distance,best_error,count_of_better_models))
 
         return best_model
         pass
