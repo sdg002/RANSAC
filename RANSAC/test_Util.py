@@ -38,7 +38,7 @@ class Test_test_Util(unittest.TestCase):
         folder_script=os.path.dirname(__file__)
         filename="Util_unittest.png"
         file_noisy_line=os.path.join(folder_script,"./input/",filename)
-        np_image=skimage.io.imread(file_noisy_line,as_gray=False)
+        np_image=skimage.io.imread(file_noisy_line,as_gray=True)
         file_result=os.path.join(folder_script,"./out/",filename)
         new_points=list()
         #
@@ -63,6 +63,8 @@ class Test_test_Util(unittest.TestCase):
             self.assertEqual(np_newimage2[y][x][1],color_green)
             self.assertEqual(np_newimage2[y][x][2],color_blue)
         pass
+        self.assertGreater(len(new_points) , 1)
+        #TODO We should verify that atleast some of the original points were re-drawn
 
 if __name__ == '__main__':
     unittest.main()

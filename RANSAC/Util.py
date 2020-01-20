@@ -35,6 +35,15 @@ def superimpose_points_on_image(arr_image_input:np.ndarray, points,red:int,green
     width=arr_image_input.shape[1]
     height=arr_image_input.shape[0]
     arr_new=np.zeros([height,width,3])
+    #We want to capture the original image
+    for x in range(0,width):
+        for y in range(0,height):
+            color=arr_image_input[y][x]
+            if (color > 0.5):
+                arr_new[y][x][0]=255
+                arr_new[y][x][1]=255
+                arr_new[y][x][2]=255
+    #superimpose the points onto the numpy array
     for p in points:
         x:int=round(p.X)
         y:int=round(height-p.Y-1)
