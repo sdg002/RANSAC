@@ -5,6 +5,7 @@ import math
 import os
 import skimage
 import Util
+import LineModel
 
 class Test_test_1(unittest.TestCase):
     def test_AddPoints(self):
@@ -95,33 +96,54 @@ class Test_test_1(unittest.TestCase):
         self.assertAlmostEqual(actual_slope,expected_slope)
         self.assertAlmostEqual(actual_yintercept,expected_yintercept)
 
+    #
+    #In this test we are doing the full Ransac algorithm run on a very simple image
+    #
     def test_run_with_very_simple_image(self):
+        #
         #get a list of points
+        #
         folder_script=os.path.dirname(__file__)
-        filename="Ransac_UnitTest.png"
-        file_noisy_line=os.path.join(folder_script,"./input/",filename)
+        filename_input="Ransac_UnitTest.png"
+        file_noisy_line=os.path.join(folder_script,"./input/",filename_input)
         np_image=skimage.io.imread(file_noisy_line,as_gray=True)
         lst_points=Util.create_points_from_numpyimage(np_image)
-
+        #
         #initialize RansalHelper
+        #
         helper1=rh.RansacHelper()
         helper1.add_points(lst_points)
-        helper1.max_iterations=30
-        helper1.min_points_for_model=4
-        helper1.threshold_error=10
+        helper1.max_iterations=3000
+        #10000 did not work
+        helper1.min_points_for_model=2
+        helper1.threshold_error=3 #10
         helper1.threshold_inlier_count=3
         result_model=helper1.run()
+        print("RANSAC-complete")    
+        print("Found model %s , polar=%s" % (result_model,result_model.display_polar()))
+        #
+        #Superimpose the new line over the image
+        #
+        folder_results=os.path.join(folder_script,"./out/")
+        count_of_files=len(os.listdir(folder_results))
+        filename_results=("Ransac_UnitTest.Run.%d.png" % (count_of_files) )
+        file_result=os.path.join(folder_results,filename_results)
+        x_lower=0
+        x_upper=np_image.shape[1]-1
+        y_lower=0
+        y_upper=np_image.shape[0]-1
+        new_points=LineModel.generate_points_from_line(result_model,x_lower,y_lower,x_upper,y_upper)
+        np_superimposed=Util.superimpose_points_on_image(np_image,new_points,100,255,100)
+        skimage.io.imsave(file_result,np_superimposed)
+        #
+        #Asserts!
+        #
         x_intercept=result_model.xintercept()
         y_intercept=result_model.yintercept()
-        self.assertTrue ( x_intercept > 30)
-        self.assertTrue ( x_intercept < 50)
-
-        self.assertTrue ( y_intercept > 20)
-        self.assertTrue ( y_intercept < 35)
-
-
-        #invoke the run method
-
+        self.assertTrue ( x_intercept > 30,"X intercept below threshold")
+        self.assertTrue ( x_intercept < 50,"X intercept above threshold")
+        self.assertTrue ( y_intercept > 30,"Y intercept above threshold")
+        self.assertTrue ( y_intercept < 45,"Y intercept below threshold")
 
 
 if __name__ == '__main__':
