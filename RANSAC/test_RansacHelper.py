@@ -105,7 +105,7 @@ class Test_test_1(unittest.TestCase):
         #
         folder_script=os.path.dirname(__file__)
         filename_input="Ransac_UnitTest.png"
-        file_noisy_line=os.path.join(folder_script,"./input/",filename_input)
+        file_noisy_line=os.path.join(folder_script,"./unittest/",filename_input)
         np_image=skimage.io.imread(file_noisy_line,as_gray=True)
         lst_points=Util.create_points_from_numpyimage(np_image)
         #

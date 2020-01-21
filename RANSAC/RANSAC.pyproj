@@ -55,6 +55,7 @@
   <ItemGroup>
     <Folder Include="input\" />
     <Folder Include="final_results\" />
+    <Folder Include="unittest\" />
     <Folder Include="out\" />
   </ItemGroup>
   <ItemGroup>
@@ -70,8 +71,8 @@
     <Content Include="input\NoisyImage_2.png" />
     <Content Include="input\NoisyImage_3.png" />
     <Content Include="input\NoisyImage_4.png" />
-    <Content Include="input\Ransac_UnitTest.png" />
-    <Content Include="input\Util_unittest.png" />
+    <Content Include="unittest\Ransac_UnitTest.png" />
+    <Content Include="unittest\Util_unittest.png" />
     <Content Include="out\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

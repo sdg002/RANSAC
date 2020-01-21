@@ -13,7 +13,7 @@ class Test_test_Util(unittest.TestCase):
         pass
         folder_script=os.path.dirname(__file__)
         filename="Util_unittest.png"
-        file_noisy_line=os.path.join(folder_script,"./input/",filename)
+        file_noisy_line=os.path.join(folder_script,"./unittest/",filename)
         np_image=skimage.io.imread(file_noisy_line,as_gray=True)
         height=np_image.shape[0]
         width=np_image.shape[1]
@@ -37,7 +37,7 @@ class Test_test_Util(unittest.TestCase):
     def test_when_points_are_superimposed_over_image_array_and_saved_the_new_image_must_contain_the_new_points(self):
         folder_script=os.path.dirname(__file__)
         filename="Util_unittest.png"
-        file_noisy_line=os.path.join(folder_script,"./input/",filename)
+        file_noisy_line=os.path.join(folder_script,"./unittest/",filename)
         np_image=skimage.io.imread(file_noisy_line,as_gray=True)
         file_result=os.path.join(folder_script,"./out/",filename)
         new_points=list()
