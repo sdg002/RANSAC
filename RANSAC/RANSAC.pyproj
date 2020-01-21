@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>GenerateNoisyLine.py</StartupFile>
+    <StartupFile>RANSAC.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -54,9 +54,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="input\" />
+    <Folder Include="final_results\" />
     <Folder Include="out\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="final_results\NoisyImage_1.png" />
+    <Content Include="final_results\NoisyImage_1.result.png" />
+    <Content Include="final_results\NoisyImage_2.png" />
+    <Content Include="final_results\NoisyImage_2.result.png" />
+    <Content Include="final_results\NoisyImage_3.png" />
+    <Content Include="final_results\NoisyImage_3_result.png" />
+    <Content Include="final_results\NoisyImage_4.png" />
+    <Content Include="final_results\NoisyImage_4.result.png" />
     <Content Include="input\NoisyImage_1.png" />
     <Content Include="input\NoisyImage_2.png" />
     <Content Include="input\NoisyImage_3.png" />

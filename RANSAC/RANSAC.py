@@ -12,7 +12,7 @@ import LineModel
 
 
 folder_script=os.path.dirname(__file__)
-filename="NoisyImage_1.png"
+filename="NoisyImage_3.png"
 file_noisy_line=os.path.join(folder_script,"./input/",filename)
 np_image=skimage.io.imread(file_noisy_line,as_gray=True)
 #
@@ -26,8 +26,13 @@ lst_all_points=Util.create_points_from_numpyimage(np_image)
 ransac_maxiterations=12000
 #6000 
 #12000 worked well
-ransac_minpoints=20
-ransac_threshold=5
+ransac_minpoints=5
+#5 worked well
+#2 gave very bad results
+#20 worked well
+ransac_threshold=3
+#5 produced too much deviation
+
 ransac_mininliers=10
 
 helper=ransachelper.RansacHelper()
@@ -55,7 +60,6 @@ np_superimposed=Util.superimpose_points_on_image(np_image_result,new_points,100,
 #Save new image
 skimage.io.imsave(file_result,np_superimposed)
 
-#TODO YOU WILL NEED TO RENDER THE LINE and SUPERIMPOSE OVER ORIGINAL IMAGE, NOT JUST THE LINE - BUT THE ORIGINAL IMAGE AS WELL
 #TODO YOU WILL NEED TO ASSESS HOW MANY POINTS ARE INLINERS
 pass
 
