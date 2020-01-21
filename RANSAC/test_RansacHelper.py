@@ -113,7 +113,7 @@ class Test_test_1(unittest.TestCase):
         #
         helper1=rh.RansacHelper()
         helper1.add_points(lst_points)
-        helper1.max_iterations=3000
+        helper1.max_iterations=1000
         #10000 did not work
         helper1.min_points_for_model=2
         helper1.threshold_error=3 #10

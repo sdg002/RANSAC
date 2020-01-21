@@ -41,7 +41,7 @@ class RansacHelper(object):
         while (iter < self.max_iterations):
             print("-------------------------------------")
             iter+=1
-            print("Iteration=%d" % iter)
+            print("Iteration=%d Best error=%f Count of models=%d" % (iter,best_error,count_of_better_models))
             random_points=self.select_random_points(self.min_points_for_model)
             print("Found %d random points" % len(random_points))
             temp_model=self.create_model(random_points)
