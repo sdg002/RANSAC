@@ -57,3 +57,23 @@ def superimpose_points_on_image(arr_image_input:np.ndarray, points,red:int,green
         arr_new[y][x][2]=blue
     return arr_new
     pass
+
+#
+#Plots the points on the line starting from start point and leading to end point
+#The points are written on to a ndarray that was originally a blank image
+#The caller must take responsibility for ensuring that end coordinate values do not exceed the dimensions of the array
+#
+def plot_line_2darray(np_array,x_start,y_start,x_end,y_end,num_points):
+    print(np_array.shape)
+    print("Plotting a straight line....., ")
+    xvalues = np.linspace(x_start, x_end, num_points)
+    yvalues=list()
+    slope=(y_end-y_start)/(x_end - x_start)
+    for index in range(0,len(xvalues)):
+            x=xvalues[index]
+            y=slope* (x-x_start) +y_start
+            print("x=%f, y=%f" % (x,y))
+            yvalues.append(y)
+            np_array[int(y)][int(x)][0]=0
+    return np_array
+

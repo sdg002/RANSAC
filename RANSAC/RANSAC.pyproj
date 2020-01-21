@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>RANSAC.py</StartupFile>
+    <StartupFile>GenerateNoisyLine.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -29,9 +29,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LineModel.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="PlotLineOnNumpyArray.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Point.py">
@@ -61,6 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="input\NoisyImage_1.png" />
+    <Content Include="input\NoisyImage_2.png" />
+    <Content Include="input\NoisyImage_3.png" />
+    <Content Include="input\NoisyImage_4.png" />
     <Content Include="input\Ransac_UnitTest.png" />
     <Content Include="input\Util_unittest.png" />
     <Content Include="out\Readme.txt" />

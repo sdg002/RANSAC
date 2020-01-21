@@ -9,7 +9,7 @@
 import numpy as np
 import os
 import skimage
-import PlotLineOnNumpyArray as plotter
+import Util
 import random
 #
 #Create blank image
@@ -40,7 +40,7 @@ else:
     end_x= img_width-1
     end_y=random.random() * (img_height-1)
 
-image_with_line=plotter.PlotLineOnArray (image_noisy,start_x,start_y,end_x,end_y,num_points)
+image_with_line=Util.plot_line_2darray (image_noisy,start_x,start_y,end_x,end_y,num_points)
 
 image_result=image_with_line
 
