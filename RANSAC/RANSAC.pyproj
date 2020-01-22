@@ -55,10 +55,12 @@
   <ItemGroup>
     <Folder Include="input\" />
     <Folder Include="final_results\" />
+    <Folder Include="article\" />
     <Folder Include="unittest\" />
     <Folder Include="out\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="article\medium.md" />
     <Content Include="final_results\NoisyImage_1.png" />
     <Content Include="final_results\NoisyImage_1.result.png" />
     <Content Include="final_results\NoisyImage_2.png" />
