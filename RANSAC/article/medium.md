@@ -35,9 +35,13 @@ Consider the points above. How do we find a line which fits this distribution? O
 
 # Challenges with least squares regression 
 Consider the data points shown below. The data appears to follow a straight line and indeed least squares regression gives us a nice line that models the data.
-<<Show a pic with some points and a nicely fit line>>
-But real data is seldom so clean. Let us add one outlier to this distribution and find the best fitting line using least squares regression
-<<Show a picture , same as immediately above, but with 1 outlier point, show the line>>
+
+<img src="images/Linear_Regression_Perfect.png"/>
+
+But real data is seldom so clean. Let us add one outlier to this distribution  (10,15) and find the best fitting line using least squares regression
+
+<img src="images/Linear_Regression_Noise.png"/>
+
 We can see that the single outlier has brought about a considerable change. The out of box least squares method is very sensitive to outliers. Algorithms like weighted least squares use the distance of a point from the straight line as a weight to minimize the impact of far flung points. In this article we will restrict ourselves to RANSAC.
 
 **you were here**
