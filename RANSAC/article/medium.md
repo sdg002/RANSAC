@@ -18,6 +18,7 @@ Consider the points above. How do we find a line which fits this distribution? O
 
 - Consider any point P<sub>i</sub> with coordinates (X<sub>i</sub>, Y<sub>i</sub>)
 - Consider a straight line with the equation y=mx+c where  **m** is the slope and the Y intercept is **c** 
+<<Show a simple picture of a straight line, show slope, show Y intercept>>
 - The vertical distance of point P from this line is given by  d<sub>i</sub>=(mx<sub>i</sub>+c) - y<sub>i</sub>
 - We do want to be worried about negative values. Therfore let us square the above distance
 - The summation of the square of the vertical distance of all **N** points is given by Sum =&Sigma;(mx<sub>i</sub>+c) - y<sub>i</sub>)<sup>2</sup>
@@ -32,8 +33,15 @@ Consider the points above. How do we find a line which fits this distribution? O
 - m=(N&Sigma;(xy) -&Sigma;x&Sigma;y)/(N&Sigma;(x<sup>2</sup>) + (&Sigma;x)<sup>2</sup>)
 - c= (&Sigma;y - m&Sigma;x)/N
 
-# Challenges with least squares method
+# Challenges with least squares regression 
+Consider the data points shown below. The data appears to follow a straight line and indeed least squares regression gives us a nice line that models the data.
+<<Show a pic with some points and a nicely fit line>>
+But real data is seldom so clean. Let us add one outlier to this distribution and find the best fitting line using least squares regression
+<<Show a picture , same as immediately above, but with 1 outlier point, show the line>>
+We can see that the single outlier has brought about a considerable change. The out of box least squares method is very sensitive to outliers. Algorithms like weighted least squares use the distance of a point from the straight line as a weight to minimize the impact of far flung points. In this article we will restrict ourselves to RANSAC.
+
 **you were here**
+
 
 # Understanding RANSAC
 This is the body ddkkd
@@ -47,7 +55,10 @@ This is the body ddkkd
 # Overview of the code
 This is the body ddkkd
 
-
+# References
+- Weighted least squares 
+- Youtube video
+- Wikipedia article
  
 ssd
 sdsds
