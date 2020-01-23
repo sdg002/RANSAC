@@ -44,13 +44,20 @@ But real data is seldom so clean. Let us add one outlier to this distribution  (
 
 We can see that the single outlier has brought about a considerable change. The out of box least squares method is very sensitive to outliers. Algorithms like weighted least squares use the distance of a point from the straight line as a weight to minimize the impact of far flung points. In this article we will restrict ourselves to RANSAC.
 
-**you were here**
+
+# Understanding RANSAC - Overview
+Before getting into the full details, I have presented a distilled version of RANSAC in this section
+- Randomly select a smaller set of points (**n**) from the entire distribution (**N**)
+- Use least squares regression to determine the linear equation which fits the **n** points
+- Determine the average of the distance of every point **N** from this line. This score can be treated as a score which measure the goodness of the line. 
+- Keep track of the **score**. If this score is lesser than the last known score then discard the older linear equation and select the current linear equation.
+- Go back the first step and continue iterating till you have completed a predetermined number of iterations
+- The linear equation available at the end of the iterations is possibly the best candidate line
+
+We can see that the algorithm is not deterministic and hence the name *Random* in the acronym RANSAC. It is possible that you may not get the best model.
 
 
-# Understanding RANSAC
-This is the body ddkkd
-
-# The algorithm
+# Understanding RANSAC - Detailed
 This is the body ddkkd
 
 # Results
