@@ -2,11 +2,14 @@
 In this article we will explore the Random Sample Consensus algorithm - more popularly known by the acronym RANSAC. This is an iterative and a non-deterministic algorithm that helps in eliminating outliers. This algorithm is commonly used  to solve computer vision challenges. I have written a sample implementation using Python
 
 # Problem definition
-Consider the following diagram. The human mind can immediately spot that there is one straight line and the mind has no difficulty in distinguising the inliers from the outliers. How can me make the computer emulate this aspect of the human behavior? The RANSAC algorithm attempts to address this challenge.
+Consider the distribution of points in the following diagram. 
 
-<<Show a picture of points along a straight line, with some noisy points - The human mind is able to identify the outliers - how do we make the computer achieve this>>
+<img src="images/Intro_HumanMind_SeesStraightLine.png"/>
 
-# Traditional approach - Fitting a straight line using the least squares regression method
+The human mind can immediately spot that all the points in this distribution but for one is aligned in a straight line and the mind has no difficulty in distinguising the inliers from the outliers. How can me make the computer emulate this aspect of the human behavior? The RANSAC algorithm attempts to address this challenge.
+
+
+# Traditional approach - Fitting a straight line using the least squares regression method (TODO)
 <<Show a picture, points and a line passing - no noise>>
 Consider the points above. How do we find a line which fits this distribution? One of the popular approaches is the least square distance method. In this approach we 
 
@@ -57,16 +60,16 @@ Before getting into the full details, I have presented a distilled version of RA
 We can see that the algorithm is not deterministic and hence the name *Random* in the acronym RANSAC. It is possible that you may not get the best model.
 
 
-# Understanding RANSAC - Detailed
+# Understanding RANSAC - Detailed (TODO)
 This is the body ddkkd
 
-# Results
+# Results (TODO)
 This is the body ddkkd
 
-# Overview of the code
+# Overview of the code (TODO)
 This is the body ddkkd
 
-# References
+# References and further reading (TODO)
 - Weighted least squares 
 - Youtube video
 - Wikipedia article
