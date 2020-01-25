@@ -1,5 +1,5 @@
 ﻿# Introduction
-In this article we will explore the Random Sample Consensus algorithm - more popularly known by the acronym RANSAC. This is an iterative and a non-deterministic algorithm that helps in eliminating outliers. This algorithm is commonly used  to solve computer vision challenges. I have written a sample implementation using Python
+In this article we will explore the **Random Sample Consensus** algorithm - more popularly known by the acronym RANSAC. This is an iterative and a non-deterministic algorithm that helps in eliminating outliers. This algorithm is commonly used  to solve computer vision challenges. In this article I have presented the motivation for the RANSAC algorithm and the source code for a simplistic implementation using **Python**.
 
 # Problem definition
 Consider the distribution of points in the following diagram. 
@@ -8,20 +8,23 @@ Consider the distribution of points in the following diagram.
 
 The human mind can immediately spot that all the points in this distribution but for one is aligned in a straight line and the mind has no difficulty in distinguising the inliers from the outliers. How can me make the computer emulate this aspect of the human behavior? The RANSAC algorithm attempts to address this challenge.
 
+# Traditional approach - Fitting a straight line using the least squares regression method
+<img src="images/SimpleLinearRegression.png"/>
 
-# Traditional approach - Fitting a straight line using the least squares regression method (TODO)
-<<Show a picture, points and a line passing - no noise>>
 Consider the points above. How do we find a line which fits this distribution? One of the popular approaches is the least square distance method. In this approach we 
 
 - Create a cost function which sum up the distance of all points from the line
 - Interatively tinker with the equation of the line and evaluate the cost function
 - Select the line line which yields the lowest cost function
 
-<Show a line, show some points, indicate the vertical distance of every point from the line, we want to make the reader derive the least squares cost function> 
+## How do we build a cost function?
+
+<img src="images/y_mx_plus_c.png"/>
+
 
 - Consider any point P<sub>i</sub> with coordinates (X<sub>i</sub>, Y<sub>i</sub>)
 - Consider a straight line with the equation y=mx+c where  **m** is the slope and the Y intercept is **c** 
-<<Show a simple picture of a straight line, show slope, show Y intercept>>
+
 - The vertical distance of point P from this line is given by  d<sub>i</sub>=(mx<sub>i</sub>+c) - y<sub>i</sub>
 - We do want to be worried about negative values. Therfore let us square the above distance
 - The summation of the square of the vertical distance of all **N** points is given by Sum =&Sigma;(mx<sub>i</sub>+c) - y<sub>i</sub>)<sup>2</sup>
