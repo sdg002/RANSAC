@@ -62,10 +62,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="article\Book.xlsx" />
+    <Content Include="article\demo.html" />
     <Content Include="article\images\Intro_HumanMind_SeesStraightLine.PNG" />
     <Content Include="article\images\Linear_Regression_Noise.PNG" />
     <Content Include="article\images\Linear_Regression_Perfect.PNG" />
     <Content Include="article\images\SimpleLinearRegression.drawio" />
+    <Content Include="article\images\SimpleLinearRegression.PNG" />
+    <Content Include="article\images\y_mx_plus_c" />
+    <Content Include="article\images\y_mx_plus_c.PNG" />
     <Content Include="article\medium.md" />
     <Content Include="final_results\NoisyImage_1.png" />
     <Content Include="final_results\NoisyImage_1.result.png" />

@@ -40,10 +40,12 @@ Consider the points above. How do we find a line which fits this distribution? O
 - c= (&Sigma;y - m&Sigma;x)/N
 
 # Challenges with least squares regression 
+## No noise
 Consider the data points shown below. The data appears to follow a straight line and indeed least squares regression gives us a nice line that models the data.
 
 <img src="images/Linear_Regression_Perfect.png"/>
 
+## Noisy data
 But real data is seldom so clean. Let us add one outlier to this distribution  (10,15) and find the best fitting line using least squares regression
 
 <img src="images/Linear_Regression_Noise.png"/>
