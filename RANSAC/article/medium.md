@@ -69,14 +69,9 @@ This is the body ddkkd
 # Overview of the code (TODO)
 This is the body ddkkd
 
-# References and further reading (TODO)
-- Weighted least squares 
-- Youtube video
-- Wikipedia article
- 
-ssd
-sdsds
-
-
-sfdsfsdfsdf
-sdfsdfsdf msf,sd,,,,,,,,,,
+# References and further reading
+- Youtube lecture (https://www.youtube.com/watch?v=BpOKB3OzQBQ)
+- Wikipedia article on RANSAC (https://en.wikipedia.org/wiki/Random_sample_consensus)
+- Deriving the least squares regression (https://online.stat.psu.edu/stat414/node/278/)
+- Weighted least squares (https://towardsdatascience.com/when-and-how-to-use-weighted-least-squares-wls-models-a68808b1a89d)
+- Hough transform (https://en.wikipedia.org/wiki/Hough_transform)
