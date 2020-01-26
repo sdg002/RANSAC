@@ -96,8 +96,34 @@ In this section I have presented the algorithm from the Wikipedia page of RANSAC
 ## End
 
 
-# Results (TODO)
-This is the body ddkkd
+# Results
+
+## Test 1
+
+### Input
+<img src="images/NoisyImage_1.png" width="150%" height="150%"/>
+
+### Result
+<img src="images/NoisyImage_1.result.png" width="200%" height="200%"/>
+
+## Test 2
+
+### Input
+<img src="images/NoisyImage_2.png" width="200%" height="200%"/>
+
+### Result
+<img src="images/NoisyImage_2.result.png" width="200%" height="200%"/>
+
+## Test 3
+
+### Input
+<img src="images/NoisyImage_4.png" width="200%" height="200%"/>
+
+### Result
+<img src="images/NoisyImage_4.result.png" width="200%" height="200%"/>
+
+
+
 
 # Overview of the code (TODO)
 This is the body ddkkd

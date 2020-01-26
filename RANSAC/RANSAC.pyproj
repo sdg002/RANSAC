@@ -66,6 +66,14 @@
     <Content Include="article\images\Intro_HumanMind_SeesStraightLine.PNG" />
     <Content Include="article\images\Linear_Regression_Noise.PNG" />
     <Content Include="article\images\Linear_Regression_Perfect.PNG" />
+    <Content Include="article\images\NoisyImage_1.png" />
+    <Content Include="article\images\NoisyImage_1.result.png" />
+    <Content Include="article\images\NoisyImage_2.png" />
+    <Content Include="article\images\NoisyImage_2.result.png" />
+    <Content Include="article\images\NoisyImage_3.png" />
+    <Content Include="article\images\NoisyImage_3_result.png" />
+    <Content Include="article\images\NoisyImage_4.png" />
+    <Content Include="article\images\NoisyImage_4.result.png" />
     <Content Include="article\images\SimpleLinearRegression.drawio" />
     <Content Include="article\images\SimpleLinearRegression.PNG" />
     <Content Include="article\images\y_mx_plus_c" />
