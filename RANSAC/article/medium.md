@@ -60,16 +60,41 @@ We can see that the single outlier has brought about a considerable change. The 
 Before getting into the full details, I have presented a distilled version of RANSAC in this section
 - Randomly select a smaller set of points (**n**) from the entire distribution (**N**)
 - Use least squares regression to determine the linear equation which fits the **n** points
-- Determine the average of the distance of every point **N** from this line. This score can be treated as a score which measure the goodness of the line. 
-- Keep track of the **score**. If this score is lesser than the last known score then discard the older linear equation and select the current linear equation.
+- Determine the average of the distance of every point **N** from this line. This score can be considered to be a measure of the goodness of the line. 
+- Keep track of the **score**. If this score is less than the best score obtained from previous iterations then discard the older linear equation and select the current linear equation.
 - Go back the first step and continue iterating till you have completed a predetermined number of iterations
+- Stop the algorithm when a predetermined number of iterations have been completed
 - The linear equation available at the end of the iterations is possibly the best candidate line
 
 We can see that the algorithm is not deterministic and hence the name *Random* in the acronym RANSAC. It is possible that you may not get the best model.
 
 
-# Understanding RANSAC - Detailed (TODO)
-This is the body ddkkd
+# Understanding RANSAC - Detailed
+In this section I have presented the algorithm from the Wikipedia page of RANSAC
+1. **MAX** = max iterations
+1. **n**= number of points to pick in every iteration. Could be initialized to 2
+1. **best_model** = equation of the line with best_error . Initialize to NULL
+1. **best_error**= The lowest error (average distance) obtained so far. Initialize to a large number
+1. **threshold_error**=if the distance of a point from a line is below this value then the point is classified as an inlier otherwise outlier
+1. **threshold_inliers**=minimum number of inliers for a model to be selected
+1. **k**= count of iterations completed. Initialize to 0
+## Start
+- **k**=**k** + 1
+- if **(k > MAX)** then stop the algorithm
+- select **n** random points from entire population. Denote this set by **random_points**
+- Use least square regression to find the line  which fits **random_points**. Denote this equation by **current_model**
+- Determine **inliers** which is the set of all the points within **threshold_inliers** distance of **current_model**
+- **count_of_inliers** =count of points in the **inliers**
+- if **count_of_inliers** is less than **threshold_inliers** then abandon this sample and go to **Start**
+- Extend the sample by combining **inliers** and **random_points**. 
+- Use least squares regression to find the line which fits **inliers** and **random_points**. This equation is denoted as **better_model** 
+- Determine the average distance of all points from **better_model**. This is denoted by **current_error**
+- if (**current_error** > **best_error**) then go to **Start**
+- **best_model**=**current_model**
+- **best_error**=**current_error**
+- Go to **Start**
+## End
+
 
 # Results (TODO)
 This is the body ddkkd
