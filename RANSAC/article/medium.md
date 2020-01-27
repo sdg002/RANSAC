@@ -126,7 +126,32 @@ In this section I have presented the algorithm from the Wikipedia page of RANSAC
 
 
 # Overview of the code (TODO)
-This is the body ddkkd
+
+## Source code location
+I have used the following tools to author the Python scripts that accompany this article.
+1. Visual Studio 2019
+1. with Python project templates
+1. Python 3.7 engine
+
+The source code can be found at https://github.com/sdg002/RANSAC
+You do not have to use Visual Studio. I am quite certain that the Phython code should work as it is.
+
+## List of Python files and folders
+
+To be done  YOU WERE HERE
+
+## Quick start - Generating an image of a noisy line
+- Run the script **GenerateNoisyLine.py** to generate a rectangular image with 1 line in a random orientation and salt-pepper noise
+- The resulting image will be generated in the subfolder **.\out**
+
+<img src="images/Sample_Output_GenerateNoisyImage.66.png"/>
+
+## Quick start - Perform RANSAC on a noisy image
+- Run the script **RANSAC.py** to find the best fitting line in a noisy image
+- The input file is controlled by a variable inside RANSAC.py and the this file should be placed in the subdirectory **.\input**
+- The output is generated in the form of a new image which has the RANSAC line superimposed over the original line
+
+<img src="images/Sample_Output_After_RANSAC_GenerateNoisyImage.66.png"/>
 
 # References and further reading
 - Youtube lecture (https://www.youtube.com/watch?v=BpOKB3OzQBQ)

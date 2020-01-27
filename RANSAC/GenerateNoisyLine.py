@@ -17,6 +17,7 @@ import random
 img_back_color=255
 img_width=100
 img_height=50
+print("This script will create a monochrome image (100X50) consisting of a random line and salt-pepper noise")
 img = np.zeros([img_height,img_width,1],dtype=np.uint8)
 img.fill(img_back_color)
 #
@@ -54,6 +55,7 @@ count_of_files=len(os.listdir(folder_results))
 filename=("NoisyImage.%d.png" % count_of_files)
 file_result=os.path.join(folder_script,"./out/",filename)
 skimage.io.imsave(file_result,image_result)
+print("Image saved to fileL%s" % (file_result))
 #
 #
 #
