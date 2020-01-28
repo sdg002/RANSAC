@@ -17,14 +17,14 @@ This is an implementation of the RANSAC algorithm using Python
 - Run the script **GenerateNoisyLine.py** to generate a rectangular image with 1 line in a random orientation and salt-pepper noise
 - The resulting image will be generated in the subfolder **.\out**
 
-<img src="RANSAC/article/images/Sample_Output_GenerateNoisyImage.66.png"/>
+<img src="RANSAC/article/images/Sample_Output_GenerateNoisyImage.66.png" width="100%" height="100%" />
 
 ## Quick start - Perform RANSAC on a noisy image
 - Run the script **RANSAC.py** to find the best fitting line in a noisy image
 - The input file is controlled by a variable inside RANSAC.py and the this file should be placed in the subdirectory **.\input**
 - The output is generated in the form of a new image which has the RANSAC line superimposed over the original line
 
-<img src="RANSAC/article/images/Sample_Output_After_RANSAC_GenerateNoisyImage.66.png"/>
+<img src="RANSAC/article/images/Sample_Output_After_RANSAC_GenerateNoisyImage.66.png"  width="100%" height="100%" />
 
 
 # References and further reading
