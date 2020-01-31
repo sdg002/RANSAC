@@ -1,12 +1,12 @@
 ﻿# Introduction
-In this article we will explore the **Random Sample Consensus** algorithm - more popularly known by the acronym RANSAC. This is an iterative and a non-deterministic algorithm that helps in eliminating outliers. This algorithm is commonly used  to solve computer vision challenges. In this article I have presented the motivation for the RANSAC algorithm and the source code for a simplistic implementation using **Python**.
+In this article we will explore the **Random Sample Consensus** algorithm - more popularly known by the acronym RANSAC. This is an iterative and a non-deterministic algorithm that helps in eliminating outliers from a dataset. This algorithm is commonly used  to solve computer vision challenges. In this article I have presented the motivation for the RANSAC algorithm and the source code for a simplistic implementation using **Python**.
 
 # Problem definition
 Consider the distribution of points in the following diagram. 
 
 <img src="images/Intro_HumanMind_SeesStraightLine.png"/>
 
-The human mind can immediately spot that all the points in this distribution but for one is aligned in a straight line and the mind has no difficulty in distinguishing the inliers from the outliers. How can me make the computer emulate this aspect of the human behavior? The RANSAC algorithm attempts to address this challenge.
+The human mind can immediately spot that all the points in this distribution but for one point is aligned in a straight line and the mind has no difficulty in distinguishing the inliers from the outliers. How can me make the computer emulate this aspect of the human behavior? The RANSAC algorithm attempts to address this challenge.
 
 # Traditional approach - Fitting a straight line using the least squares regression method
 <img src="images/SimpleLinearRegression.png"/>
@@ -17,7 +17,7 @@ Consider the points above. How do we find a line which fits this distribution? O
 - Iteratively tinker with the equation of the line and evaluate the cost function
 - Select the line line which yields the lowest cost function
 
-## How do we build a cost function?
+# How do we build a cost function?
 
 <img src="images/y_mx_plus_c.png"/>
 
@@ -26,9 +26,9 @@ Consider the points above. How do we find a line which fits this distribution? O
 - Consider a straight line with the equation y=mx+c where  **m** is the slope and the **c** is the Y-intercept 
 
 - The distance of P from the point where the vertical projection intersects this line is given by  **d<sub>i</sub>=(mx<sub>i</sub>+c) - y<sub>i</sub>**
-- We do want to be worried about negative values. Therfore let us square the above distance. d<sub>i</sub><sup>2</sup>=((mx<sub>i</sub>+c) - y<sub>i</sub>)<sup>2</sup>
+- We do not want to be worried about negative values. Therefore let us square the above distance. d<sub>i</sub><sup>2</sup>=((mx<sub>i</sub>+c) - y<sub>i</sub>)<sup>2</sup>
 - The summation of the square of the vertical distance of all **N** points is given by **Sum =&Sigma;(mx<sub>i</sub>+c) - y<sub>i</sub>)<sup>2</sup>**
-- We can express the summationi as a function which is dependent on two variables - The slope **m** and the Y intercept **c**
+- We can express the summation as a function which is dependent on two variables - The slope **m** and the Y intercept **c**
 - The cost function **f(m,c)** can now be expressed as **&Sigma;(mx<sub>i</sub>+c) - y<sub>i</sub>)<sup>2</sup>**
 - Since we have 2 variables (m and c) we need 2 equations.
 - The maxima/minima of a function can be determined by using derivatives. The point where a function achieves maxima/minima the derivative of the function at that point is zero.
@@ -78,7 +78,7 @@ In this section I have presented the algorithm from the Wikipedia page of RANSAC
 1. **threshold_error**=if the distance of a point from a line is below this value then the point is classified as an inlier otherwise outlier
 1. **threshold_inliers**=minimum number of inliers for a model to be selected
 1. **k**= count of iterations completed. Initialize to 0
-## Start
+## Start of algorithm
 - **k**=**k** + 1
 - if **(k > MAX)** then stop the algorithm
 - select **n** random points from entire population. Denote this set by **random_points**
@@ -93,8 +93,7 @@ In this section I have presented the algorithm from the Wikipedia page of RANSAC
 - **best_model**=**current_model**
 - **best_error**=**current_error**
 - Go to **Start**
-## End
-
+## End of algorithm
 
 # Results
 
@@ -123,9 +122,7 @@ In this section I have presented the algorithm from the Wikipedia page of RANSAC
 <img src="images/NoisyImage_4.result.png" width="200%" height="200%"/>
 
 
-
-
-# Overview of the code (TODO)
+# Overview of the code
 
 ## Source code location
 I have used the following tools to author the Python scripts that accompany this article.
@@ -138,7 +135,15 @@ You do not have to use Visual Studio. I am quite certain that the Phython code s
 
 ## List of Python files and folders
 
-To be done  YOU WERE HERE
+- **RANSAC.py** - Outermost Python script which can be executed from the command line
+- **GenerateNoisyLine.py** - Outermost Python script which will generate a random straight line with salt-pepper noise
+- **LineModel.py** - Implements a class that represents the equation of a straight line
+- **Point.py** - Implements a class which represents a 2d point
+- **RansacHelper.py** - Implements the core RANSAC algorithm
+- **Util.py** - Utility functions
+- **test_??.py** - These are unit test classes
+- .\input\ - The folder containing input files
+- .\output\ - The folder where the resulting images are published
 
 ## Quick start - Generating an image of a noisy line
 - Run the script **GenerateNoisyLine.py** to generate a rectangular image with 1 line in a random orientation and salt-pepper noise

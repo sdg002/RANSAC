@@ -12,7 +12,8 @@ import LineModel
 
 
 folder_script=os.path.dirname(__file__)
-filename="NoisyImage.5.png"
+#Change the input file in the following line
+filename="NoisyImage.5.png"  
 #TODO NoisyImage_3.png is not generating correct results
 file_noisy_line=os.path.join(folder_script,"./input/",filename)
 np_image=skimage.io.imread(file_noisy_line,as_gray=True)
