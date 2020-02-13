@@ -2,6 +2,8 @@ import math
 import numpy as np
 #
 #Generate a normally distributed random cluster of points around x,y
+#Takes in a point x,y and the standard deviation (stddev) 
+#and the number of points to generate (num)
 #
 def GenerateClusterOfRandomPointsAroundXY(x,y,stddev,num):
     angleStart=0
