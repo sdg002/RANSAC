@@ -25,7 +25,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GenerateGaussianNoiseAtPoint.py" />
     <Compile Include="GenerateNoisyLine.py">
       <SubType>Code</SubType>
     </Compile>
