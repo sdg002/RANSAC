@@ -341,4 +341,5 @@ healthchecksdb
 
 # Ignore OUT folder
 RANSAC/out
+Common/out
 

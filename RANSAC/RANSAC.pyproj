@@ -5,8 +5,7 @@
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>RANSAC.py</StartupFile>
-    <SearchPath>
-    </SearchPath>
+    <SearchPath>..\Common</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>RANSAC</Name>
@@ -14,6 +13,8 @@
     <TestFramework>unittest</TestFramework>
     <UnitTestPattern>test*.py</UnitTestPattern>
     <UnitTestRootDirectory>.</UnitTestRootDirectory>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,29 +29,7 @@
     <Compile Include="GenerateNoisyLine.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LineModel.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Point.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="RANSAC.py" />
-    <Compile Include="RansacHelper.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="test_LineModel.py" />
-    <Compile Include="test_Point.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="test_RansacHelper.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="test_Util.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Util.py">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="article\images\" />
