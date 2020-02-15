@@ -20,7 +20,7 @@ def GenerateClusterOfRandomPointsAroundXY(x,y,stddev,num):
         radii=abs(random_radii[idx])
         random_x=radii* math.cos(theta)  +x
         random_y=radii* math.sin(theta)  +y
-        print("angle=%f,x,y=%f,%f" % (theta,random_x,random_y))
+        #print("angle=%f,x,y=%f,%f" % (theta,random_x,random_y))
         np_results[idx][0]=random_x
         np_results[idx][1]=random_y
 

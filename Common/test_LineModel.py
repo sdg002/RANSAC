@@ -107,6 +107,76 @@ class Test_LineModel(unittest.TestCase):
             print("Testing point=%s" % (p))
             self.assertTrue(p.Y >= y1)
             self.assertTrue(p.Y <= y2)
-
+    #
+    #Testing function create_line_from_start_and_end for a horizontal line
+    #
+    def test_create_line_from_start_and_end_horizontal_line(self):
+        self.fail("not yet implemented")
+    #
+    #create_line_from_2points - vertical line
+    #
+    def test_create_line_from_start_and_end_vertical_line(self):
+        start_x=1
+        start_y=5
+        end_x=1
+        end_y=25
+        model=lm.create_line_from_2points(start_x,start_y,end_x,end_y)
+        expected_B=0
+        expected_x_intercept=start_x
+        self.assertAlmostEqual(model.B,0)
+        self.assertAlmostEqual(model.C/model.A,-expected_x_intercept)
+    #
+    #create_line_from_2points  - horizontal line
+    #
+    def test_create_line_from_start_and_end_horizontal_line(self):
+        start_x=1
+        start_y=5
+        end_x=10
+        end_y=5
+        model=lm.create_line_from_2points(start_x,start_y,end_x,end_y)
+        #equation ax+by+c=0
+        #slope=-a/b
+        #yinter=-c/b
+        expected_A=0
+        expected_y_intercept=5
+        self.assertAlmostEqual(model.A,0)
+        self.assertAlmostEqual(model.C/model.B,-expected_y_intercept)
+    #
+    #create_line_from_2points  -  slop=1,yintercept=1
+    #
+    def test_create_line_from_start_and_end_horizontal_line(self):
+        start_x=0
+        start_y=1
+        end_x=1
+        end_y=2
+        model=lm.create_line_from_2points(start_x,start_y,end_x,end_y)
+        #equation ax+by+c=0
+        #slope=-a/b
+        #yinter=-c/b
+        expected_slope=1
+        expected_y_intercept=1
+        self.assertAlmostEqual(model.A/model.B, -expected_slope)
+        self.assertAlmostEqual(model.C/model.B,-expected_y_intercept)
+    #
+    #generate_points_at_regular_intervals_stline  (0,1) to (1,2)
+    #
+    def test_generate_points_at_regular_intervals_stline(self):
+        start_x=0
+        start_y=1
+        end_x=10
+        end_y=11
+        model=lm.create_line_from_2points(start_x,start_y,end_x,end_y)
+        slope=-model.A/model.B
+        yintercept=-model.C/model.B
+        gap=5
+        new_points=lm.generate_points_at_regular_intervals_stline(start_x,start_y,end_x,end_y,gap)
+        count_of_new_points=len(new_points)
+        self.assertTrue(count_of_new_points > 0)
+        self.assertTrue(count_of_new_points < 4)
+        for new_point in new_points:
+            new_x=new_point.X
+            new_y=new_point.Y
+            expected_y=slope*new_x + yintercept
+            self.assertAlmostEqual(new_y,expected_y)
 if __name__ == '__main__':
     unittest.main()

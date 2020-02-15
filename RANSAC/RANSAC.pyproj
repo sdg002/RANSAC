@@ -4,8 +4,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>RANSAC.py</StartupFile>
-    <SearchPath>..\Common</SearchPath>
+    <StartupFile>GenerateNoisyLineGaussian.py</StartupFile>
+    <SearchPath>..\;..\Common\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>RANSAC</Name>
@@ -28,6 +28,9 @@
     <Compile Include="GenerateNoisyLine.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GenerateNoisyLineGaussian.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RANSAC.py" />
   </ItemGroup>
   <ItemGroup>
@@ -35,7 +38,6 @@
     <Folder Include="input\" />
     <Folder Include="final_results\" />
     <Folder Include="article\" />
-    <Folder Include="unittest\" />
     <Folder Include="out\" />
   </ItemGroup>
   <ItemGroup>
@@ -72,8 +74,6 @@
     <Content Include="input\NoisyImage_2.png" />
     <Content Include="input\NoisyImage_3.png" />
     <Content Include="input\NoisyImage_4.png" />
-    <Content Include="unittest\Ransac_UnitTest.png" />
-    <Content Include="unittest\Util_unittest.png" />
     <Content Include="out\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

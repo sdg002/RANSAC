@@ -79,6 +79,7 @@ class LineModel:
 #
 #This function will generate points using the specified line model within the bounds of x1,y1 and x2,y2
 #Returns an array of Point class instances
+#We increment X or Y by 1 pixel and generate new points
 #
 def generate_points_from_line(model:LineModel,x1:float,y1:float,x2:float,y2:float)->List[pt.Point]:
     lst_points:List[pt.Point]=list()
@@ -112,3 +113,46 @@ def generate_points_from_line(model:LineModel,x1:float,y1:float,x2:float,y2:floa
             start_x+=1
     return lst_points
  
+#
+#Creates a line equation from start and end points
+#Returns a LineModel instance
+#
+def create_line_from_2points(x_start,y_start,x_end,y_end):
+    is_infinite_slope=abs(x_start-x_end) < LineModel.SMALL
+    if (is_infinite_slope):
+        #nearly vertical, take the average of x
+        x_intercept=(x_start+x_end)/2
+        line_a=1
+        line_c=-1 * line_a * x_intercept
+        line_b=0
+        model=LineModel(line_a,line_b,line_c)
+        return model    
+    else:
+        slope=(y_end-y_start)/(x_end-x_start)
+        y_intercept= y_end - slope * x_end
+        line_a=slope
+        line_b=-1
+        line_c=y_intercept
+        model=LineModel(line_a,line_b,line_c)
+        return model    
+    pass
+#
+#Returns a list of Points which are generated on a straight line connecting start and end
+#The points are spaced at intervals of 'gap' distance
+#
+def generate_points_at_regular_intervals_stline(start_x:float,start_y:float,end_x:float,end_y:float,gap:float):
+    model=create_line_from_2points(start_x,start_y,end_x,end_y)
+    pts_result=list()
+    pts_crowded=generate_points_from_line(model,start_x,start_y,end_x,end_y)
+    
+    point_last=pts_crowded[0]
+    for index in range(1,len(pts_crowded)):
+        point_current=pts_crowded[index]
+        distance= math.sqrt( (point_current.X-point_last.X)**2 + (point_current.Y-point_last.Y)**2 )
+        if (distance > gap):
+            pts_result.append(point_current)
+            point_last=point_current
+            continue
+        else:
+            pass
+    return pts_result
