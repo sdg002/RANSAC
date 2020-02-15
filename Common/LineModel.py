@@ -79,10 +79,11 @@ class LineModel:
 #
 #This function will generate points using the specified line model within the bounds of x1,y1 and x2,y2
 #Returns an array of Point class instances
-#We increment X or Y by 1 pixel and generate new points
+#We increment X or Y by delta_increment= pixel and generate new points
 #
 def generate_points_from_line(model:LineModel,x1:float,y1:float,x2:float,y2:float)->List[pt.Point]:
     lst_points:List[pt.Point]=list()
+    delta_increment=0.1
     if (math.fabs(model.B) < LineModel.SMALL):
         #
         #Perp line
@@ -96,7 +97,7 @@ def generate_points_from_line(model:LineModel,x1:float,y1:float,x2:float,y2:floa
             x=(-model.C - 0)/model.A
             pt_new=pt.Point(x,start_y)
             lst_points.append(pt_new)
-            start_y+=1
+            start_y+=delta_increment
     else:
         #
         #All other points
@@ -110,7 +111,7 @@ def generate_points_from_line(model:LineModel,x1:float,y1:float,x2:float,y2:floa
             y=(-model.C - model.A*start_x)/model.B
             pt_new=pt.Point(start_x,y)
             lst_points.append(pt_new)
-            start_x+=1
+            start_x+=delta_increment
     return lst_points
  
 #
