@@ -83,7 +83,7 @@ class LineModel:
 #
 def generate_points_from_line(model:LineModel,x1:float,y1:float,x2:float,y2:float)->List[pt.Point]:
     lst_points:List[pt.Point]=list()
-    delta_increment=0.1
+    delta_increment=0.01
     if (math.fabs(model.B) < LineModel.SMALL):
         #
         #Perp line

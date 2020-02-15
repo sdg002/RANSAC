@@ -48,7 +48,7 @@ else:
 #Generate gaussian points
 #
 gap=5
-num_gaussian_points=3
+num_gaussian_points=5 #3
 line_model=lm.create_line_from_2points(start_x,start_y,end_x,end_y)
 pts_st_line_regular_intervals=lm.generate_points_at_regular_intervals_stline(start_x,start_y,end_x,end_y,gap)
 print("Calculate %d points at spacing of %.f" % (len(pts_st_line_regular_intervals),gap))
