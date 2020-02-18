@@ -13,8 +13,11 @@ import LineModel
 
 folder_script=os.path.dirname(__file__)
 #Change the input file in the following line
-filename="NoisyImage.5.png"  
-#TODO NoisyImage_3.png is not generating correct results
+filename="NoisyLine-Gaussian-sp-0.80.103.png"
+
+#Images which did not generate good results:
+#   NoisyImage_3.png
+#   NoisyLine-Gaussian-sp-0.80.111.png
 file_noisy_line=os.path.join(folder_script,"./input/",filename)
 np_image=skimage.io.imread(file_noisy_line,as_gray=True)
 #
@@ -26,13 +29,17 @@ lst_all_points=Util.create_points_from_numpyimage(np_image)
 #begin RANSAC
 #
 ransac_maxiterations=12000
+#12000
 #6000 
 #12000 worked well
 ransac_minpoints=5
 #5 worked well
 #2 gave very bad results
 #20 worked well
-ransac_threshold=3
+ransac_threshold=5
+#25 #10 - did not produce good results for 
+#5 produced good results for Gaussian noise for the input image "NoisyLine-Gaussian-sp-0.80.111.png"
+#3 for first set when points were much closer
 #5 produced too much deviation
 
 ransac_mininliers=10
@@ -56,7 +63,7 @@ now=datetime.datetime.now()
 filename_result=("result-%s.png") % now.strftime("%Y-%m-%d-%H-%M-%S")
 file_result=os.path.join(folder_script,"./out/",filename_result)
 #Load input image into array
-np_image_result=skimage.io.imread(file_noisy_line,as_gray=False)
+np_image_result=skimage.io.imread(file_noisy_line,as_gray=True)
 new_points=LineModel.generate_points_from_line(model,0,0,np_image_result.shape[1]-1,np_image_result.shape[0]-1)
 np_superimposed=Util.superimpose_points_on_image(np_image_result,new_points,100,255,100)
 #Save new image

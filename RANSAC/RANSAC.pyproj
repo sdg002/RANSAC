@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>GenerateNoisyLineGaussian.py</StartupFile>
+    <StartupFile>RANSAC.py</StartupFile>
     <SearchPath>..\;..\Common\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -69,11 +69,25 @@
     <Content Include="final_results\NoisyImage_3_result.png" />
     <Content Include="final_results\NoisyImage_4.png" />
     <Content Include="final_results\NoisyImage_4.result.png" />
+    <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.103.result.png" />
+    <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.104.result.png" />
+    <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.111.result.png" />
+    <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.118.result.png" />
+    <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.119.result.png" />
+    <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.121.result.png" />
+    <Content Include="final_results\NoisyLine-Gaussian-sp-1.00.88.result.png" />
     <Content Include="input\NoisyImage.5.png" />
     <Content Include="input\NoisyImage_1.png" />
     <Content Include="input\NoisyImage_2.png" />
     <Content Include="input\NoisyImage_3.png" />
     <Content Include="input\NoisyImage_4.png" />
+    <Content Include="input\NoisyLine-Gaussian-sp-0.80.103.png" />
+    <Content Include="input\NoisyLine-Gaussian-sp-0.80.104.png" />
+    <Content Include="input\NoisyLine-Gaussian-sp-0.80.111.png" />
+    <Content Include="input\NoisyLine-Gaussian-sp-0.80.118.png" />
+    <Content Include="input\NoisyLine-Gaussian-sp-0.80.119.png" />
+    <Content Include="input\NoisyLine-Gaussian-sp-0.80.121.png" />
+    <Content Include="input\NoisyLine-Gaussian-sp-1.00.088.png" />
     <Content Include="out\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
