@@ -54,6 +54,7 @@
     <Content Include="article\images\NoisyImage_3_result.png" />
     <Content Include="article\images\NoisyImage_4.png" />
     <Content Include="article\images\NoisyImage_4.result.png" />
+    <Content Include="article\images\NoisyLine-Gaussian-sp-0.80.1.png" />
     <Content Include="article\images\Sample_Output_After_RANSAC_GenerateNoisyImage.66.png" />
     <Content Include="article\images\Sample_Output_GenerateNoisyImage.66.png" />
     <Content Include="article\images\SimpleLinearRegression.drawio" />
