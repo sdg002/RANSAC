@@ -15,6 +15,7 @@ folder_script=os.path.dirname(__file__)
 #Change the input file in the following line
 filename="NoisyLine-Gaussian-sp-0.80.103.png"
 
+
 #Images which did not generate good results:
 #   NoisyImage_3.png
 #   NoisyLine-Gaussian-sp-0.80.111.png
@@ -37,8 +38,8 @@ ransac_minpoints=5
 #2 gave very bad results
 #20 worked well
 ransac_threshold=5
-#25 #10 - did not produce good results for 
-#5 produced good results for Gaussian noise for the input image "NoisyLine-Gaussian-sp-0.80.111.png"
+#25 worked well for 'NoisyLine-Gaussian-sp-0.80.104.png' 15 and 5 did not
+#Nothing worked well for 'NoisyLine-Gaussian-sp-0.80.111.png" , tried increasing to 35
 #3 for first set when points were much closer
 #5 produced too much deviation
 
