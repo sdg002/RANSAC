@@ -1,6 +1,7 @@
-# Implementation of RANSAC algorithm 
+# Implementation of RANSAC algorithm  (Article on Medium)
+This is the source code of my article on Medium
+https://medium.com/@saurabh.dasgupta1/outlier-detection-using-the-ransac-algorithm-de52670adb4a
 
-This is an implementation of the RANSAC algorithm using Python
 
 # About the source code
 I have used the following tools to author the Python scripts that accompany this article.
