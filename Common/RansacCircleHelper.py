@@ -7,7 +7,7 @@ import math
 class TrigramOfPoints(object):
     def __init__(self,p1:point.Point, p2:point.Point, p3:point.Point):
         self.P1:point.Point=p1
-        self.P2:point.Point=p1
+        self.P2:point.Point=p2
         self.P3:point.Point=p3
 
         #self.P1=p1
@@ -37,7 +37,7 @@ class RansacCircleHelper(object):
             raise Exception("The threshold has not been initialized")
         #
         #generate trigrams of points - find some temporary model to hold this model
-        trigrams=self.generate_trigam_from_points(self._all_points)
+        trigrams=self.generate_trigam_from_points()
         learning_rate=0.1
         #for ever triagram find circle model
         tri:TrigramOfPoints
@@ -65,11 +65,17 @@ class RansacCircleHelper(object):
     @param points:Collection of points on which to iterate
     '''
     #def GenerateTrigamFromPoints(self,points:List[point.Point])->List[TrigramOfPoints]:
-    def generate_trigam_from_points(self,points):
+    def generate_trigam_from_points(self,):
         lst=list()
-        fake=TrigramOfPoints(points[0],points[1],points[2])
-        lst.append(fake)
-        ##to be done
+        points=self._all_points
+        for i in range(0,len(points)):
+            for j in range(i+1,len(points)):
+                for k in range(j+1,len(points)):
+                    p0=points[i]
+                    p1=points[j]
+                    p2=points[k]
+                    trigram=TrigramOfPoints(p0,p1,p2)
+                    lst.append(trigram)
         return lst
         pass
     
