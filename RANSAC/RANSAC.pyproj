@@ -77,6 +77,7 @@
     <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.121.result.png" />
     <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.104.result.png" />
     <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.111.result.png" />
+    <Content Include="input\NoisyCircle-HandDrawn-001.png" />
     <Content Include="input\NoisyImage.5.png" />
     <Content Include="input\NoisyImage_1.png" />
     <Content Include="input\NoisyImage_2.png" />

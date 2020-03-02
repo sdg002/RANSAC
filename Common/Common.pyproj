@@ -4,7 +4,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>ea8337d1-4146-41e9-8f34-35a4b13eece4</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Common.py</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -27,7 +28,6 @@
     <Compile Include="CircleModel.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common.py" />
     <Compile Include="GenerateGaussianNoiseAtPoint.py" />
     <Compile Include="GradientDescentCircleFitting.py">
       <SubType>Code</SubType>

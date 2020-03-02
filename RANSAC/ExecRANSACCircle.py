@@ -15,7 +15,8 @@ folder_script=os.path.dirname(__file__)
 #
 #Change the input file in the following line
 #
-filename="NoisyLine-Gaussian-sp-0.80.103.png" #change this
+filename="NoisyCircle-HandDrawn-001.png"
+#"NoisyLine-Gaussian-sp-0.80.103.png" #change this
 file_noisy_line=os.path.join(folder_script,"./input/",filename)
 np_image=skimage.io.imread(file_noisy_line,as_gray=True)
 ransac_threshold=sys.float_info.max #max possible error

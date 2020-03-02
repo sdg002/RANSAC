@@ -1,14 +1,15 @@
 import CircleModel as cmodel
-import Point as point
+import Point as pmodel
 import GradientDescentCircleFitting
 from typing import List, Set, Dict, Tuple, Optional
 import math
+import statistics as stats
 
 class TrigramOfPoints(object):
-    def __init__(self,p1:point.Point, p2:point.Point, p3:point.Point):
-        self.P1:point.Point=p1
-        self.P2:point.Point=p2
-        self.P3:point.Point=p3
+    def __init__(self,p1:pmodel.Point, p2:pmodel.Point, p3:pmodel.Point):
+        self.P1:pmodel.Point=p1
+        self.P2:pmodel.Point=p2
+        self.P3:pmodel.Point=p3
 
         #self.P1=p1
         #self.P2=p1
@@ -21,13 +22,13 @@ class TrigramOfPoints(object):
 class RansacCircleHelper(object):
     """Implements Ransac algorithm for Circle model"""
     def __init__(self):
-        self._all_points:List[point.Point]=list() #all points in the population
+        self._all_points:List[pmodel.Point]=list() #all points in the population
         self.threshold_error:float=float("nan")
         pass
     #
     #Should be called once to set the full list of data points
     #
-    def add_points(self,points:List[point.Point]):
+    def add_points(self,points:List[pmodel.Point]):
         self._all_points.extend(points)
         pass
 
@@ -45,7 +46,7 @@ class RansacCircleHelper(object):
         for tri in trigrams:
             try:
                 model=cmodel.GenerateModelFrom3Points(tri.P1,tri.P2,tri.P3)
-                model_error,inliner_count=self.ComputeModelGoodness(model)
+                model_error,inliner_count=self.compute_model_goodness(model)
                 tri.inlier_count=inliner_count
                 lst_trigrams.appeend(tri)
             except:
@@ -64,7 +65,7 @@ class RansacCircleHelper(object):
     Iterates over all points and generates trigrams
     @param points:Collection of points on which to iterate
     '''
-    #def GenerateTrigamFromPoints(self,points:List[point.Point])->List[TrigramOfPoints]:
+    #def GenerateTrigamFromPoints(self,points:List[pmodel.Point])->List[TrigramOfPoints]:
     def generate_trigam_from_points(self,):
         lst=list()
         points=self._all_points
@@ -87,11 +88,19 @@ class RansacCircleHelper(object):
         Compute the total no of inliners
     Return a tuple of mse,inlier_count
     '''
-    def ComputeModelGoodness(self,model:cmodel.CircleModel)->Tuple:
+    def compute_model_goodness(self,model:cmodel.CircleModel)->Tuple:
         radius=model.R
         all_points=self._all_points
         threshold=self.threshold_error
-        #to be done , 
-        return 0.001,10
-        pass
-
+        p:pmodel.Point
+        shortlist_inliners=list()
+        list_distances=list()
+        for p in all_points:
+            distance=(p.X - model.X)**2 + (p.Y - model.Y)**2 
+            if (distance > threshold):
+                continue
+            shortlist_inliners.append(p)
+            list_distances.append(distance)
+        mean_squared_error=stats.mean(list_distances)
+        result=(mean_squared_error,len(shortlist_inliners))
+        return result

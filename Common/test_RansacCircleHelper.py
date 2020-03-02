@@ -2,6 +2,7 @@ import unittest
 import RansacCircleHelper
 import math
 import Point as pmodel
+import CircleModel as cmodel
 
 class Test_test_RansacCircleHelper(unittest.TestCase):
 
@@ -48,6 +49,39 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         self.assertTrue(tri.P1.ID == p1.ID)
         self.assertTrue(tri.P2.ID == p2.ID)
         self.assertTrue(tri.P3.ID == p3.ID)
+
+    def test_compute_model_goodness_all_points_on_circumfrence(self):
+        helper=RansacCircleHelper.RansacCircleHelper()
+        universe=list()
+        universe.append(pmodel.Point(+1,0))
+        universe.append(pmodel.Point(-1,0))
+        universe.append(pmodel.Point(0,1))
+        helper.add_points(universe)
+        circ=cmodel.CircleModel(0,0,1)
+        helper.threshold_error=4
+        t=helper.compute_model_goodness(circ)
+        mse=t[0]
+        inlier_count=t[1]
+        self.assertAlmostEqual(mse,circ.R)
+        self.assertAlmostEqual(inlier_count,3)
+        pass
+
+    def test_compute_model_goodness_3_points_on_circumfrence_1_far_away(self):
+        helper=RansacCircleHelper.RansacCircleHelper()
+        universe=list()
+        universe.append(pmodel.Point(+1,0))
+        universe.append(pmodel.Point(-1,0))
+        universe.append(pmodel.Point(0,1))
+        universe.append(pmodel.Point(100,100)) #far away
+        helper.add_points(universe)
+        circ=cmodel.CircleModel(0,0,1)
+        helper.threshold_error=4
+        t=helper.compute_model_goodness(circ)
+        mse=t[0]
+        inlier_count=t[1]
+        self.assertAlmostEqual(mse,circ.R)
+        self.assertAlmostEqual(inlier_count,3)
+        pass
 
 
 if __name__ == '__main__':
