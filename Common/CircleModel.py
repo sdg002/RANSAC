@@ -1,4 +1,7 @@
 import Point as pmodel
+from typing import List, Set, Dict, Tuple, Optional
+import numpy as np
+import math
 
 class CircleModel(object):
     """Represents a Circle model using its center point and radius"""
@@ -37,3 +40,23 @@ def GenerateModelFrom3Points(p1:pmodel.Point, p2:pmodel.Point, p3:pmodel.Point)-
     circ=CircleModel(px,py,r)
     
     return circ
+
+
+#
+#Computes points which lie on the given circle model and within the specified bounds
+#Returns a list of points
+#
+def generate_points_from_circle(model:CircleModel,x1:float,y1:float,x2:float,y2:float)->List[CircleModel]:
+    angleStart=0
+    angleEnd=2*3.1415
+    num=100
+    angles=np.linspace(angleStart,angleEnd,num)
+    radius=model.R
+    lst_points:List[pt.Point]=list()
+    for idx in range(0,len(angles)):
+        theta=angles[idx]
+        x=radius * math.cos(theta)  +model.X
+        y=radius * math.sin(theta)  +model.Y
+        pt_new=pmodel.Point(x,y)
+        lst_points.append(pt_new)
+    return lst_points
