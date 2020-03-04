@@ -45,5 +45,7 @@ class Test_CircleModel(unittest.TestCase):
         self.assertAlmostEquals(c1.X, 0.0,1)
         self.assertAlmostEquals(c1.Y, 1.0,1)
 
+    def test_generate_points_from_circle_model(self):
+        self.fail("Method is not yet implemented")
 if __name__ == '__main__':
     unittest.main()
