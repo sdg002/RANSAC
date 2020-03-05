@@ -18,9 +18,15 @@ class TrigramOfPoints(object):
 class RansacCircleHelper(object):
     """Implements Ransac algorithm for Circle model"""
     def __init__(self):
-        self._all_points:List[pmodel.Point]=list() #all points in the population
+        #all points in the population
+        self._all_points:List[pmodel.Point]=list()
+
+        #A point will be considered an inlier of a model circle if it is 
+        #within this distance from circumfrence of the model
         self.threshold_error:float=float("nan")
-        self.threshold_inlier_count=4 #A lower limit on inliers to shortlist a model
+        
+        #A lower limit on count of inliers for a model to be shortlisted
+        self.threshold_inlier_count=float("nan") 
         pass
     #
     #Should be called once to set the full list of data points
@@ -32,7 +38,10 @@ class RansacCircleHelper(object):
     def run(self)->cmodel.CircleModel:
         pass
         if (math.isnan(self.threshold_error) == True):
-            raise Exception("The threshold has not been initialized")
+            raise Exception("The property 'threshold_error' has not been initialized")
+
+        if (math.isnan(self.threshold_inlier_count) == True):
+            raise Exception("The property 'threshold_inlier_count' has not been initialized")
         #
         #generate trigrams of points - find some temporary model to hold this model
         trigrams=self.generate_trigam_from_points()

@@ -28,6 +28,7 @@ lst_all_points=Util.create_points_from_numpyimage(np_image)
 #
 helper=ransachelper.RansacCircleHelper()
 helper.threshold_error=ransac_threshold
+helper.threshold_inlier_count=4
 helper.add_points(lst_all_points)
 best_model=helper.run() 
 print("RANSAC-complete")    
