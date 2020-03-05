@@ -43,10 +43,10 @@ def GenerateModelFrom3Points(p1:pmodel.Point, p2:pmodel.Point, p3:pmodel.Point)-
 
 
 #
-#Computes points which lie on the given circle model and within the specified bounds
+#Computes points which lie on the given circle model 
 #Returns a list of points
 #
-def generate_points_from_circle(model:CircleModel,x1:float,y1:float,x2:float,y2:float)->List[CircleModel]:
+def generate_points_from_circle(model:CircleModel)->List[CircleModel]:
     angleStart=0
     angleEnd=2*3.1415
     num=100

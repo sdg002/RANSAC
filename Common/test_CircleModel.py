@@ -1,6 +1,8 @@
 import unittest
 import CircleModel as cmodel
 import Point as pmodel
+from typing import List, Set, Dict, Tuple, Optional
+import math
 
 class Test_CircleModel(unittest.TestCase):
     def test_When_Constructed_All_Properties_Must_Be_Initialized(self):
@@ -45,7 +47,20 @@ class Test_CircleModel(unittest.TestCase):
         self.assertAlmostEquals(c1.X, 0.0,1)
         self.assertAlmostEquals(c1.Y, 1.0,1)
 
-    def test_generate_points_from_circle_model(self):
-        self.fail("Method is not yet implemented")
+    #
+    #A circle with center=0,0 and radius=1
+    #All points generated should be 1 unit from center
+    #
+    def test_generate_points_from_circle_model_center_at_0_0_radius_1(self):
+        center_x=0
+        center_y=0
+        radius=1.0
+        model=cmodel.CircleModel(center_x,center_y,radius)
+        points=cmodel.generate_points_from_circle(model)
+        pt:pmodel.Point
+        for pt in points:
+            distance_from_center=math.sqrt( (pt.X-center_x)**2 + (pt.Y-center_y)**2)
+            self.assertAlmostEqual(distance_from_center,radius,2)
+
 if __name__ == '__main__':
     unittest.main()
