@@ -1,6 +1,6 @@
 import CircleModel as cmodel
 import Point as pmodel
-import GradientDescentCircleFitting
+import GradientDescentCircleFitting as gdescent
 from typing import List, Set, Dict, Tuple, Optional
 import math
 import statistics as stats
@@ -11,8 +11,8 @@ class TrigramOfPoints(object):
         self.P2:pmodel.Point=p2
         self.P3:pmodel.Point=p3
 
-        self.mean_error:float=0.0
-        self.inlier_count:int=0
+        #self.mean_error:float=0.0
+        #self.inlier_count:int=0
         pass
 
 class RansacCircleHelper(object):
@@ -44,9 +44,14 @@ class RansacCircleHelper(object):
             raise Exception("The property 'threshold_inlier_count' has not been initialized")
         #
         #generate trigrams of points - find some temporary model to hold this model
+        #
         trigrams=self.generate_trigam_from_points()
         learning_rate=0.1
+        #
         #for ever triagram find circle model
+        #   find the circle that passes through those points
+        #   Determine model goodness score
+        #
         tri:TrigramOfPoints
         lst_results=list()
         for tri in trigrams:
@@ -63,13 +68,33 @@ class RansacCircleHelper(object):
                 continue
             error=self.compute_model_goodness2(temp_circle,inliers)
             result=(temp_circle,inliers,error,tri)
-            lst_results.append(result)
-
-            
-        #Fit all the other points to this model and make a note of the error
-        #done with all trigrams
+            lst_results.append(result)            
+        #
         #Sort trigrams with lowest error
+        #
         sorted_by_mse=  sorted(lst_results, key = lambda x: x[2])
+        lst_results_gdescent=list()
+        for t in sorted_by_mse:
+            model=t[0]
+            inliers=t[1]
+            trigram:TrigramOfPoints=t[3]
+            new_points=list()
+            new_points.extend(inliers)
+            new_points.append(trigram.P1)
+            new_points.append(trigram.P2)
+            new_points.append(trigram.P3)
+            new_model,new_error=self.find_model_using_gradient_descent(model,new_points)
+            result=(new_model,new_error)
+            lst_results_gdescent.append(result)
+        lst_results_gd2=sorted(lst_results,key= lambda x: x[2])
+        #you were hr# fkae thre results
+        #
+        #TODO take every model, 
+        #   expand using all inliers that were found
+        #   use GD to find best circle
+        #   Compute error
+        #   Take best model
+        #
         best_model=sorted_by_mse[0][0]
         return best_model
         pass
@@ -153,4 +178,14 @@ class RansacCircleHelper(object):
                 continue
             shortlist_inliners.append(p)
         return shortlist_inliners
+        pass
+
+    #
+    #Use the gradience descent algorithm to find the circle that fits the givens points
+    #use the modelhint as a starting circle
+    #
+    def find_model_using_gradient_descent(self,modelhint:cmodel.CircleModel, points:List[pmodel.Point])->cmodel.CircleModel:
+        gdhelper=gdescent.GradientDescentCircleFitting(modelhint, 0.1, points)
+        new_model=gdhelper.FindBestFittingCircle()
+        return new_model
         pass

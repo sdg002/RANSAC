@@ -39,6 +39,9 @@
     <Compile Include="test_CircleModel.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="test_GradientDescentCircleFitting.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="test_LineModel.py" />
     <Compile Include="test_Point.py" />
     <Compile Include="test_RansacCircleHelper.py">
