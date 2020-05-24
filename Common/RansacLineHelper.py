@@ -7,7 +7,7 @@ import math
 
 from sklearn.linear_model import LinearRegression
 
-class RansacHelper(object):
+class RansacLineHelper(object):
     """Encapsulates RANSAC logic"""
     def __init__ (self):
         pass

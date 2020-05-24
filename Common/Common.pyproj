@@ -35,7 +35,7 @@
     <Compile Include="LineModel.py" />
     <Compile Include="Point.py" />
     <Compile Include="RansacCircleHelper.py" />
-    <Compile Include="RansacHelper.py" />
+    <Compile Include="RansacLineHelper.py" />
     <Compile Include="test_CircleModel.py">
       <SubType>Code</SubType>
     </Compile>
@@ -47,7 +47,7 @@
     <Compile Include="test_RansacCircleHelper.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="test_RansacHelper.py" />
+    <Compile Include="test_RansacLineHelper.py" />
     <Compile Include="test_Util.py" />
     <Compile Include="Util.py" />
   </ItemGroup>

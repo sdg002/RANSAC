@@ -9,7 +9,7 @@ import LineModel
 
 class Test_test_1(unittest.TestCase):
     def test_AddPoints(self):
-        helper=rh.RansacHelper()
+        helper=rh.RansacLineHelper()
         lst=list()
         lst.append(pt.Point(0,0))
         lst.append(pt.Point(1,1))
@@ -22,7 +22,7 @@ class Test_test_1(unittest.TestCase):
         pass
 
     def test_GetRandomPoints(self):
-        helper1=rh.RansacHelper()
+        helper1=rh.RansacLineHelper()
         lst=list()
         lst.append(pt.Point(0,0))
         lst.append(pt.Point(1,1))
@@ -49,7 +49,7 @@ class Test_test_1(unittest.TestCase):
 
     def test_create_model_vertical_through_x_equal_5(self):
         pass
-        helper1=rh.RansacHelper()
+        helper1=rh.RansacLineHelper()
         lst=list()
         lst.append(pt.Point(5,0))
         lst.append(pt.Point(5,1))
@@ -63,7 +63,7 @@ class Test_test_1(unittest.TestCase):
 
     def test_create_model_horizontal_through_y_equal_5(self):
         pass
-        helper1=rh.RansacHelper()
+        helper1=rh.RansacLineHelper()
         lst=list()
         lst.append(pt.Point(0,5))
         lst.append(pt.Point(1,5))
@@ -80,7 +80,7 @@ class Test_test_1(unittest.TestCase):
 
     def test_create_model_45_degrees_through_origin(self):
         pass
-        helper1=rh.RansacHelper()
+        helper1=rh.RansacLineHelper()
         lst=list()
         lst.append(pt.Point(0,0))
         lst.append(pt.Point(1,1))
@@ -111,7 +111,7 @@ class Test_test_1(unittest.TestCase):
         #
         #initialize RansalHelper
         #
-        helper1=rh.RansacHelper()
+        helper1=rh.RansacLineHelper()
         helper1.add_points(lst_points)
         helper1.max_iterations=1000
         #10000 did not work
