@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ExecRANSACCircle.py</StartupFile>
+    <StartupFile>ExecRANSACLine.py</StartupFile>
     <SearchPath>..\;..\Common\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -32,7 +32,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ExecRANSACCircle.py" />
-    <Compile Include="RANSAC.py" />
+    <Compile Include="ExecRANSACLine.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="article\images\" />
