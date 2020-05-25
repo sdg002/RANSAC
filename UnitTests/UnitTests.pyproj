@@ -30,9 +30,15 @@
     <Compile Include="common\test_CircleModel.py" />
     <Compile Include="common\test_LineModel.py" />
     <Compile Include="common\test_Point.py" />
+    <Compile Include="common\test_Util.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="common\" />
+    <Folder Include="common\data\" />
+    <Folder Include="out\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="common\data\Util_unittest.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

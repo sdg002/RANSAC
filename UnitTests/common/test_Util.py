@@ -1,9 +1,10 @@
 import unittest
-import Util
+from RANSAC.Common import Util
 import numpy as np
 import os
 import skimage
-import Point
+from RANSAC.Common import Point
+
 
 class Test_test_Util(unittest.TestCase):
     #
@@ -13,7 +14,7 @@ class Test_test_Util(unittest.TestCase):
         pass
         folder_script=os.path.dirname(__file__)
         filename="Util_unittest.png"
-        file_noisy_line=os.path.join(folder_script,"./unittest/",filename)
+        file_noisy_line=os.path.join(folder_script,"./data/",filename)
         np_image=skimage.io.imread(file_noisy_line,as_gray=True)
         height=np_image.shape[0]
         width=np_image.shape[1]
@@ -37,17 +38,17 @@ class Test_test_Util(unittest.TestCase):
     def test_when_points_are_superimposed_over_image_array_and_saved_the_new_image_must_contain_the_new_points(self):
         folder_script=os.path.dirname(__file__)
         filename="Util_unittest.png"
-        file_noisy_line=os.path.join(folder_script,"./unittest/",filename)
+        file_noisy_line=os.path.join(folder_script,"./data/",filename)
         np_image=skimage.io.imread(file_noisy_line,as_gray=True)
-        file_result=os.path.join(folder_script,"./out/",filename)
+        file_result=os.path.join(folder_script,"../out/",filename)
         new_points=list()
         #
         #Superimpose some points
         #
-        new_points.append(Point.Point(0,0))
-        new_points.append(Point.Point(2,2))
-        new_points.append(Point.Point(3,3))
-        new_points.append(Point.Point(4,4))
+        new_points.append(Point(0,0))
+        new_points.append(Point(2,2))
+        new_points.append(Point(3,3))
+        new_points.append(Point(4,4))
         color_red=100
         color_green=255
         color_blue=90

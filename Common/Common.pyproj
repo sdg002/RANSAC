@@ -46,7 +46,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="test_RansacLineHelper.py" />
-    <Compile Include="test_Util.py" />
     <Compile Include="Util.py" />
     <Compile Include="__init__.py">
       <SubType>Code</SubType>
