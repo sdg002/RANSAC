@@ -1,3 +1,7 @@
 from .RansacLineHelper import RansacLineHelper
-__all__ = ["RansacLineHelper"]
+from .RansacCircleHelper import RansacCircleHelper
+from .GradientDescentCircleFitting import GradientDescentCircleFitting
+__all__ = ["RansacLineHelper",
+           "RansacCircleHelper",
+           "GradientDescentCircleFitting"]
 

@@ -1,15 +1,17 @@
-import CircleModel as cmodel
-import Point as pmodel
-import GradientDescentCircleFitting as gdescent
 from typing import List, Set, Dict, Tuple, Optional
 import math
 import statistics as stats
 
+from RANSAC.Common import Point
+from RANSAC.Common import CircleModel
+from RANSAC.Algorithm import GradientDescentCircleFitting
+
+
 class TrigramOfPoints(object):
-    def __init__(self,p1:pmodel.Point, p2:pmodel.Point, p3:pmodel.Point):
-        self.P1:pmodel.Point=p1
-        self.P2:pmodel.Point=p2
-        self.P3:pmodel.Point=p3
+    def __init__(self,p1:Point, p2:Point, p3:Point):
+        self.P1:Point=p1
+        self.P2:Point=p2
+        self.P3:Point=p3
 
         #self.mean_error:float=0.0
         #self.inlier_count:int=0
@@ -19,7 +21,7 @@ class RansacCircleHelper(object):
     """Implements Ransac algorithm for Circle model"""
     def __init__(self):
         #all points in the population
-        self._all_points:List[pmodel.Point]=list()
+        self._all_points:List[Point]=list()
 
         #A point will be considered an inlier of a model circle if it is 
         #within this distance from circumfrence of the model
@@ -31,11 +33,11 @@ class RansacCircleHelper(object):
     #
     #Should be called once to set the full list of data points
     #
-    def add_points(self,points:List[pmodel.Point]):
+    def add_points(self,points:List[Point]):
         self._all_points.extend(points)
         pass
 
-    def run(self)->cmodel.CircleModel:
+    def run(self)->CircleModel:
         pass
         if (math.isnan(self.threshold_error) == True):
             raise Exception("The property 'threshold_error' has not been initialized")
@@ -56,12 +58,12 @@ class RansacCircleHelper(object):
         lst_results=list()
         for tri in trigrams:
             try:
-                temp_circle=cmodel.GenerateModelFrom3Points(tri.P1,tri.P2,tri.P3)
+                temp_circle=GenerateModelFrom3Points(tri.P1,tri.P2,tri.P3)
             except Exception as e:
                 print("Could not generate Circle model. Error=%s" % (str(e)))
                 continue
 
-            inliers:List[pmodel.Point]=self.get_inliers(temp_circle,[tri.P1,tri.P2,tri.P3])
+            inliers:List[Point]=self.get_inliers(temp_circle,[tri.P1,tri.P2,tri.P3])
             count_inliers=len(inliers)
             if (count_inliers < self.threshold_inlier_count):
                 print("Skipping because of poor inlier count=%d and this is less than threshold=%f)" % (count_inliers, self.threshold_inlier_count))
@@ -103,7 +105,7 @@ class RansacCircleHelper(object):
     Iterates over all points and generates trigrams
     @param points:Collection of points on which to iterate
     '''
-    #def GenerateTrigamFromPoints(self,points:List[pmodel.Point])->List[TrigramOfPoints]:
+    #def GenerateTrigamFromPoints(self,points:List[Point])->List[TrigramOfPoints]:
     def generate_trigam_from_points(self,):
         lst=list()
         points=self._all_points
@@ -121,7 +123,7 @@ class RansacCircleHelper(object):
     #
     #Compute the mean squared error of the inlier points w.r.t circle model
     #
-    def compute_model_goodness2(self,model:cmodel.CircleModel,inliers:List[pmodel.Point])->float:
+    def compute_model_goodness2(self,model:CircleModel,inliers:List[Point])->float:
         radius=model.R
         list_errors=list()
         for p in inliers:
@@ -139,13 +141,13 @@ class RansacCircleHelper(object):
         Compute the total no of inliners
     Return a tuple of mse,inlier_count
     '''
-    def compute_model_goodness(self,model:cmodel.CircleModel)->Tuple:
+    def compute_model_goodness(self,model:CircleModel)->Tuple:
         #Needs correction
         raise Exception("Method needs correction")
         radius=model.R
         all_points=self._all_points
         threshold=self.threshold_error
-        p:pmodel.Point
+        p:Point
         shortlist_inliners=list()
         list_mean_errors=list()
         for p in all_points:
@@ -163,11 +165,11 @@ class RansacCircleHelper(object):
     #Returns all points which are within the tolerance distance from the circumfrence of the specified circle
     #Points in the exclusion list will not be considered. 
     #
-    def get_inliers(self,model:cmodel.CircleModel,exclude_points:List[pmodel.Point])->List[pmodel.Point]:
+    def get_inliers(self,model:CircleModel,exclude_points:List[Point])->List[Point]:
         radius=model.R
         all_points=self._all_points
         threshold=self.threshold_error
-        p:pmodel.Point
+        p:Point
         shortlist_inliners=list()
         for p in all_points:
             if (p in exclude_points):
@@ -184,8 +186,8 @@ class RansacCircleHelper(object):
     #Use the gradience descent algorithm to find the circle that fits the givens points
     #use the modelhint as a starting circle
     #
-    def find_model_using_gradient_descent(self,modelhint:cmodel.CircleModel, points:List[pmodel.Point])->cmodel.CircleModel:
-        gdhelper=gdescent.GradientDescentCircleFitting(modelhint, 0.1, points)
+    def find_model_using_gradient_descent(self,modelhint:CircleModel, points:List[Point])->CircleModel:
+        gdhelper=GradientDescentCircleFitting(modelhint, 0.1, points)
         new_model=gdhelper.FindBestFittingCircle()
         return new_model
         pass

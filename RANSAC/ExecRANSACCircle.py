@@ -3,12 +3,14 @@
 #
 import skimage
 import os
-import RansacCircleHelper as ransachelper
-import Point as pmodel
-import Util
 import datetime
 import sys
-import CircleModel as cmodel
+
+from RANSAC.Common import Util
+from RANSAC.Common import CircleModel
+from RANSAC.Common import Point
+from RANSAC.Algorithm import RansacCircleHelper
+
 
 folder_script=os.path.dirname(__file__)
 #
@@ -26,7 +28,7 @@ lst_all_points=Util.create_points_from_numpyimage(np_image)
 #
 #begin RANSAC
 #
-helper=ransachelper.RansacCircleHelper()
+helper=RansacCircleHelper()
 helper.threshold_error=ransac_threshold
 helper.threshold_inlier_count=4
 helper.add_points(lst_all_points)
