@@ -27,6 +27,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="common\test_CircleModel.py" />
     <Compile Include="common\test_LineModel.py" />
     <Compile Include="common\test_Point.py" />
   </ItemGroup>
