@@ -1,20 +1,21 @@
 import unittest
-import RansacHelper as rh
-import Point as pt
 import math
 import os
 import skimage
-import Util
-import LineModel
+
+from RANSAC.RANSAC import RansacLineHelper
+from RANSAC.Common import LineModel
+from RANSAC.Common import Point
+from RANSAC.Common import Util
 
 class Test_test_1(unittest.TestCase):
     def test_AddPoints(self):
-        helper=rh.RansacLineHelper()
+        helper=RansacLineHelper()
         lst=list()
-        lst.append(pt.Point(0,0))
-        lst.append(pt.Point(1,1))
-        lst.append(pt.Point(2,2))
-        lst.append(pt.Point(3,3))
+        lst.append(Point(0,0))
+        lst.append(Point(1,1))
+        lst.append(Point(2,2))
+        lst.append(Point(3,3))
         helper.add_points(lst)
         expected_count=len(lst)
         actual_count=len(helper.get_points())
@@ -22,12 +23,12 @@ class Test_test_1(unittest.TestCase):
         pass
 
     def test_GetRandomPoints(self):
-        helper1=rh.RansacLineHelper()
+        helper1=RansacLineHelper()
         lst=list()
-        lst.append(pt.Point(0,0))
-        lst.append(pt.Point(1,1))
-        lst.append(pt.Point(2,2))
-        lst.append(pt.Point(3,3))
+        lst.append(Point(0,0))
+        lst.append(Point(1,1))
+        lst.append(Point(2,2))
+        lst.append(Point(3,3))
         print("displaying orignal points")
         print("------------")
         for p in lst:
@@ -49,11 +50,11 @@ class Test_test_1(unittest.TestCase):
 
     def test_create_model_vertical_through_x_equal_5(self):
         pass
-        helper1=rh.RansacLineHelper()
+        helper1=RansacLineHelper()
         lst=list()
-        lst.append(pt.Point(5,0))
-        lst.append(pt.Point(5,1))
-        lst.append(pt.Point(5,2))
+        lst.append(Point(5,0))
+        lst.append(Point(5,1))
+        lst.append(Point(5,2))
         model=helper1.create_model(lst)
         expected_xintercept=5
         actual_xintercept=-model.C/model.A
@@ -63,11 +64,11 @@ class Test_test_1(unittest.TestCase):
 
     def test_create_model_horizontal_through_y_equal_5(self):
         pass
-        helper1=rh.RansacLineHelper()
+        helper1=RansacLineHelper()
         lst=list()
-        lst.append(pt.Point(0,5))
-        lst.append(pt.Point(1,5))
-        lst.append(pt.Point(2,5))
+        lst.append(Point(0,5))
+        lst.append(Point(1,5))
+        lst.append(Point(2,5))
         model=helper1.create_model(lst)
         #y=5
         #0x+1y-5=0
@@ -80,11 +81,11 @@ class Test_test_1(unittest.TestCase):
 
     def test_create_model_45_degrees_through_origin(self):
         pass
-        helper1=rh.RansacLineHelper()
+        helper1=RansacLineHelper()
         lst=list()
-        lst.append(pt.Point(0,0))
-        lst.append(pt.Point(1,1))
-        lst.append(pt.Point(2,2))
+        lst.append(Point(0,0))
+        lst.append(Point(1,1))
+        lst.append(Point(2,2))
         model=helper1.create_model(lst)
         #
         #y=x
@@ -105,13 +106,13 @@ class Test_test_1(unittest.TestCase):
         #
         folder_script=os.path.dirname(__file__)
         filename_input="Ransac_UnitTest.png"
-        file_noisy_line=os.path.join(folder_script,"./unittest/",filename_input)
+        file_noisy_line=os.path.join(folder_script,"./data/",filename_input)
         np_image=skimage.io.imread(file_noisy_line,as_gray=True)
         lst_points=Util.create_points_from_numpyimage(np_image)
         #
         #initialize RansalHelper
         #
-        helper1=rh.RansacLineHelper()
+        helper1=RansacLineHelper()
         helper1.add_points(lst_points)
         helper1.max_iterations=1000
         #10000 did not work
@@ -124,7 +125,7 @@ class Test_test_1(unittest.TestCase):
         #
         #Superimpose the new line over the image
         #
-        folder_results=os.path.join(folder_script,"./out/")
+        folder_results=os.path.join(folder_script,"../out/")
         count_of_files=len(os.listdir(folder_results))
         filename_results=("Ransac_UnitTest.Run.%d.png" % (count_of_files) )
         file_result=os.path.join(folder_results,filename_results)

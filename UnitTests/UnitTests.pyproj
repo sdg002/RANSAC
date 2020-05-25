@@ -31,14 +31,19 @@
     <Compile Include="common\test_LineModel.py" />
     <Compile Include="common\test_Point.py" />
     <Compile Include="common\test_Util.py" />
+    <Compile Include="ransac\test_RansacLineHelper.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="common\" />
     <Folder Include="common\data\" />
+    <Folder Include="ransac\" />
     <Folder Include="out\" />
+    <Folder Include="ransac\data\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="common\data\Readme.txt" />
     <Content Include="common\data\Util_unittest.png" />
+    <Content Include="ransac\data\Ransac_UnitTest.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

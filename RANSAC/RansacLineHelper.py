@@ -1,11 +1,10 @@
-import Point as pt
 import statistics 
-import LineModel as lm
 import random
 import numpy as np
 import math
-
 from sklearn.linear_model import LinearRegression
+from RANSAC.Common import Point
+from RANSAC.Common import LineModel
 
 class RansacLineHelper(object):
     """Encapsulates RANSAC logic"""
@@ -33,7 +32,7 @@ class RansacLineHelper(object):
     #
     #Main algorithm
     #
-    def run(self) -> lm.LineModel:
+    def run(self) -> LineModel:
         iter=0
         best_error=9999
         best_model=None
@@ -69,7 +68,7 @@ class RansacLineHelper(object):
         return best_model
         pass
 
-    def compute_average_distance(self,model:lm.LineModel,points:list) -> float:
+    def compute_average_distance(self,model:LineModel,points:list) -> float:
         lst_distances=list()
         for p in points:
             distance=model.compute_distance(p)
@@ -79,7 +78,7 @@ class RansacLineHelper(object):
     #
     #Get all points from master list (not used for model building) within error threshold
     #
-    def get_inliers_from_model(self,model:lm.LineModel,points_old_inliers:list) -> list:
+    def get_inliers_from_model(self,model:LineModel,points_old_inliers:list) -> list:
         lst_inliers=list()
         for p in self._complete_list_of_points:
             if ((p in points_old_inliers) == True):
@@ -130,7 +129,7 @@ class RansacLineHelper(object):
             vertical_line_a=1
             vertical_line_b=0
             vertical_line_c=-x_intercept
-            model=lm.LineModel(vertical_line_a,vertical_line_b,vertical_line_c)
+            model=LineModel(vertical_line_a,vertical_line_b,vertical_line_c)
             return model
         
         slope=slope_numerator/slope_denominator
@@ -147,5 +146,5 @@ class RansacLineHelper(object):
         #   slope= -a/b
         #   yint= -c/b
         #        
-        model=lm.LineModel(line_a,line_b,line_c)
+        model=LineModel(line_a,line_b,line_c)
         return model

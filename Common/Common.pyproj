@@ -35,17 +35,9 @@
     <Compile Include="LineModel.py" />
     <Compile Include="Point.py" />
     <Compile Include="RansacCircleHelper.py" />
-    <Compile Include="RansacLineHelper.py" />
-    <Compile Include="test_CircleModel.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="test_GradientDescentCircleFitting.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="test_RansacCircleHelper.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="test_RansacLineHelper.py" />
     <Compile Include="Util.py" />
     <Compile Include="__init__.py">
       <SubType>Code</SubType>
@@ -53,13 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="out\" />
-    <Folder Include="unittest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="out\Readme.txt" />
-    <Content Include="unittest\Ransac_UnitTest.png" />
-    <Content Include="unittest\Readme.txt" />
-    <Content Include="unittest\Util_unittest.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

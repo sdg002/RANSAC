@@ -5,7 +5,7 @@
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>ExecRANSACLine.py</StartupFile>
-    <SearchPath>..\;..\Common\</SearchPath>
+    <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>RANSAC</Name>
@@ -33,6 +33,10 @@
     </Compile>
     <Compile Include="ExecRANSACCircle.py" />
     <Compile Include="ExecRANSACLine.py" />
+    <Compile Include="RansacLineHelper.py" />
+    <Compile Include="__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="article\images\" />
