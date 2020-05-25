@@ -1,4 +1,4 @@
-import Point as pt
+from .Point import Point
 import math
 from typing import List, Set, Dict, Tuple, Optional
 
@@ -19,7 +19,7 @@ class LineModel:
     #
     #Compute distance of the point from the model line
     #
-    def compute_distance(self,point:pt.Point):
+    def compute_distance(self,point:Point):
         numerator=self.A*point.X + self.B*point.Y + self.C
         denominator=math.sqrt(self.A*self.A + self.B*self.B)
         distance=math.fabs( numerator/denominator)
@@ -62,7 +62,7 @@ class LineModel:
     #Create a friendly display which shows all attributes of the Line
     #
     def display_polar(self):
-        origin=pt.Point(0,0)
+        origin=Point(0,0)
         distance_origin=self.compute_distance(origin)
         deg_per_radian=90*2/math.pi;
         angle=self.get_inclination() * deg_per_radian; 
@@ -76,84 +76,87 @@ class LineModel:
         display=("POLAR radius=%f  angle=%f     y_int=%s    x_int=%s" % (distance_origin,angle,y_intercept,x_intercept))
         return display
 
-#
-#This function will generate points using the specified line model within the bounds of x1,y1 and x2,y2
-#Returns an array of Point class instances
-#We increment X or Y by delta_increment= pixel and generate new points
-#
-def generate_points_from_line(model:LineModel,x1:float,y1:float,x2:float,y2:float)->List[pt.Point]:
-    lst_points:List[pt.Point]=list()
-    delta_increment=0.01
-    if (math.fabs(model.B) < LineModel.SMALL):
-        #
-        #Perp line
-        #
-        min_y=min(y1,y2)
-        max_y=max(y1,y2)
-        start_y=min_y
-        while (start_y <= max_y):
-            #ax+by+c=0
-            #x=(-c-by)/a
-            x=(-model.C - 0)/model.A
-            pt_new=pt.Point(x,start_y)
-            lst_points.append(pt_new)
-            start_y+=delta_increment
-    else:
-        #
-        #All other points
-        #
-        min_x=min(x1,x2)
-        max_x=max(x1,x2)
-        start_x=min_x
-        while (start_x <= max_x):
-            #ax+by+c=0
-            #y= (-c -ax)/b
-            y=(-model.C - model.A*start_x)/model.B
-            pt_new=pt.Point(start_x,y)
-            lst_points.append(pt_new)
-            start_x+=delta_increment
-    return lst_points
- 
-#
-#Creates a line equation from start and end points
-#Returns a LineModel instance
-#
-def create_line_from_2points(x_start,y_start,x_end,y_end):
-    is_infinite_slope=abs(x_start-x_end) < LineModel.SMALL
-    if (is_infinite_slope):
-        #nearly vertical, take the average of x
-        x_intercept=(x_start+x_end)/2
-        line_a=1
-        line_c=-1 * line_a * x_intercept
-        line_b=0
-        model=LineModel(line_a,line_b,line_c)
-        return model    
-    else:
-        slope=(y_end-y_start)/(x_end-x_start)
-        y_intercept= y_end - slope * x_end
-        line_a=slope
-        line_b=-1
-        line_c=y_intercept
-        model=LineModel(line_a,line_b,line_c)
-        return model    
-    pass
-#
-#Returns a list of Points which are generated on a straight line connecting start and end
-#The points are spaced at intervals of 'gap' distance
-#
-def generate_points_at_regular_intervals_stline(start_x:float,start_y:float,end_x:float,end_y:float,gap:float):
-    model=create_line_from_2points(start_x,start_y,end_x,end_y)
-    pts_result=list()
-    pts_crowded=generate_points_from_line(model,start_x,start_y,end_x,end_y)
-    
-    point_last=pts_crowded[0]
-    for index in range(1,len(pts_crowded)):
-        point_current=pts_crowded[index]
-        distance= math.sqrt( (point_current.X-point_last.X)**2 + (point_current.Y-point_last.Y)**2 )
-        if (distance > gap):
-            pts_result.append(point_current)
-            point_last=point_current
-            continue
+    #
+    #This function will generate points using the specified line model within the bounds of x1,y1 and x2,y2
+    #Returns an array of Point class instances
+    #We increment X or Y by delta_increment= pixel and generate new points
+    #
+    @classmethod
+    def generate_points_from_line(cls,model,x1:float,y1:float,x2:float,y2:float)->List[Point]:
+        lst_points:List[Point]=list()
+        delta_increment=0.01
+        if (math.fabs(model.B) < LineModel.SMALL):
+            #
+            #Perp line
+            #
+            min_y=min(y1,y2)
+            max_y=max(y1,y2)
+            start_y=min_y
+            while (start_y <= max_y):
+                #ax+by+c=0
+                #x=(-c-by)/a
+                x=(-model.C - 0)/model.A
+                pt_new=Point(x,start_y)
+                lst_points.append(pt_new)
+                start_y+=delta_increment
         else:
-            pass
-    return pts_result
+            #
+            #All other points
+            #
+            min_x=min(x1,x2)
+            max_x=max(x1,x2)
+            start_x=min_x
+            while (start_x <= max_x):
+                #ax+by+c=0
+                #y= (-c -ax)/b
+                y=(-model.C - model.A*start_x)/model.B
+                pt_new=Point(start_x,y)
+                lst_points.append(pt_new)
+                start_x+=delta_increment
+        return lst_points
+ 
+    #
+    #Creates a line equation from start and end points
+    #Returns a LineModel instance
+    #
+    @classmethod
+    def create_line_from_2points(cls,x_start,y_start,x_end,y_end):
+        is_infinite_slope=abs(x_start-x_end) < cls.SMALL
+        if (is_infinite_slope):
+            #nearly vertical, take the average of x
+            x_intercept=(x_start+x_end)/2
+            line_a=1
+            line_c=-1 * line_a * x_intercept
+            line_b=0
+            model=cls(line_a,line_b,line_c)
+            return model    
+        else:
+            slope=(y_end-y_start)/(x_end-x_start)
+            y_intercept= y_end - slope * x_end
+            line_a=slope
+            line_b=-1
+            line_c=y_intercept
+            model=cls(line_a,line_b,line_c)
+            return model    
+        pass
+    #
+    #Returns a list of Points which are generated on a straight line connecting start and end
+    #The points are spaced at intervals of 'gap' distance
+    #
+    @classmethod
+    def generate_points_at_regular_intervals_stline(cls,start_x:float,start_y:float,end_x:float,end_y:float,gap:float):
+        model=cls.create_line_from_2points(start_x,start_y,end_x,end_y)
+        pts_result=list()
+        pts_crowded=cls.generate_points_from_line(model,start_x,start_y,end_x,end_y)
+    
+        point_last=pts_crowded[0]
+        for index in range(1,len(pts_crowded)):
+            point_current=pts_crowded[index]
+            distance= math.sqrt( (point_current.X-point_last.X)**2 + (point_current.Y-point_last.Y)**2 )
+            if (distance > gap):
+                pts_result.append(point_current)
+                point_last=point_current
+                continue
+            else:
+                pass
+        return pts_result
