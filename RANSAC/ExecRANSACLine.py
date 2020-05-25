@@ -3,11 +3,12 @@
 #
 import skimage
 import os
-import RansacHelper as ransachelper
-import Point as pt
-import Util
 import datetime
-import LineModel
+
+from RANSAC.Algorithm import RansacLineHelper
+from RANSAC.Common import LineModel
+from RANSAC.Common import Point
+from RANSAC.Common import Util
 
 
 
@@ -45,7 +46,7 @@ ransac_threshold=5
 
 ransac_mininliers=10
 
-helper=ransachelper.RansacHelper()
+helper=RansacLineHelper()
 helper.max_iterations=ransac_maxiterations
 helper.min_points_for_model=ransac_minpoints
 helper.threshold_error=ransac_threshold

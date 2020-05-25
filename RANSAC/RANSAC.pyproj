@@ -33,7 +33,6 @@
     </Compile>
     <Compile Include="ExecRANSACCircle.py" />
     <Compile Include="ExecRANSACLine.py" />
-    <Compile Include="RansacLineHelper.py" />
     <Compile Include="__init__.py">
       <SubType>Code</SubType>
     </Compile>
