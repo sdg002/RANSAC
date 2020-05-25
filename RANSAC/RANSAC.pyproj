@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>GenerateNoisyLineGaussian.py</StartupFile>
+    <StartupFile>GenerateNoisyLine.py</StartupFile>
     <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>

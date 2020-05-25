@@ -9,7 +9,7 @@
 import numpy as np
 import os
 import skimage
-import Util
+from RANSAC.Common import Util
 import random
 #
 #Create blank image
