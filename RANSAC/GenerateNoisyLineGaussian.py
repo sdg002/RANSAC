@@ -10,10 +10,12 @@ import numpy as np
 import os
 import skimage
 import random
-import GenerateGaussianNoiseAtPoint as gnp
-import Util
-import Point
-import LineModel as lm
+
+from RANSAC.Common import LineModel
+from RANSAC.Common import Point
+from RANSAC.Common import Util
+from RANSAC.Common import GenerateGaussianNoiseAtPoint as gnp
+
 #
 #Create blank image
 #
@@ -49,8 +51,8 @@ else:
 #
 gap=5
 num_gaussian_points=5 #3
-line_model=lm.create_line_from_2points(start_x,start_y,end_x,end_y)
-pts_st_line_regular_intervals=lm.generate_points_at_regular_intervals_stline(start_x,start_y,end_x,end_y,gap)
+line_model=LineModel.create_line_from_2points(start_x,start_y,end_x,end_y)
+pts_st_line_regular_intervals=LineModel.generate_points_at_regular_intervals_stline(start_x,start_y,end_x,end_y,gap)
 print("Calculate %d points at spacing of %.f" % (len(pts_st_line_regular_intervals),gap))
 pts_new=list();
 for pt_regular in pts_st_line_regular_intervals:
@@ -59,7 +61,7 @@ for pt_regular in pts_st_line_regular_intervals:
     for idx in range(0,cluster_shape[0]):
         x_cluster=arr_cluster[idx][0]; 
         y_cluster=arr_cluster[idx][1];
-        pt_noisy=Point.Point(x_cluster,y_cluster)
+        pt_noisy=Point(x_cluster,y_cluster)
         pts_new.append(pt_noisy)
 print("Calculated %d noisy points" % (len(pts_new)))
 image_result=Util.superimpose_points_on_image(image_noisy,pts_new, 0,0,0)
