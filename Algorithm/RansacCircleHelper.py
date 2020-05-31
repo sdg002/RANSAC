@@ -58,7 +58,7 @@ class RansacCircleHelper(object):
         lst_results=list()
         for tri in trigrams:
             try:
-                temp_circle=GenerateModelFrom3Points(tri.P1,tri.P2,tri.P3)
+                temp_circle=CircleModel.GenerateModelFrom3Points(tri.P1,tri.P2,tri.P3)
             except Exception as e:
                 print("Could not generate Circle model. Error=%s" % (str(e)))
                 continue

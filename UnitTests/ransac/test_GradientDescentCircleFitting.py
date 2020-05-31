@@ -15,10 +15,19 @@ class Test_test_GradientDescentCircleFitting(unittest.TestCase):
         expected_lrate=1.1
         helper=GradientDescentCircleFitting(None,expected_lrate,expected_list)
         self.assertEqual(expected_lrate,helper._learningrate)
+        self.assertEqual(len(expected_list),len(helper._points))
         self.assertTrue (p1 in helper._points)
         self.assertTrue(p2 in helper._points)
 
 
+    #
+    #A very basic test with the following 3 points only. 
+    #   (+1,0)
+    #   (-1,0)
+    #   (0,1)
+    #Expected:
+    #   Should produce a perfect circle with center=(0,0) and radius=1.0
+    #
     def test_3points_around_origin_unit_radius(self):
         p1=Point(+1,0)
         p2=Point(+0,1)
@@ -29,13 +38,18 @@ class Test_test_GradientDescentCircleFitting(unittest.TestCase):
         expected_list.append(p2)
         expected_list.append(p3)
 
-        expected_lrate=0.1
-        helper=GradientDescentCircleFitting(None,expected_lrate,expected_list)
+        helper=GradientDescentCircleFitting(None,expected_list)
         result:CircleModel =helper.FindBestFittingCircle()
-        self.assertAlmostEquals(result.R, 1.0);
-        self.assertAlmostEquals(result.X, 0.0);
-        self.assertAlmostEquals(result.Y, 0.0);
-                        
+        delta=0.01
+        self.assertAlmostEquals(result.R, 1.0, delta=delta);
+        self.assertAlmostEquals(result.X, 0.0, delta=delta);
+        self.assertAlmostEquals(result.Y, 0.0, delta=delta);
+        
+
+    def test_When_GD_Is_Invoked_With_less_than_3_points_Exception_MustBe_Thrown(self):
+        self.fail("Not implemented")
+
+        
 
     def test_Skeleton(self):
         self.fail("Not implemented")
