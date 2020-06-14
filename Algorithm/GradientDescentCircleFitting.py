@@ -10,6 +10,9 @@ class GradientDescentCircleFitting(object):
         self._learningrate=learningrate
         self._points=points
         self._lst_distance_from_center=[] #Used as temp variable when computing MSE
+        if (len(self._points) < 3):
+            raise Exception("Need 3 or more points")
+        pass
         pass
 
     def FindBestFittingCircle(self)->CircleModel:

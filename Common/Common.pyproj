@@ -29,9 +29,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GenerateGaussianNoiseAtPoint.py" />
-    <Compile Include="GradientDescentCircleFitting.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="LineModel.py" />
     <Compile Include="Point.py" />
     <Compile Include="RansacCircleHelper.py" />
