@@ -81,6 +81,27 @@ class Test_test_GradientDescentCircleFitting(unittest.TestCase):
         self.assertAlmostEquals(result.X, 0.0, delta=delta);
         self.assertAlmostEquals(result.Y, 0.0, delta=delta);
 
+    def test_5points_around_3_3_and_radius_5(self):
+        #Plotted this circle using desmos.com
+        #\left(5\cdot\cos\left(t\right)+3,5\cdot\sin\left(t\right)+3\right)
+        p1 = Point(7,0)
+        p2 = Point(8,3)
+        p3 = Point(6,7)
+        p4 = Point(-2,3)
+        p5 = Point(0,-1)
+        expected_list=list()
+        expected_list.append(p1)
+        expected_list.append(p2)
+        expected_list.append(p3)
+        expected_list.append(p4)
+        expected_list.append(p5)
+        helper=GradientDescentCircleFitting(None,expected_list)
+        result:CircleModel =helper.FindBestFittingCircle()
+        delta=0.01
+        self.assertAlmostEquals(result.R, 5.0, delta=delta);
+        self.assertAlmostEquals(result.X, 3.0, delta=delta);
+        self.assertAlmostEquals(result.Y, 3.0, delta=delta);
+
     def test_When_GD_Is_Invoked_With_less_than_3_points_Exception_MustBe_Thrown(self):
         p1=Point(+1,0)
         p2=Point(+0,1)
@@ -97,8 +118,6 @@ class Test_test_GradientDescentCircleFitting(unittest.TestCase):
             self.assertEquals(message,"Need 3 or more points");
             pass
 
-    def test_Skeleton(self):
-        self.fail("Not implemented")
 
 if __name__ == '__main__':
     unittest.main()
