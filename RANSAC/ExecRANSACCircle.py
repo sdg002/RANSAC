@@ -42,7 +42,7 @@ filename_result=("%s-%s.png" % (filename,now.strftime("%Y-%m-%d-%H-%M-%S")))
 file_result=os.path.join(folder_script,"./out/",filename_result)
 #Load input image into array
 np_image_result=skimage.io.imread(file_noisy_circle,as_gray=True)
-new_points=cmodel.generate_points_from_circle(best_model)
+new_points=CircleModel.generate_points_from_circle(best_model)
 np_superimposed=Util.superimpose_points_on_image(np_image_result,new_points,100,255,100)
 #Save new image
 skimage.io.imsave(file_result,np_superimposed)
