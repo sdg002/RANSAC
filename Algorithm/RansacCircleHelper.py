@@ -4,8 +4,7 @@ import statistics as stats
 
 from RANSAC.Common import Point
 from RANSAC.Common import CircleModel
-from RANSAC.Algorithm import GradientDescentCircleFitting
-
+from RANSAC.Algorithm import GradientDescentCircleFitting 
 
 class TrigramOfPoints(object):
     def __init__(self,p1:Point, p2:Point, p3:Point):
@@ -85,7 +84,8 @@ class RansacCircleHelper(object):
             new_points.append(trigram.P1)
             new_points.append(trigram.P2)
             new_points.append(trigram.P3)
-            new_model,new_error=self.find_model_using_gradient_descent(model,new_points)
+            new_model=self.find_model_using_gradient_descent(model,new_points)
+            new_error,found_inliers=self.compute_model_goodness(new_model)
             result=(new_model,new_error)
             lst_results_gdescent.append(result)
         lst_results_gd2=sorted(lst_results,key= lambda x: x[2])
@@ -142,24 +142,40 @@ class RansacCircleHelper(object):
     Return a tuple of mse,inlier_count
     '''
     def compute_model_goodness(self,model:CircleModel)->Tuple:
-        #Needs correction
-        raise Exception("Method needs correction")
         radius=model.R
         all_points=self._all_points
         threshold=self.threshold_error
         p:Point
         shortlist_inliners=list()
-        list_mean_errors=list()
+        summation_meas_squared=0
         for p in all_points:
-            squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
-            distance=math.sqrt(squared)
-            absolute_error=math.fabs(distance - radius)
-            if (absolute_error <= threshold):
-                shortlist_inliners.append(p)
-            list_mean_errors.append(absolute_error)
-        mean_error=stats.mean(list_mean_errors)
-        result=(mean_error,len(shortlist_inliners))
+            squared_distance=(p.X - model.X)**2 + (p.Y - model.Y)**2 
+            distance_from_center=math.sqrt(squared_distance)
+            absolute_error=math.fabs(distance_from_center - radius)
+            if (absolute_error > threshold):
+                #skip point if outlier
+                continue
+            shortlist_inliners.append(p)
+            e_squared=absolute_error**2
+            summation_mean_squared=summation_meas_squared+e_squared
+
+        sqrt_summation_mean_squared=math.sqrt(summation_mean_squared)
+        mse=1/2*sqrt_summation_mean_squared/len(all_points)
+        result=(mse,shortlist_inliners)
         return result
+        ###
+        #list_mean_errors=list()
+        #for p in all_points:
+        #    squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
+        #    distance=math.sqrt(squared)
+        #    e_squared=(distance - radius)*82
+        #    absolute_error=math.fabs(distance - radius)
+        #    if (absolute_error <= threshold):
+        #        shortlist_inliners.append(p)
+        #    list_mean_errors.append(absolute_error)
+        #mean_error=stats.mean(list_mean_errors)
+        #result=(mean_error,len(shortlist_inliners))
+        #return result
 
     #
     #Returns all points which are within the tolerance distance from the circumfrence of the specified circle
@@ -187,7 +203,7 @@ class RansacCircleHelper(object):
     #use the modelhint as a starting circle
     #
     def find_model_using_gradient_descent(self,modelhint:CircleModel, points:List[Point])->CircleModel:
-        gdhelper=GradientDescentCircleFitting(modelhint, 0.1, points)
+        gdhelper=GradientDescentCircleFitting.GradientDescentCircleFitting(modelhint,points, 0.1)
         new_model=gdhelper.FindBestFittingCircle()
         return new_model
         pass

@@ -32,6 +32,9 @@
     <Compile Include="common\test_Point.py" />
     <Compile Include="common\test_Util.py" />
     <Compile Include="ransac\test_GradientDescentCircleFitting.py" />
+    <Compile Include="ransac\test_RansacCircleHelper.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ransac\test_RansacLineHelper.py" />
   </ItemGroup>
   <ItemGroup>
