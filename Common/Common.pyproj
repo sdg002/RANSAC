@@ -31,10 +31,6 @@
     <Compile Include="GenerateGaussianNoiseAtPoint.py" />
     <Compile Include="LineModel.py" />
     <Compile Include="Point.py" />
-    <Compile Include="RansacCircleHelper.py" />
-    <Compile Include="test_GradientDescentCircleFitting.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Util.py" />
     <Compile Include="__init__.py">
       <SubType>Code</SubType>
