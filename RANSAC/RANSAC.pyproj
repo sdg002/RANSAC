@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ExecRANSACCircle.py</StartupFile>
+    <StartupFile>GenerateNoisyCircle.py</StartupFile>
     <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -25,6 +25,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GenerateNoisyCircle.py" />
     <Compile Include="GenerateNoisyLine.py">
       <SubType>Code</SubType>
     </Compile>
