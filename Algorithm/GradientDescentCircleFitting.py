@@ -16,10 +16,6 @@ class GradientDescentCircleFitting(object):
         pass
 
     def FindBestFittingCircle(self)->CircleModel:
-        #you were here
-        #write an unit test
-        #implement this method
-
         seed_circle:CircleModel=None
         if (self._modelhint == None):
             seed_circle=self.GenerateSeedCircle()
@@ -33,7 +29,6 @@ class GradientDescentCircleFitting(object):
             new_cy=-1*self._learningrate*derivative_cy + seed_circle.Y
             new_radius=-1*self._learningrate*derivative_radius + seed_circle.R
             seed_circle=CircleModel(new_cx,new_cy,new_radius)
-            print("Iteration=%d, Circle=%s" % (i,seed_circle))
         return seed_circle
         pass
 

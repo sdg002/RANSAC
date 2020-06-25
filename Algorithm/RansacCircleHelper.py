@@ -54,7 +54,7 @@ class RansacCircleHelper(object):
         #   Determine model goodness score
         #
         tri:TrigramOfPoints
-        lst_results=list()
+        lst_trigram_scores=list()
         for trig_index in range(0,len(trigrams)):
             tri=trigrams[trig_index]
             if (trig_index%100 ==0):
@@ -72,16 +72,19 @@ class RansacCircleHelper(object):
                 continue
             error=self.compute_model_goodness2(temp_circle,inliers)
             result=(temp_circle,inliers,error,tri)
-            lst_results.append(result)            
+            lst_trigram_scores.append(result)            
         #
         #Sort trigrams with lowest error
         #
-        sorted_by_mse=  sorted(lst_results, key = lambda x: x[2])
+        sorted_trigram_scores=sorted(lst_trigram_scores, key = lambda x: x[2])
         lst_results_gdescent=list()
-        for t in sorted_by_mse:
+        for index in range(0,len(sorted_trigram_scores)):
+            t=sorted_trigram_scores[index]
             model=t[0]
             inliers=t[1]
             trigram:TrigramOfPoints=t[3]
+            if (index%100 ==0):
+                print("Expanding circle candidate:%s , %d of %d " % (model, index, len(sorted_trigram_scores)))
             new_points=list()
             new_points.extend(inliers)
             new_points.append(trigram.P1)
@@ -91,8 +94,8 @@ class RansacCircleHelper(object):
             new_error,found_inliers=self.compute_model_goodness(new_model)
             result=(new_model,new_error)
             lst_results_gdescent.append(result)
-        lst_results_gd2=sorted(lst_results,key= lambda x: x[2])
-        best_model=sorted_by_mse[0][0]
+        lst_results_gd2=sorted(lst_trigram_scores,key= lambda x: x[2])
+        best_model=sorted_trigram_scores[0][0]
         return best_model
         pass
 
