@@ -47,6 +47,7 @@
   <ItemGroup>
     <Content Include="common\data\Readme.txt" />
     <Content Include="common\data\Util_unittest.png" />
+    <Content Include="ransac\data\NoisyCircle-HandDrawn-001.png" />
     <Content Include="ransac\data\Ransac_UnitTest.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

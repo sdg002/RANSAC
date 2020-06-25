@@ -55,7 +55,10 @@ class RansacCircleHelper(object):
         #
         tri:TrigramOfPoints
         lst_results=list()
-        for tri in trigrams:
+        for trig_index in range(0,len(trigrams)):
+            tri=trigrams[trig_index]
+            if (trig_index%100 ==0):
+                print("Processing trigram %d of %d" % (trig_index,len(trigrams)))
             try:
                 temp_circle=CircleModel.GenerateModelFrom3Points(tri.P1,tri.P2,tri.P3)
             except Exception as e:
@@ -89,14 +92,6 @@ class RansacCircleHelper(object):
             result=(new_model,new_error)
             lst_results_gdescent.append(result)
         lst_results_gd2=sorted(lst_results,key= lambda x: x[2])
-        #you were hr# fkae thre results
-        #
-        #TODO take every model, 
-        #   expand using all inliers that were found
-        #   use GD to find best circle
-        #   Compute error
-        #   Take best model
-        #
         best_model=sorted_by_mse[0][0]
         return best_model
         pass
