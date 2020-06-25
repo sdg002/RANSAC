@@ -161,19 +161,6 @@ class RansacCircleHelper(object):
         mse=1/2*sqrt_summation_mean_squared/len(all_points)
         result=(mse,shortlist_inliners)
         return result
-        ###
-        #list_mean_errors=list()
-        #for p in all_points:
-        #    squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
-        #    distance=math.sqrt(squared)
-        #    e_squared=(distance - radius)*82
-        #    absolute_error=math.fabs(distance - radius)
-        #    if (absolute_error <= threshold):
-        #        shortlist_inliners.append(p)
-        #    list_mean_errors.append(absolute_error)
-        #mean_error=stats.mean(list_mean_errors)
-        #result=(mean_error,len(shortlist_inliners))
-        #return result
 
     #
     #Returns all points which are within the tolerance distance from the circumfrence of the specified circle
