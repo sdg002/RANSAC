@@ -58,6 +58,23 @@ def superimpose_points_on_image(arr_image_input:np.ndarray, points,red:int,green
     pass
 
 #
+#The expected input image is a monochrome image
+#The new points will be drawn over the old one
+#
+def add_points_to_monoimage(arr_image_input:np.ndarray, points,use_black:bool):
+    width=arr_image_input.shape[1]
+    height=arr_image_input.shape[0]
+    for p in points:
+        x:int=int(round(p.X))
+        y:int=int(round(height-p.Y-1))
+        if (x<0 or x >= width ):
+            continue
+        if (y<0 or y >= height ):
+            continue
+        arr_image_input[y][x]=0
+    return arr_image_input
+
+#
 #Plots the points on the line starting from start point and leading to end point
 #The points are written on to a ndarray that was originally a blank image
 #The caller must take responsibility for ensuring that end coordinate values do not exceed the dimensions of the array

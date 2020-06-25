@@ -20,7 +20,7 @@ import math
 img_white_color=255
 img_width=100
 img_height=100
-salt_pepper_ratio=0.2
+salt_pepper_ratio=0.8
 
 print("This script will create a monochrome image (%d X %d) consisting of a partial circle and salt-pepper noise",img_width,img_height)
 img = np.zeros([img_height,img_width,1],dtype=np.uint8)
@@ -36,7 +36,7 @@ image_noisy=skimage.util.random_noise(img,mode="s&p",seed=None, clip=True,salt_v
 center_x=-img_width*0.5 + 2*img_width*random.random()
 center_y=-img_height*0.5 + 2*img_height*random.random()
 radius=(img_width+img_height)/3.0 * (1+random.random())
-density=0.5
+density=0.2
 def generate_points_for_circle(centerx,centery,r,density_factor):
     pts_on_circle=[]
     num_points=int(2*3.141*r*density_factor)  #proportional to circumfrence
@@ -51,8 +51,8 @@ def generate_points_for_circle(centerx,centery,r,density_factor):
 
 print("Generating noisy circle at center (x,y,radius) (%d,%d,%d)" % (center_x,center_y,radius))
 lst_circle=generate_points_for_circle(center_x,center_y,radius,density)
-image_result=Util.superimpose_points_on_image(image_noisy,lst_circle,0,0,255)
-
+#image_result=Util.superimpose_points_on_image(image_noisy,lst_circle,0,0,0)
+image_result=Util.add_points_to_monoimage(image_noisy,lst_circle,use_black=True)
 
 #
 #Save the image to disk
@@ -61,7 +61,7 @@ folder_script=os.path.dirname(__file__)
 folder_results=os.path.join(folder_script,"./out/")
 count_of_files=len(os.listdir(folder_results))
 
-filename="NoisyCircle_x_%d_y_%d_r_%d_d_%f.%d.png" % (center_x,center_y,radius,density,count_of_files)
+filename="NoisyCircle_x_%d_y_%d_r_%d_d_%f_sp_%.1f.%d.png" % (center_x,center_y,radius,density,salt_pepper_ratio,count_of_files)
 file_result=os.path.join(folder_script,"./out/",filename)
 skimage.io.imsave(file_result,image_result)
 print("Image saved to fileL%s" % (file_result))
