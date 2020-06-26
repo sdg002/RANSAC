@@ -5,15 +5,14 @@ from typing import List, Set, Dict, Tuple, Optional
 
 class GradientDescentCircleFitting(object):
     """Finds the best fit circle using Gradient descent approach"""
-    def __init__(self, modelhint:CircleModel, points:List[Point],learningrate:float=0.05):
+    def __init__(self, modelhint:CircleModel, points:List[Point],learningrate:float=0.05,iterations=1000):
         self._modelhint=modelhint #Useful for speeding up when you have an approx circle arleady
         self._learningrate=learningrate
         self._points=points
         self._lst_distance_from_center=[] #Used as temp variable when computing MSE
         if (len(self._points) < 3):
             raise Exception("Need 3 or more points")
-        pass
-        pass
+        self._max_iterations=iterations
 
     def FindBestFittingCircle(self)->CircleModel:
         seed_circle:CircleModel=None
@@ -21,8 +20,7 @@ class GradientDescentCircleFitting(object):
             seed_circle=self.GenerateSeedCircle()
         else:
             seed_circle=self._modelhint;
-        MAX_ITERATIONS=1000
-        for i in range(0,MAX_ITERATIONS):
+        for i in range(0,self._max_iterations):
             mse=self.ComputeMse(seed_circle)
             derivative_radius,derivative_cx,derivative_cy=self.ComputeDerivativesOfMse(seed_circle,mse)
             new_cx=-1*self._learningrate*derivative_cx + seed_circle.X
