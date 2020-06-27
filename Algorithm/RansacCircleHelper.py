@@ -1,7 +1,7 @@
 from typing import List, Set, Dict, Tuple, Optional
 import math
 import statistics as stats
-
+import random
 from RANSAC.Common import Point
 from RANSAC.Common import CircleModel
 from RANSAC.Algorithm import GradientDescentCircleFitting 
@@ -12,8 +12,6 @@ class TrigramOfPoints(object):
         self.P2:Point=p2
         self.P3:Point=p3
 
-        #self.mean_error:float=0.0
-        #self.inlier_count:int=0
         pass
 
 class RansacCircleHelper(object):
@@ -26,8 +24,17 @@ class RansacCircleHelper(object):
         #within this distance from circumfrence of the model
         self.threshold_error:float=float("nan")
         
-        #A lower limit on count of inliers for a model to be shortlisted
+        #Minimum count of inliers needed for a model to be shortlisted
         self.threshold_inlier_count=float("nan") 
+
+        #The learning rate used for Gradient descent circle fitting algorithm
+        self.learning_rate=0.1
+
+        #The algorithm will run for these many iterations
+        self.max_iterations=100
+
+        #These many points will be selected at random to build a model
+        self.min_points_for_model=20
         pass
     #
     #Should be called once to set the full list of data points
@@ -36,13 +43,79 @@ class RansacCircleHelper(object):
         self._all_points.extend(points)
         pass
 
-    def run(self)->CircleModel:
-        pass
+    ##
+    ##Returns a List of circle model tuples in descending order of inlier count
+    ##Structure of tuple:
+    ##   (circle_model,inlier_count)
+    ##
+    #def run2(self):
+    #    self.validate_hyperparams()
+    #    #
+    #    #generate trigrams of points - find some temporary model to hold this model
+    #    #
+    #    iter=0
+    #    shortlist_models=[] #tuple of circle model, error
+    #    while (iter < self.max_iterations):
+    #        print("Iteration %d" % (iter))
+    #        iter+=1
+    #        random_points=self.select_random_points(self.min_points_for_model)
+    #        temp_circle=self.find_model_using_gradient_descent(None,random_points)
+    #        if (temp_circle==None):
+    #            continue
+
+    #        inliers:List[Point]=self.get_inliers2(temp_circle)
+    #        count_of_inliers=len(inliers)
+    #        #if (count_of_inliers < self.threshold_inlier_count):
+    #        #    print("   Skipping because of poor inlier count (%d less than %d)" % (count_of_inliers,self.threshold_inlier_count))
+    #        #    continue
+    #        t=(temp_circle,random_points,inliers)
+    #        shortlist_models.append(t)
+    #    sorted_shortlist_models=sorted(shortlist_models, key = lambda x: len(x[2]), reverse=True)
+
+    #    #you were hre - you got the first short list
+    #    count_of_shorlist=len(sorted_shortlist_models)
+    #    second_shortlist=[]
+    #    for index in range(0,count_of_shorlist):
+    #        model=sorted_shortlist_models[index][0]
+    #        random_points=set(sorted_shortlist_models[index][1])
+    #        inliers=set(sorted_shortlist_models[index][2])
+    #        also_inliers=random_points.union(inliers)
+    #        temp_circle=self.find_model_using_gradient_descent(model,list(also_inliers))
+    #        if (temp_circle==None):
+    #            continue
+    #        new_error,new_inliers=self.compute_model_goodness(temp_circle)
+    #        if (len(new_inliers) < self.threshold_inlier_count):
+    #            print("Skipping candidate because of low inlier count %d " % (new_inliers))
+    #            continue;
+    #        result=(temp_circle,new_error,new_inliers)
+    #        second_shortlist.append(result)
+
+
+    #    #run thorugh the short list
+    #    #expand the inliners from the tuple and re-build model
+    #    #for every new model, compute average distance -- take inspiration from line
+    #    sorted_second_shortlist=sorted(second_shortlist, key = lambda x: (len(x[2])), reverse=True)
+    #    if (len(sorted_second_shortlist) == 0):
+    #        return None
+    #    return sorted_second_shortlist[0][0]
+        
+    #    pass
+
+        
+
+    def validate_hyperparams(self):
         if (math.isnan(self.threshold_error) == True):
             raise Exception("The property 'threshold_error' has not been initialized")
 
         if (math.isnan(self.threshold_inlier_count) == True):
             raise Exception("The property 'threshold_inlier_count' has not been initialized")
+
+        if (math.isnan(self.learning_rate) == True):
+            raise Exception("The property 'threshold_inlier_count' has not been initialized")
+
+    def run(self)->CircleModel:
+        self.validate_hyperparams()
+
         #
         #generate trigrams of points - find some temporary model to hold this model
         #
@@ -70,32 +143,42 @@ class RansacCircleHelper(object):
             if (count_inliers < self.threshold_inlier_count):
                 print("Skipping because of poor inlier count=%d and this is less than threshold=%f)" % (count_inliers, self.threshold_inlier_count))
                 continue
-            error=self.compute_model_goodness2(temp_circle,inliers)
-            result=(temp_circle,inliers,error,tri)
+            result=(temp_circle,inliers,tri)
+
             lst_trigram_scores.append(result)            
         #
         #Sort trigrams with lowest error
         #
-        sorted_trigram_scores=sorted(lst_trigram_scores, key = lambda x: x[2])
+        sorted_trigram_inliercount=sorted(lst_trigram_scores, key = lambda x: len(x[1]),reverse=True)
         lst_results_gdescent=list()
-        for index in range(0,len(sorted_trigram_scores)):
-            t=sorted_trigram_scores[index]
+        for index in range(0,len(sorted_trigram_inliercount)):
+            t=sorted_trigram_inliercount[index]
             model=t[0]
             inliers=t[1]
-            trigram:TrigramOfPoints=t[3]
+            trigram:TrigramOfPoints=t[2]
             if (index%100 ==0):
-                print("Expanding circle candidate:%s , %d of %d " % (model, index, len(sorted_trigram_scores)))
+                print("Expanding circle candidate:%s , %d of %d " % (model, index, len(sorted_trigram_inliercount)))
             new_points=list()
             new_points.extend(inliers)
             new_points.append(trigram.P1)
             new_points.append(trigram.P2)
             new_points.append(trigram.P3)
             new_model=self.find_model_using_gradient_descent(model,new_points)
-            new_error,found_inliers=self.compute_model_goodness(new_model)
-            result=(new_model,new_error)
+            if (new_model==None):
+                continue
+
+            new_inliers=self.get_inliers2(new_model)
+            if (len(new_inliers) == 0):
+                continue
+            result=(new_model,new_inliers)
+
             lst_results_gdescent.append(result)
-        lst_results_gd2=sorted(lst_trigram_scores,key= lambda x: x[2])
-        best_model=sorted_trigram_scores[0][0]
+            #if (index%100 ==0):
+            #    print("Expanding circle candidate:%s , %d of %d " % (model, index, len(sorted_trigram_inliercount)))
+        lst_results_gd2=sorted(lst_results_gdescent,key= lambda x: len(x[1]),reverse=True)
+        if (len(lst_results_gd2) == 0):
+            return None
+        best_model=lst_results_gd2[0][0]
         return best_model
         pass
 
@@ -176,19 +259,55 @@ class RansacCircleHelper(object):
             if (p in exclude_points):
                 continue
             squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
-            distance=math.sqrt(squared)
-            if (distance > threshold):
+            distance_from_center=math.sqrt(squared)
+            distance_from_circumfrence=math.fabs(distance_from_center - model.R)
+            if (distance_from_circumfrence > threshold):
                 continue
             shortlist_inliners.append(p)
         return shortlist_inliners
         pass
 
     #
+    #Iterates over all points in the population and finds points 
+    #which are within the allowable threshold
+    #
+    def get_inliers2(self,model:CircleModel)->List[Point]:
+        radius=model.R
+        all_points=self._all_points
+        threshold=self.threshold_error
+        p:Point
+        shortlist_inliners=list()
+        for p in all_points:
+            squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
+            distance_from_center=math.sqrt(squared)
+            distance_from_circumfrence=math.fabs(distance_from_center - model.R)
+            if (distance_from_circumfrence > threshold):
+                continue
+            shortlist_inliners.append(p)
+        return shortlist_inliners
+        pass
+
+
+    #
     #Use the gradience descent algorithm to find the circle that fits the givens points
     #use the modelhint as a starting circle
     #
     def find_model_using_gradient_descent(self,modelhint:CircleModel, points:List[Point])->CircleModel:
-        gdhelper=GradientDescentCircleFitting.GradientDescentCircleFitting(modelhint,points, 0.1)
-        new_model=gdhelper.FindBestFittingCircle()
-        return new_model
+        try:
+            gdhelper=GradientDescentCircleFitting.GradientDescentCircleFitting(modelhint,points, learningrate= self.learning_rate, iterations=2000)
+            new_model=gdhelper.FindBestFittingCircle()
+            return new_model
+        except Exception as e:
+            print("Error while Gradient descent: %s" % (str(e)))
+            return None
         pass
+    #
+    #Returns the specified count of random selection of points from the full data set
+    #
+    def select_random_points(self,count:int):
+        count_original=len(self._all_points)
+        if (count >= count_original):
+            message="The count of random points:%d canot exceed length of original list:%d" % (count,count_original)
+            raise Exception(message)
+        lst=random.sample(population=self._all_points,k=count)
+        return lst

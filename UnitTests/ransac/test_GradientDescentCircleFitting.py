@@ -121,7 +121,7 @@ class Test_test_GradientDescentCircleFitting(unittest.TestCase):
             self.assertEquals(message,"Need 3 or more points");
             pass
 
-    def test_NoisyImage(self):
+    def test_large_circle_50X50_no_noise(self):
         folder_script=os.path.dirname(__file__)
         filename_input="NoisyCircle_x_-10_y_-14.png"
         file_noisy_line=os.path.join(folder_script,"./data/",filename_input)
