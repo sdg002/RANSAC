@@ -48,6 +48,18 @@ class Test_CircleModel(unittest.TestCase):
         self.assertAlmostEquals(c1.X, 0.0,1)
         self.assertAlmostEquals(c1.Y, 1.0,1)
 
+    def test_generate_model_from_3points_straight_line(self):
+        p_0=Point(0,33)
+        p_1=Point(9,30)
+        p_2=Point(12,29)
+
+        try:
+            c1=CircleModel.GenerateModelFrom3Points(p_0,p_1,p_2)
+            self.fail("Expected exception was not thrown")
+        except:
+            #Exception was expected
+            pass
+
     #
     #A circle with center=0,0 and radius=1
     #All points generated should be 1 unit from center
