@@ -5,7 +5,7 @@ from typing import List, Set, Dict, Tuple, Optional
 
 class GradientDescentCircleFitting(object):
     """Finds the best fit circle using Gradient descent approach"""
-    def __init__(self, modelhint:CircleModel, points:List[Point],learningrate:float=0.05,iterations=1000):
+    def __init__(self, modelhint:CircleModel, points:List[Point],learningrate:float=0.05,iterations:int=1000):
         self._modelhint=modelhint #Useful for speeding up when you have an approx circle arleady
         self._learningrate=learningrate
         self._points=points
