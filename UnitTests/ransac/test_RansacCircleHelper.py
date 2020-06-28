@@ -186,6 +186,9 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         #initialize RansalHelper
         #
         helper=RansacCircleHelper()
+        helper.gradient_descent_max_iterations=1000
+        helper.learning_rate=0.3
+
         helper.threshold_error=5
         helper.threshold_inlier_count=9
         #helper.max_iterations=400 #100

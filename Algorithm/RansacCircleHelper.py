@@ -31,6 +31,8 @@ class RansacCircleHelper(object):
         #The learning rate used for Gradient descent circle fitting algorithm
         self.learning_rate=0.1
 
+        self.gradient_descent_max_iterations=2000
+
         #The algorithm will run for these many iterations
         self.max_iterations=100
 
@@ -114,6 +116,9 @@ class RansacCircleHelper(object):
         if (math.isnan(self.learning_rate) == True):
             raise Exception("The property 'threshold_inlier_count' has not been initialized")
 
+        if (math.isnan(self.gradient_descent_max_iterations) == True):
+            raise Exception("The property 'threshold_inlier_count' has not been initialized")
+        
     def run(self)->CircleModel:
         self.validate_hyperparams()
 
@@ -306,7 +311,7 @@ class RansacCircleHelper(object):
     def find_model_using_gradient_descent2(self,modelhint:CircleModel, points:List[Point],lst_results):
         new_model=None
         try:
-            gdhelper=GradientDescentCircleFitting.GradientDescentCircleFitting(modelhint,points, learningrate= self.learning_rate, iterations=2000)
+            gdhelper=GradientDescentCircleFitting.GradientDescentCircleFitting(modelhint,points, learningrate= self.learning_rate, iterations=self.gradient_descent_max_iterations)
             new_model=gdhelper.FindBestFittingCircle()
         except Exception as e:
             #print("Error while Gradient descent: %s" % (str(e)))
