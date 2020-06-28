@@ -5,6 +5,7 @@ import random
 from RANSAC.Common import Point
 from RANSAC.Common import CircleModel
 from RANSAC.Algorithm import GradientDescentCircleFitting 
+import threading
 
 class TrigramOfPoints(object):
     def __init__(self,p1:Point, p2:Point, p3:Point):
@@ -150,37 +151,34 @@ class RansacCircleHelper(object):
         #Sort trigrams with lowest error
         #
         sorted_trigram_inliercount=sorted(lst_trigram_scores, key = lambda x: len(x[1]),reverse=True)
+        
         lst_results_gdescent=list()
+        jobs=[]
         for index in range(0,len(sorted_trigram_inliercount)):
             t=sorted_trigram_inliercount[index]
             model=t[0]
             inliers=t[1]
             trigram:TrigramOfPoints=t[2]
-            if (index%100 ==0):
-                print("Expanding circle candidate:%s , %d of %d " % (model, index, len(sorted_trigram_inliercount)))
             new_points=list()
             new_points.extend(inliers)
             new_points.append(trigram.P1)
             new_points.append(trigram.P2)
             new_points.append(trigram.P3)
-            new_model=self.find_model_using_gradient_descent(model,new_points)
-            if (new_model==None):
-                continue
+            new_thread=threading.Thread(target=self.find_model_using_gradient_descent2,args=(model,new_points,lst_results_gdescent))
+            jobs.append(new_thread)
 
-            new_inliers=self.get_inliers2(new_model)
-            if (len(new_inliers) == 0):
-                continue
-            result=(new_model,new_inliers)
+        for j in jobs:
+            j.start();
 
-            lst_results_gdescent.append(result)
-            #if (index%100 ==0):
-            #    print("Expanding circle candidate:%s , %d of %d " % (model, index, len(sorted_trigram_inliercount)))
+        #Wait for all threads to finish!
+        for j in jobs:
+            j.join();        
+        
         lst_results_gd2=sorted(lst_results_gdescent,key= lambda x: len(x[1]),reverse=True)
         if (len(lst_results_gd2) == 0):
             return None
         best_model=lst_results_gd2[0][0]
         return best_model
-        pass
 
     '''
     Iterates over all points and generates trigrams
@@ -301,6 +299,26 @@ class RansacCircleHelper(object):
             print("Error while Gradient descent: %s" % (str(e)))
             return None
         pass
+
+    #
+    #This method was written with the expectation that it would be called in the context of a new thread
+    #
+    def find_model_using_gradient_descent2(self,modelhint:CircleModel, points:List[Point],lst_results):
+        new_model=None
+        try:
+            gdhelper=GradientDescentCircleFitting.GradientDescentCircleFitting(modelhint,points, learningrate= self.learning_rate, iterations=2000)
+            new_model=gdhelper.FindBestFittingCircle()
+        except Exception as e:
+            #print("Error while Gradient descent: %s" % (str(e)))
+            pass
+        if (new_model == None):
+            return
+        new_inliers=self.get_inliers2(new_model)
+        if (len(new_inliers) == 0):
+            return
+        result=(new_model,new_inliers)
+        lst_results.append(result)
+        return
     #
     #Returns the specified count of random selection of points from the full data set
     #
