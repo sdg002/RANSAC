@@ -6,6 +6,7 @@ from RANSAC.Common import Point
 from RANSAC.Common import CircleModel
 from RANSAC.Algorithm import GradientDescentCircleFitting 
 import threading
+import sys
 
 class TrigramOfPoints(object):
     def __init__(self,p1:Point, p2:Point, p3:Point):
@@ -179,10 +180,15 @@ class RansacCircleHelper(object):
         for j in jobs:
             j.join();        
         
-        lst_results_gd2=sorted(lst_results_gdescent,key= lambda x: len(x[1]),reverse=True)
-        if (len(lst_results_gd2) == 0):
+        if (len(lst_results_gdescent) == 0):
             return None
-        best_model=lst_results_gd2[0][0]
+
+        lst_results_gdescent_sortedby_inlier_count=sorted(lst_results_gdescent,key= lambda x: len(x[1]),reverse=True)
+        max_inliers=len(lst_results_gdescent_sortedby_inlier_count[0][1])
+        lst_all_results_with_highest_inlier_count= list(filter(lambda x: len(x[1])>=max_inliers, lst_results_gdescent_sortedby_inlier_count))
+        lst_results_best_inlier_best_goodness=sorted(lst_all_results_with_highest_inlier_count,key= lambda x: (x[2]),reverse=False)
+
+        best_model=lst_results_best_inlier_best_goodness[0][0]
         return best_model
 
     '''
@@ -263,6 +269,9 @@ class RansacCircleHelper(object):
                 continue
             squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
             distance_from_center=math.sqrt(squared)
+            #outlier_measure=self.compute_outlier_measure(distance_from_center,model.R)
+            #if (outlier_measure > threshold):
+            #    continue;
             distance_from_circumfrence=math.fabs(distance_from_center - model.R)
             if (distance_from_circumfrence > threshold):
                 continue
@@ -270,6 +279,17 @@ class RansacCircleHelper(object):
         return shortlist_inliners
         pass
 
+
+    #
+    #Gives us an idea of how far away the point is from the circumfrence given 
+    #   the radius of the circle
+    #   the distance of the point from the center
+    #
+    def compute_outlier_measure(self,distance,radius):
+        delta=abs(distance-radius)
+        mx=max(distance,radius)
+        ratio=delta/mx
+        return ratio
     #
     #Iterates over all points in the population and finds points 
     #which are within the allowable threshold
@@ -283,11 +303,40 @@ class RansacCircleHelper(object):
         for p in all_points:
             squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
             distance_from_center=math.sqrt(squared)
+            outlier_measure=self.compute_outlier_measure(distance_from_center,model.R)
+            if (outlier_measure > threshold):
+                continue;
+
+            #distance_from_circumfrence=math.fabs(distance_from_center - model.R)
+            #if (distance_from_circumfrence > threshold):
+            #    continue
+            shortlist_inliners.append(p)
+        return shortlist_inliners
+        pass
+
+    def get_inliers2_and_goodness(self,model:CircleModel)->List[Point]:
+        radius=model.R
+        all_points=self._all_points
+        threshold=self.threshold_error
+        p:Point
+        shortlist_inliners=list()
+        sum_goodness_measure=0
+        for p in all_points:
+            squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
+            distance_from_center=math.sqrt(squared)
+            #goodness=self.compute_outlier_measure(distance_from_center,model.R)
+            #if (sum_goodness_measure > threshold):
+            #    continue;
+            #sum_goodness_measure+=goodness
             distance_from_circumfrence=math.fabs(distance_from_center - model.R)
             if (distance_from_circumfrence > threshold):
                 continue
             shortlist_inliners.append(p)
-        return shortlist_inliners
+        avg_goodness=sys.maxsize;
+        #we need to calculate the goodness score to allow us to select the best model - max inliers, least mse
+        if (len(shortlist_inliners) != 0):
+            avg_goodness=sum_goodness_measure/len(shortlist_inliners)
+        return (shortlist_inliners,avg_goodness)
         pass
 
 
@@ -318,10 +367,10 @@ class RansacCircleHelper(object):
             pass
         if (new_model == None):
             return
-        new_inliers=self.get_inliers2(new_model)
+        (new_inliers,goodness)=self.get_inliers2_and_goodness(new_model)
         if (len(new_inliers) == 0):
             return
-        result=(new_model,new_inliers)
+        result=(new_model,new_inliers,goodness)
         lst_results.append(result)
         return
     #

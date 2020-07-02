@@ -51,9 +51,9 @@ def superimpose_points_on_image(arr_image_input:np.ndarray, points,red:int,green
             continue
         if (y<0 or y >= height ):
             continue
-        arr_new[y][x][0]=(arr_new[y][x][0]+red)/2
-        arr_new[y][x][1]=(arr_new[y][x][1]+green)/2
-        arr_new[y][x][2]=(arr_new[y][x][2]+blue)/2
+        arr_new[y][x][0]=red
+        arr_new[y][x][1]=green
+        arr_new[y][x][2]=blue
     return arr_new
     pass
 

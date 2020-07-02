@@ -75,7 +75,7 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         self.assertTrue(p2 in actual_inliers)
         self.assertTrue(p3 in actual_inliers)
 
-    def test_run_method_is_invoked_on_hand_drawn_circle(self):
+    def test_run_method_hand_drawn_circle(self):
         #
         #get a list of points
         #
@@ -87,10 +87,9 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         #
         #initialize RansalHelper
         #
-        ransac_threshold=40
         helper=RansacCircleHelper()
-        helper.threshold_error=ransac_threshold
-        helper.threshold_inlier_count=4
+        helper.threshold_error=20
+        helper.threshold_inlier_count=5
         helper.add_points(lst_points)
         best_model=helper.run() 
         #
@@ -100,39 +99,10 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         #
         #Assertions
         #
-        delta=2
+        delta=15
         self.assertAlmostEqual(best_model.X,89,delta=delta)
         self.assertAlmostEqual(best_model.Y,78,delta=delta)
         self.assertAlmostEqual(best_model.R,45,delta=delta)
-
-    @unittest.skip("We are not testing run2 method now")
-    def test_run2_method_is_invoked_on_hand_drawn_circle(self):
-        #
-        #get a list of points
-        #
-        folder_script=os.path.dirname(__file__)
-        filename_input="NoisyCircle-HandDrawn-001.png"
-        file_hand_drawn=os.path.join(folder_script,"./data/",filename_input)
-        np_image=skimage.io.imread(file_hand_drawn,as_gray=True)
-        lst_points=Util.create_points_from_numpyimage(np_image)
-        #
-        #initialize RansalHelper
-        #
-        helper=RansacCircleHelper()
-        helper.threshold_error=40
-        helper.threshold_inlier_count=4
-        helper.max_iterations=200
-        helper.add_points(lst_points)
-        helper.min_points_for_model=3
-        best_model=helper.run2() 
-        self.superimpose_circle_over_original_image(file_hand_drawn,best_model)
-        #
-        #Assertions
-        #
-        #take the best error
-        self.assertAlmostEqual(best_model.X,75.8,delta=2)
-        self.assertAlmostEqual(best_model.Y,77.7,delta=2)
-        self.assertAlmostEqual(best_model.R,36.09,delta=2)
 
     #
     #Superimpose the circle over the specified image file
@@ -147,11 +117,11 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         file_result=os.path.join(folder_results,filename_results)
 
         new_points=CircleModel.generate_points_from_circle(circle)
-        np_superimposed=Util.superimpose_points_on_image(np_image,new_points,100,255,100)
+        np_superimposed=Util.superimpose_points_on_image(np_image,new_points,255,255,0)
         skimage.io.imsave(file_result,np_superimposed)
 
-    @unittest.skip("Skipping because it takes too long. Needs performance improvement")
-    def test_run_method_is_invoked_NoisyCircle1_50X50(self):
+    #@unittest.skip("Skipping because it takes too long. Needs performance improvement")
+    def test_run_method_NoisyCircle1_50X50(self):
         #
         #get a list of points
         #
@@ -164,16 +134,29 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         #initialize RansalHelper
         #
         helper=RansacCircleHelper()
-        helper.threshold_error=5
-        helper.threshold_inlier_count=4
+        helper.gradient_descent_max_iterations=1000
+        helper.learning_rate=0.3
+        helper.threshold_error=2
+        helper.threshold_inlier_count=15
         helper.max_iterations=400 #100
         helper.add_points(lst_points)
         best_model=helper.run() 
         self.superimpose_circle_over_original_image(file_noisy_circle,best_model)
-        raise Exception("Not yet complete")
-        pass
+        #
+        #Assertions
+        #
+        delta=15
+        self.assertGreater(best_model.X,-30)
+        self.assertLess(best_model.X,-10)
 
-    def test_run_method_is_invoked_NoisyCircle0_50X50(self):
+        self.assertGreater(best_model.Y,-35)
+        self.assertLess(best_model.Y,-15)
+
+        self.assertGreater(best_model.R,55)
+        self.assertLess(best_model.R,75)
+
+
+    def test_run_method_NoisyCircle0_50X50(self):
         #
         #get a list of points
         #
@@ -188,9 +171,8 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         helper=RansacCircleHelper()
         helper.gradient_descent_max_iterations=1000
         helper.learning_rate=0.3
-
         helper.threshold_error=5
-        helper.threshold_inlier_count=9
+        helper.threshold_inlier_count=15
         #helper.max_iterations=400 #100
         helper.add_points(lst_points)
         best_model=helper.run() 
@@ -198,35 +180,13 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         #
         #Assertions
         #
-        delta=10
+        delta=15
         self.assertAlmostEqual(best_model.X,-2,delta=delta)
         self.assertAlmostEqual(best_model.Y,-5,delta=delta)
         self.assertAlmostEqual(best_model.R,37,delta=delta)
         pass
 
-    @unittest.skip("We are not testing run2 method now")
-    def test_run2_method_is_invoked_NoisyCircle0_50X50(self):
-        #
-        #get a list of points
-        #
-        folder_script=os.path.dirname(__file__)
-        filename_input="NoisyCircle_x_-10_y_-14.png"
-        file_noisy_circle=os.path.join(folder_script,"./data/",filename_input)
-        np_image=skimage.io.imread(file_noisy_circle,as_gray=True)
-        lst_points=Util.create_points_from_numpyimage(np_image)
-        #
-        #initialize RansalHelper
-        #
-        helper=RansacCircleHelper()
-        helper.min_points_for_model= 5#25
-        helper.threshold_error=5
-        helper.threshold_inlier_count=9
-        helper.max_iterations=400 #100
-        helper.add_points(lst_points)
-        best_model=helper.run2() 
-        self.superimpose_circle_over_original_image(file_noisy_circle,best_model)
-        raise Exception("Not yet complete")
-        pass
 
 if __name__ == '__main__':
     unittest.main()
+
