@@ -237,29 +237,6 @@ class RansacCircleHelper(object):
         mx=max(distance,radius)
         ratio=delta/mx
         return ratio
-    #
-    #Iterates over all points in the population and finds points 
-    #which are within the allowable threshold
-    #
-    def get_inliers2(self,model:CircleModel)->List[Point]:
-        radius=model.R
-        all_points=self._all_points
-        threshold=self.threshold_error
-        p:Point
-        shortlist_inliners=list()
-        for p in all_points:
-            squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
-            distance_from_center=math.sqrt(squared)
-            outlier_measure=self.compute_outlier_measure(distance_from_center,model.R)
-            if (outlier_measure > threshold):
-                continue;
-
-            #distance_from_circumfrence=math.fabs(distance_from_center - model.R)
-            #if (distance_from_circumfrence > threshold):
-            #    continue
-            shortlist_inliners.append(p)
-        return shortlist_inliners
-        pass
 
     #
     #Use the gradience descent algorithm to find the circle that fits the givens points
