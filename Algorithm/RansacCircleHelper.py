@@ -45,67 +45,7 @@ class RansacCircleHelper(object):
     #
     def add_points(self,points:List[Point]):
         self._all_points.extend(points)
-        pass
-
-    ##
-    ##Returns a List of circle model tuples in descending order of inlier count
-    ##Structure of tuple:
-    ##   (circle_model,inlier_count)
-    ##
-    #def run2(self):
-    #    self.validate_hyperparams()
-    #    #
-    #    #generate trigrams of points - find some temporary model to hold this model
-    #    #
-    #    iter=0
-    #    shortlist_models=[] #tuple of circle model, error
-    #    while (iter < self.max_iterations):
-    #        print("Iteration %d" % (iter))
-    #        iter+=1
-    #        random_points=self.select_random_points(self.min_points_for_model)
-    #        temp_circle=self.find_model_using_gradient_descent(None,random_points)
-    #        if (temp_circle==None):
-    #            continue
-
-    #        inliers:List[Point]=self.get_inliers2(temp_circle)
-    #        count_of_inliers=len(inliers)
-    #        #if (count_of_inliers < self.threshold_inlier_count):
-    #        #    print("   Skipping because of poor inlier count (%d less than %d)" % (count_of_inliers,self.threshold_inlier_count))
-    #        #    continue
-    #        t=(temp_circle,random_points,inliers)
-    #        shortlist_models.append(t)
-    #    sorted_shortlist_models=sorted(shortlist_models, key = lambda x: len(x[2]), reverse=True)
-
-    #    #you were hre - you got the first short list
-    #    count_of_shorlist=len(sorted_shortlist_models)
-    #    second_shortlist=[]
-    #    for index in range(0,count_of_shorlist):
-    #        model=sorted_shortlist_models[index][0]
-    #        random_points=set(sorted_shortlist_models[index][1])
-    #        inliers=set(sorted_shortlist_models[index][2])
-    #        also_inliers=random_points.union(inliers)
-    #        temp_circle=self.find_model_using_gradient_descent(model,list(also_inliers))
-    #        if (temp_circle==None):
-    #            continue
-    #        new_error,new_inliers=self.compute_model_goodness(temp_circle)
-    #        if (len(new_inliers) < self.threshold_inlier_count):
-    #            print("Skipping candidate because of low inlier count %d " % (new_inliers))
-    #            continue;
-    #        result=(temp_circle,new_error,new_inliers)
-    #        second_shortlist.append(result)
-
-
-    #    #run thorugh the short list
-    #    #expand the inliners from the tuple and re-build model
-    #    #for every new model, compute average distance -- take inspiration from line
-    #    sorted_second_shortlist=sorted(second_shortlist, key = lambda x: (len(x[2])), reverse=True)
-    #    if (len(sorted_second_shortlist) == 0):
-    #        return None
-    #    return sorted_second_shortlist[0][0]
-        
-    #    pass
-
-        
+        pass        
 
     def validate_hyperparams(self):
         if (math.isnan(self.threshold_error) == True):
