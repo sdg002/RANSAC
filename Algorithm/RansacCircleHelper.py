@@ -85,7 +85,7 @@ class RansacCircleHelper(object):
                 print("Could not generate Circle model. Error=%s" % (str(e)))
                 continue
 
-            inliers:List[Point]=self.get_inliers(temp_circle,[tri.P1,tri.P2,tri.P3])
+            inliers,goodness_score=self.get_inliers(temp_circle,[tri.P1,tri.P2,tri.P3])
             count_inliers=len(inliers)
             if (count_inliers < self.threshold_inlier_count):
                 print("Skipping because of poor inlier count=%d and this is less than threshold=%f)" % (count_inliers, self.threshold_inlier_count))
@@ -204,26 +204,33 @@ class RansacCircleHelper(object):
         threshold=self.threshold_error
         p:Point
         shortlist_inliners=list()
+        sum_goodness_measure=0
         for p in all_points:
             if (p in exclude_points):
                 continue
             squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
             distance_from_center=math.sqrt(squared)
-            #outlier_measure=self.compute_outlier_measure(distance_from_center,model.R)
-            #if (outlier_measure > threshold):
-            #    continue;
             distance_from_circumfrence=math.fabs(distance_from_center - model.R)
+
             if (distance_from_circumfrence > threshold):
                 continue
+
+            outlier_goodness_measure=self.compute_outlier_measure(distance_from_center,model.R)
+            sum_goodness_measure+=outlier_goodness_measure
+
             shortlist_inliners.append(p)
-        return shortlist_inliners
+        avg_goodness=1.0;
+        if (len(shortlist_inliners) != 0):
+            avg_goodness=sum_goodness_measure/len(shortlist_inliners)
+        return (shortlist_inliners,avg_goodness)
         pass
 
 
     #
-    #Gives us an idea of how far away the point is from the circumfrence given 
-    #   the radius of the circle
+    #Gives us a relative idea of how far away the point is from the circumfrence given 
     #   the distance of the point from the center
+    #   the radius of the circle
+    #   Points on the circumfrence have a value of 0 increasin to 1 as we move away from the circumfrence radially
     #
     def compute_outlier_measure(self,distance,radius):
         delta=abs(distance-radius)

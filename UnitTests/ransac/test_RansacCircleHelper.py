@@ -8,6 +8,61 @@ from RANSAC.Common import Util
 
 class Test_test_RansacCircleHelper(unittest.TestCase):
 
+    def test_When_get_inliers_and_all_points_on_circumfrence_and_no_exclusion_list(self):
+        #arrange
+        p1=Point(+1,0)
+        p2=Point(+0,1)
+        p3=Point(-1,0)
+        list_of_points=list()
+        list_of_points.append(p1)
+        list_of_points.append(p2)
+        list_of_points.append(p3)
+
+        model=CircleModel(0,0,1)
+        helper=RansacCircleHelper()
+        helper.threshold_error=0.2
+        helper.add_points(list_of_points)
+
+        #act
+        inliers,model_score=helper.get_inliers(model,[])
+
+        #assert
+        self.assertAlmostEquals(model_score, 0.0, delta=0.1);
+        self.assertEquals(len(inliers),3)
+        self.assertTrue(p1 in inliers)
+        self.assertTrue(p2 in inliers)
+        self.assertTrue(p3 in inliers)
+
+    def test_When_get_inliers_and_3_inliers_and_1_outlier_and_no_exclusion_list(self):
+        #arrange
+        p1=Point(+1.4,0.0)
+        p2=Point(+0.0,1.4)
+        p3=Point(-1.4,0.0)
+        p_outlier=Point(-10,0)
+        list_of_points=list()
+        list_of_points.append(p1)
+        list_of_points.append(p2)
+        list_of_points.append(p3)
+        list_of_points.append(p_outlier)
+
+        model=CircleModel(0,0,1)
+        helper=RansacCircleHelper()
+        helper.threshold_error=0.5
+        helper.add_points(list_of_points)
+
+        #act
+        inliers,model_score=helper.get_inliers(model,[])
+
+        #assert
+        expected_score=((0.4/1.4)+(0.4/1.4)+(0.4/1.4))/3.0
+        self.assertAlmostEquals(model_score, expected_score, delta=0.1);
+        self.assertEquals(len(inliers),3)
+        self.assertTrue(p1 in inliers)
+        self.assertTrue(p2 in inliers)
+        self.assertTrue(p3 in inliers)
+        self.assertFalse(p_outlier in inliers)
+
+
     def test_When_compute_model_goodness_And_All_Points_On_Circle_Then_Error_ShouldBe_Zero(self):
         #Circle at 0,0 with unit radius
         p1=Point(+1,0)
