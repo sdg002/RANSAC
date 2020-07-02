@@ -175,13 +175,47 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         np_superimposed=Util.superimpose_points_on_image(np_image,new_points,255,255,0)
         skimage.io.imsave(file_result,np_superimposed)
 
-    #@unittest.skip("Skipping because it takes too long. Needs performance improvement")
+    @unittest.skip("Skipping because it takes too long. Needs performance improvement. 18 minutes. Produces a nicely fitting circle.")
+    def test_run_method_NoisyCircle2_99X50(self):
+        #
+        #get a list of points
+        #
+        folder_script=os.path.dirname(__file__)
+        filename_input="NoisyCircle_99_50.png"
+        file_noisy_circle=os.path.join(folder_script,"./data/",filename_input)
+        np_image=skimage.io.imread(file_noisy_circle,as_gray=True)
+        lst_points=Util.create_points_from_numpyimage(np_image)
+        #
+        #initialize RansalHelper
+        #
+        helper=RansacCircleHelper()
+        helper.gradient_descent_max_iterations=1000
+        helper.learning_rate=0.3
+        helper.threshold_error=2
+        helper.threshold_inlier_count=25
+        helper.max_iterations=400 #100
+        helper.add_points(lst_points)
+        best_model=helper.run() 
+        self.superimpose_circle_over_original_image(file_noisy_circle,best_model)
+        #
+        #Assertions
+        #
+        delta=15
+        self.assertGreater(best_model.X,0)
+        self.assertLess(best_model.X,0)
+
+        self.assertGreater(best_model.Y,0)
+        self.assertLess(best_model.Y,0)
+
+        self.assertGreater(best_model.R,0)
+        self.assertLess(best_model.R,0)
+
     def test_run_method_NoisyCircle1_50X50(self):
         #
         #get a list of points
         #
         folder_script=os.path.dirname(__file__)
-        filename_input="NoisyCircle_x_-10_y_-14_r_48_d_0.400000_sp_0.8.186.png"
+        filename_input="NoisyCircle_x_116_y_-15_r_133_d_0.500000_sp_0.5.177.png"
         file_noisy_circle=os.path.join(folder_script,"./data/",filename_input)
         np_image=skimage.io.imread(file_noisy_circle,as_gray=True)
         lst_points=Util.create_points_from_numpyimage(np_image)
@@ -211,7 +245,7 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         self.assertLess(best_model.R,75)
 
 
-    def test_run_method_NoisyCircle0_50X50(self):
+    def test_run_method_NoisyCircle1_50X50_NoNoise(self):
         #
         #get a list of points
         #
