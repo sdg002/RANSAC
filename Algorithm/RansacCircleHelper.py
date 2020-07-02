@@ -261,32 +261,6 @@ class RansacCircleHelper(object):
         return shortlist_inliners
         pass
 
-    def get_inliers2_and_goodness(self,model:CircleModel)->List[Point]:
-        radius=model.R
-        all_points=self._all_points
-        threshold=self.threshold_error
-        p:Point
-        shortlist_inliners=list()
-        sum_goodness_measure=0
-        for p in all_points:
-            squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
-            distance_from_center=math.sqrt(squared)
-            #goodness=self.compute_outlier_measure(distance_from_center,model.R)
-            #if (sum_goodness_measure > threshold):
-            #    continue;
-            #sum_goodness_measure+=goodness
-            distance_from_circumfrence=math.fabs(distance_from_center - model.R)
-            if (distance_from_circumfrence > threshold):
-                continue
-            shortlist_inliners.append(p)
-        avg_goodness=sys.maxsize;
-        #we need to calculate the goodness score to allow us to select the best model - max inliers, least mse
-        if (len(shortlist_inliners) != 0):
-            avg_goodness=sum_goodness_measure/len(shortlist_inliners)
-        return (shortlist_inliners,avg_goodness)
-        pass
-
-
     #
     #Use the gradience descent algorithm to find the circle that fits the givens points
     #use the modelhint as a starting circle

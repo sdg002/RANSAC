@@ -16,11 +16,21 @@ folder_script=os.path.dirname(__file__)
 #
 #Change the input file in the following line
 #
-filename="NoisyCircle-HandDrawn-001.png"
-#"NoisyLine-Gaussian-sp-0.80.103.png" #change this
+filename6="NoisyCircle_x_-10_y_-14_r_48_d_0.400000_sp_0.8.186.png"
+filename5="NoisyCircle_x_118_y_59_r_100_d_0.200000_sp_0.8.183.png"
+filename4="NoisyCircle_x_60_y_143_r_103_d_0.400000_sp_0.8.182.png"
+filename3="NoisyCircle_x_116_y_-15_r_133_d_0.500000_sp_0.5.177.png"
+filename1="NoisyCircle_1.png"
+filename2="NoisyCircle_2.png"
+filename0="NoisyCircle-HandDrawn-001.png"
+
+filename=filename0
 file_noisy_circle=os.path.join(folder_script,"./input/",filename)
 np_image=skimage.io.imread(file_noisy_circle,as_gray=True)
-ransac_threshold=40
+ransac_threshold=10 #20
+
+#YOU WERE LOOKING AT WHY WE CHOSE A HIGHT VALUE OF 40 FOR ransac_threshold
+#Are we dividing the MSE by N
 #
 #Iterate over all cells of the NUMPY array and convert to array of Point classes
 #
@@ -30,7 +40,7 @@ lst_all_points=Util.create_points_from_numpyimage(np_image)
 #
 helper=RansacCircleHelper()
 helper.threshold_error=ransac_threshold
-helper.threshold_inlier_count=4
+helper.threshold_inlier_count=5 #20
 helper.add_points(lst_all_points)
 best_model=helper.run() 
 print("RANSAC-complete")    

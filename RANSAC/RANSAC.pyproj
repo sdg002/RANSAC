@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>GenerateNoisyCircle.py</StartupFile>
+    <StartupFile>ExecRANSACCircle.py</StartupFile>
     <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -82,6 +82,12 @@
     <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.104.result.png" />
     <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.111.result.png" />
     <Content Include="input\NoisyCircle-HandDrawn-001.png" />
+    <Content Include="input\NoisyCircle_1.png" />
+    <Content Include="input\NoisyCircle_2.png" />
+    <Content Include="input\NoisyCircle_x_-10_y_-14_r_48_d_0.400000_sp_0.8.186.png" />
+    <Content Include="input\NoisyCircle_x_116_y_-15_r_133_d_0.500000_sp_0.5.177.png" />
+    <Content Include="input\NoisyCircle_x_118_y_59_r_100_d_0.200000_sp_0.8.183.png" />
+    <Content Include="input\NoisyCircle_x_60_y_143_r_103_d_0.400000_sp_0.8.182.png" />
     <Content Include="input\NoisyImage.5.png" />
     <Content Include="input\NoisyImage_1.png" />
     <Content Include="input\NoisyImage_2.png" />
