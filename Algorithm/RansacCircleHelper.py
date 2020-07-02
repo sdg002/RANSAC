@@ -148,51 +148,7 @@ class RansacCircleHelper(object):
                     trigram=TrigramOfPoints(p0,p1,p2)
                     lst.append(trigram)
         return lst
-        pass
-    
-    #
-    #Compute the mean squared error of the inlier points w.r.t circle model
-    #
-    def compute_model_goodness2(self,model:CircleModel,inliers:List[Point])->float:
-        radius=model.R
-        list_errors=list()
-        for p in inliers:
-            squared=(p.X - model.X)**2 + (p.Y - model.Y)**2 
-            distance=math.sqrt(squared)
-            absolute_error=math.fabs(distance - radius)
-            list_errors.append(absolute_error)
-        return stats.mean(list_errors)
-
-    '''
-    Determine how good all the points fit the given circle equatino.
-        Iterate over all points
-        Pick only those points which are within 'threshold'
-        Compute mean squared error for these points
-        Compute the total no of inliners
-    Return a tuple of mse,inlier_count
-    '''
-    def compute_model_goodness(self,model:CircleModel)->Tuple:
-        radius=model.R
-        all_points=self._all_points
-        threshold=self.threshold_error
-        p:Point
-        shortlist_inliners=list()
-        summation_meas_squared=0
-        for p in all_points:
-            squared_distance=(p.X - model.X)**2 + (p.Y - model.Y)**2 
-            distance_from_center=math.sqrt(squared_distance)
-            absolute_error=math.fabs(distance_from_center - radius)
-            if (absolute_error > threshold):
-                #skip point if outlier
-                continue
-            shortlist_inliners.append(p)
-            e_squared=absolute_error**2
-            summation_mean_squared=summation_meas_squared+e_squared
-
-        sqrt_summation_mean_squared=math.sqrt(summation_mean_squared)
-        mse=1/2*sqrt_summation_mean_squared/len(all_points)
-        result=(mse,shortlist_inliners)
-        return result
+        pass    
 
     #
     #Returns all points which are within the tolerance distance from the circumfrence of the specified circle
