@@ -314,7 +314,7 @@ class RansacCircleHelper(object):
             pass
         if (new_model == None):
             return
-        (new_inliers,goodness)=self.get_inliers2_and_goodness(new_model)
+        new_inliers,goodness=self.get_inliers(new_model,[])
         if (len(new_inliers) == 0):
             return
         result=(new_model,new_inliers,goodness)
