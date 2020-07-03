@@ -63,72 +63,6 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         self.assertFalse(p_outlier in inliers)
 
 
-    def test_When_compute_model_goodness_And_All_Points_On_Circle_Then_Error_ShouldBe_Zero(self):
-        #Circle at 0,0 with unit radius
-        p1=Point(+1,0)
-        p2=Point(+0,1)
-        p3=Point(-1,0)
-        list_of_points=list()
-        list_of_points.append(p1)
-        list_of_points.append(p2)
-        list_of_points.append(p3)
-
-        model=CircleModel(0,0,1)
-        helper=RansacCircleHelper()
-        helper.threshold_error=0.2
-        helper.add_points(list_of_points)
-        mse,inliers=helper.compute_model_goodness(model)
-
-        delta=0.01
-        self.assertAlmostEquals(mse, 0.0, delta=delta);
-        self.assertEquals(len(inliers),3)
-        self.assertTrue(p1 in inliers)
-        self.assertTrue(p2 in inliers)
-        self.assertTrue(p3 in inliers)
-
-    def test_When_compute_model_goodness_And_3_Points_On_Circle_And_1_Point_VeryFarAway_Then_Error_ShouldBe_Zero(self):
-        #Circle at 0,0 with unit radius
-        p1=Point(+1,0)
-        p2=Point(+0,1)
-        p3=Point(-1,0)
-        pfar_away=Point(-100,100)
-        list_of_points=list()
-        list_of_points.append(p1)
-        list_of_points.append(p2)
-        list_of_points.append(p3)
-        list_of_points.append(pfar_away)
-
-        model=CircleModel(0,0,1)
-        helper=RansacCircleHelper()
-        helper.threshold_error=0.2
-        helper.add_points(list_of_points)
-        mse,inliers=helper.compute_model_goodness(model)
-
-        delta=0.01
-        self.assertAlmostEquals(mse, 0.0, delta=delta);
-        self.assertEquals(len(inliers),3)
-        self.assertTrue(p1 in inliers)
-        self.assertTrue(p2 in inliers)
-        self.assertTrue(p3 in inliers)
-
-    def test_when_get_inliers2_is_invoked_and_all_points_are_on_thecircle_then_no_inliers_mustbe_returned(self):
-        p1=Point(+1,0)
-        p2=Point(+0,1)
-        p3=Point(-1,0)
-        list_of_points=list()
-        list_of_points.append(p1)
-        list_of_points.append(p2)
-        list_of_points.append(p3)
-
-        circle=CircleModel.GenerateModelFrom3Points(p1,p2,p3)
-        helper=RansacCircleHelper()
-        helper.threshold_error=2
-        helper.add_points(list_of_points)
-        actual_inliers=helper.get_inliers2(circle)
-        self.assertTrue(len(actual_inliers) == 3)
-        self.assertTrue(p1 in actual_inliers)
-        self.assertTrue(p2 in actual_inliers)
-        self.assertTrue(p3 in actual_inliers)
 
     def test_run_method_hand_drawn_circle(self):
         #
@@ -210,6 +144,7 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         self.assertGreater(best_model.R,0)
         self.assertLess(best_model.R,0)
 
+    @unittest.skip("Skipping because it takes too long. Needs performance improvement. 18 minutes. Produces a nicely fitting circle.")
     def test_run_method_NoisyCircle1_50X50(self):
         #
         #get a list of points
@@ -279,3 +214,5 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
+    #you were going to test "NoisyCircle_x_116_y_-15_r_133_d_0.500000_sp_0.5.177"
+    #look at the final picking of model. You want the model with max inliers and min error count
