@@ -21,8 +21,8 @@ class GradientDescentCircleFitting(object):
         else:
             seed_circle=self._modelhint;
         for i in range(0,self._max_iterations):
-            mse=self.ComputeMse(seed_circle)
-            derivative_radius,derivative_cx,derivative_cy=self.ComputeDerivativesOfMse(seed_circle,mse)
+            #mse=self.ComputeMse(seed_circle)
+            derivative_radius,derivative_cx,derivative_cy=self.ComputeDerivativesOfMse(seed_circle)
             new_cx=-1*self._learningrate*derivative_cx + seed_circle.X
             new_cy=-1*self._learningrate*derivative_cy + seed_circle.Y
             new_radius=-1*self._learningrate*derivative_radius + seed_circle.R
@@ -79,9 +79,14 @@ class GradientDescentCircleFitting(object):
     #   derivative w.r.t to cx of candidate circle
     #   derivative w.r.t to cy of candidate circle
     #
-    def ComputeDerivativesOfMse(self,candidate:CircleModel,mse):
+    def ComputeDerivativesOfMse(self,candidate:CircleModel):
 
-        count_of_points=len(self._lst_distance_from_center)
+        self._lst_distance_from_center.clear()
+        for point in self._points:
+            r=self.ComputeEuclideanDistance(point.X,point.Y,candidate.X,candidate.Y)            
+            self._lst_distance_from_center.append(r)
+
+        count_of_points=len(self._points)
         dmse_radius=0
         for radius in self._lst_distance_from_center:
             dmse_radius=dmse_radius+(radius-candidate.R)
@@ -92,9 +97,11 @@ class GradientDescentCircleFitting(object):
         for idx in range(0,len(self._points)):
             pt_i=self._points[idx]
             r_i=self._lst_distance_from_center[idx]
-            dmse_cx=dmse_cx + ((r_i - candidate.R) * (1/r_i) * (pt_i.X-candidate.X) * -1.0)
-            dmse_cy=dmse_cy + ((r_i - candidate.R) * (1/r_i) * (pt_i.Y-candidate.Y) * -1.0)
+            t1=(r_i - candidate.R) * (1/r_i)
+            dmse_cx=dmse_cx + (t1 * (pt_i.X-candidate.X) * -1.0)
+            dmse_cy=dmse_cy + (t1 * (pt_i.Y-candidate.Y) * -1.0)
 
-        dmse_cx=dmse_cx * 1/count_of_points
-        dmse_cy=dmse_cy * 1/count_of_points
+        t2=1/count_of_points
+        dmse_cx=dmse_cx * t2
+        dmse_cy=dmse_cy * t2
         return dmse_radius,dmse_cx,dmse_cy
