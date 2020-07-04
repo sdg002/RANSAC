@@ -12,3 +12,12 @@ class Point:
         s="ID=%d x='%d' y='%d'" % (self.ID,self.X,self.Y)
         return s
 
+    #
+    #Computes the euclidean distance between the 2 points
+    #
+    @staticmethod
+    def euclidean_distance(point1,point2):
+        squared=(point1.X-point2.X)**2 + (point1.Y-point2.Y)**2
+        r=squared**0.5
+        return r
+
