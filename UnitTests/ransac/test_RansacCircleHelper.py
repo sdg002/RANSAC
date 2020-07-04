@@ -105,7 +105,7 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         filename_results=("%s.%d.png" % (__name__,count_of_files) )
         file_result=os.path.join(folder_results,filename_results)
 
-        new_points=CircleModel.generate_points_from_circle(circle)
+        new_points=CircleModel.generate_points_from_circle(circle, distance=2)
         np_superimposed=Util.superimpose_points_on_image(np_image,new_points,255,255,0)
         skimage.io.imsave(file_result,np_superimposed)
 
@@ -180,7 +180,7 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         self.assertLess(best_model.R,75)
 
 
-    def test_run_method_NoisyCircle1_50X50_NoNoise(self):
+    def test_run_method_LargeCircle1_50X50_NoNoise(self):
         #
         #get a list of points
         #
@@ -215,4 +215,3 @@ if __name__ == '__main__':
     unittest.main()
 
     #you were going to test "NoisyCircle_x_116_y_-15_r_133_d_0.500000_sp_0.5.177"
-    #look at the final picking of model. You want the model with max inliers and min error count

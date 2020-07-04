@@ -39,6 +39,10 @@ class RansacCircleHelper(object):
 
         #These many points will be selected at random to build a model
         self.min_points_for_model=20
+
+        #Out of the total population of trigrams generated, the actual number selected is a fraction
+        #specified by the following attribute
+        self.sampling_fraction=0.25
         pass
     #
     #Should be called once to set the full list of data points
@@ -56,10 +60,18 @@ class RansacCircleHelper(object):
 
         if (math.isnan(self.learning_rate) == True):
             raise Exception("The property 'threshold_inlier_count' has not been initialized")
+        if ((self.learning_rate <=0 ) or (self.learning_rate >= 1.0)):
+            raise Exception("The attribute 'learning_rate' should be between 0 and 1")
 
         if (math.isnan(self.gradient_descent_max_iterations) == True):
             raise Exception("The property 'threshold_inlier_count' has not been initialized")
         
+        if (math.isnan(self.sampling_fraction) == True):
+            raise Exception("The property 'sampling_fraction' has not been initialized")
+        if ((self.sampling_fraction <=0 ) or (self.sampling_fraction > 1.0)):
+            raise Exception("The property 'sampling_fraction' should be between 0 and 1")
+        
+
     def run(self)->CircleModel:
         self.validate_hyperparams()
 
@@ -75,7 +87,13 @@ class RansacCircleHelper(object):
         #
         tri:TrigramOfPoints
         lst_trigram_scores=list()
-        for trig_index in range(0,len(trigrams)):
+        #
+        all_trigram_indices=list(range(0,len(trigrams)))
+        fraction=self.sampling_fraction
+        random_count=int(len(all_trigram_indices)*1/5)
+        random_trigram_indices=random.sample(all_trigram_indices,random_count)
+        #for trig_index in range(0,len(trigrams)):
+        for trig_index in random_trigram_indices:
             tri=trigrams[trig_index]
             if (trig_index%100 ==0):
                 print("Processing trigram %d of %d" % (trig_index,len(trigrams)))
