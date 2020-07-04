@@ -75,5 +75,29 @@ class Test_CircleModel(unittest.TestCase):
             distance_from_center=math.sqrt( (pt.X-center_x)**2 + (pt.Y-center_y)**2)
             self.assertAlmostEqual(distance_from_center,radius,2)
 
+    #
+    #Center with center =0,0 and radius=10
+    #Generate points with 'distance' of 5
+    #
+    def test_generate_points_from_circle_model_center_at_0_0_radius_10(self):
+        center_x=0
+        center_y=0
+        radius=100.0
+        distance=5
+        model=CircleModel(center_x,center_y,radius)
+        points=CircleModel.generate_points_from_circle(model,distance=distance)
+        pt:Point
+        for pt in points:
+            distance_from_center=math.sqrt( (pt.X-center_x)**2 + (pt.Y-center_y)**2)
+            self.assertAlmostEqual(distance_from_center,radius,2)
+
+        #compare distance
+        for index in range(1,len(points)):
+            point1=points[index]
+            point2=points[index-1]
+            actual_distance=Point.euclidean_distance(point1,point2)
+            self.assertAlmostEqual(distance,actual_distance,delta=2)
+            #some approximation needed due to curvature
+
 if __name__ == '__main__':
     unittest.main()

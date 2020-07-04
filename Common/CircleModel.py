@@ -46,12 +46,15 @@ class CircleModel(object):
     #
     #Computes points which lie on the given circle model 
     #Returns a list of points
+    #   The 'distance' governs how far apart the points would be on the circumfrence
     #
     @classmethod
-    def generate_points_from_circle(cls,model):
+    def generate_points_from_circle(cls,model,distance=1):
         angleStart=0
-        angleEnd=2*3.1415
-        num=100
+        angleEnd=2*math.pi
+        circumfrence=2*math.pi * model.R
+        num=circumfrence/distance
+
         angles=np.linspace(angleStart,angleEnd,num)
         radius=model.R
         lst_points:List[pt.Point]=list()
