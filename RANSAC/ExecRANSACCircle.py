@@ -10,7 +10,7 @@ from RANSAC.Common import Util
 from RANSAC.Common import CircleModel
 from RANSAC.Common import Point
 from RANSAC.Algorithm import RansacCircleHelper
-def run(filename,threshold,inlier):
+def run(filename,threshold,inlier,sampling_fraction=0.25):
     print("Going to process file:%s" % (filename))
     folder_script=os.path.dirname(__file__)
     file_noisy_circle=os.path.join(folder_script,"./input/",filename)
@@ -74,7 +74,14 @@ filename0="NoisyCircle-HandDrawn-001.png"
 #run("NoisyCircle_x_-5_y_5_r_19_d_0.40_sp_0.80_w_25_h_25.197.png",2,8)
 #run("NoisyCircle_x_-5_y_-9_r_24_d_0.40_sp_0.80_w_25_h_25.199.png",1,7)
 
-run("NoisyCircle_x_20_y_2_r_22_d_0.40_sp_0.80_w_25_h_25.1.png00",1,7)
-run("NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.png",1,7)
+#run("NoisyCircle_x_20_y_2_r_22_d_0.40_sp_0.80_w_25_h_25.1.png00",1,7)
+#run("NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.png",1,7)
+
+#run("NoisyCircle_x_-4_y_51_r_33_d_0.40_sp_0.90_w_50_h_50.16.png",2,15)
+#run("NoisyCircle_x_36_y_-12_r_57_d_0.40_sp_0.90_w_50_h_50.15.png",2,15)
+run("NoisyCircle_x_-15_y_-7_r_58_d_0.40_sp_0.90_w_50_h_50.14.png",2,15)
+
+
+
 
 
