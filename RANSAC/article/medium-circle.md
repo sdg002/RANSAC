@@ -1,30 +1,12 @@
 # Introduction
 
-<< Link to RANSAC on lines>>
-<< Talk about previous article on lines , provide link. What motivated you to do this? >>
+The RANSAC (Random sample and consensus) algorithm is the "gold standard" in eliminating noise. A while ago, I wrote an [article](https://medium.com/@saurabh.dasgupta1/outlier-detection-using-the-ransac-algorithm-de52670adb4a)  on how the RANSAC algorithm is implemented for finding the model of a straight line in a noisy field of points. 
+
+In this article, I will explore how to implement the RANSAC algorithm a circle model in a noisy set of points.
 
 
--1
 ![Human mind](images/Intro_HumanMind_SeesStraightLine.PNG)
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
-<img src="RANSAC/article/images/Intro_HumanMind_SeesStraightLine.png" width="100%" height="100%" />
-
-100
-<img src="/RANSAC/article/images/Sample_Output_GenerateNoisyImage.66.png" width="100%" height="100%" />
-
-200
-<img src="RANSAC/article/images/Sample_Output_GenerateNoisyImage.66.png" width="100%" height="100%" />
-
-
-300
-<img src="images/Sample_Output_GenerateNoisyImage.66.png" width="100%" height="100%" />
-
-400
-<img src="images/Intro_HumanMind_SeesStraightLine.PNG" width="100%" height="100%" />
-
-500
 
 
 
