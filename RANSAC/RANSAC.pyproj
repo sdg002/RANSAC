@@ -62,6 +62,8 @@
     <Content Include="article\circle-images\NoisyCircle_x_20_y_2_r_22_d_0.40_sp_0.80_w_25_h_25.1.results.png" />
     <Content Include="article\circle-images\NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.png" />
     <Content Include="article\circle-images\NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.results.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_34_y_-6_r_43_d_0.40_sp_0.85_w_50_h_50.9.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_34_y_-6_r_43_d_0.40_sp_0.85_w_50_h_50.9.results.png" />
     <Content Include="article\circle-images\NoisyCircle_x_36_y_-12_r_57_d_0.40_sp_0.90_w_50_h_50.15.png" />
     <Content Include="article\circle-images\NoisyCircle_x_36_y_-12_r_57_d_0.40_sp_0.90_w_50_h_50.15.results.png" />
     <Content Include="article\circle-images\NoisyCircle_x_36_y_15_r_21_d_0.40_sp_0.80_w_25_h_25.198.png" />
@@ -118,6 +120,7 @@
     <Content Include="input\NoisyCircle_x_16_y_35_r_20_d_0.40_sp_0.80_w_25_h_25.196.png" />
     <Content Include="input\NoisyCircle_x_20_y_2_r_22_d_0.40_sp_0.80_w_25_h_25.1.png" />
     <Content Include="input\NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.png" />
+    <Content Include="input\NoisyCircle_x_34_y_-6_r_43_d_0.40_sp_0.85_w_50_h_50.9.png" />
     <Content Include="input\NoisyCircle_x_36_y_-12_r_57_d_0.40_sp_0.90_w_50_h_50.15.png" />
     <Content Include="input\NoisyCircle_x_36_y_15_r_21_d_0.40_sp_0.80_w_25_h_25.198.png" />
     <Content Include="input\NoisyCircle_x_55_y_34_r_36_d_0.40_sp_0.85_w_50_h_50.2.png" />
