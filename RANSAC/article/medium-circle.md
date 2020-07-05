@@ -4,7 +4,8 @@
 << Talk about previous article on lines , provide link. What motivated you to do this? >>
 
 
-![Human mind](RANSAC/article/images/Intro_HumanMind_SeesStraightLine.png)
+-1
+![Human mind](RANSAC/article/images/Intro_HumanMind_SeesStraightLine.PNG)
 
 ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
@@ -21,8 +22,9 @@
 <img src="images/Sample_Output_GenerateNoisyImage.66.png" width="100%" height="100%" />
 
 400
-<img src="images/Intro_HumanMind_SeesStraightLine.png" width="100%" height="100%" />
+<img src="images/Intro_HumanMind_SeesStraightLine.PNG" width="100%" height="100%" />
 
+500
 
 
 
