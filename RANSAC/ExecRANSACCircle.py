@@ -79,7 +79,7 @@ filename0="NoisyCircle-HandDrawn-001.png"
 
 #run("NoisyCircle_x_-4_y_51_r_33_d_0.40_sp_0.90_w_50_h_50.16.png",2,15)
 #run("NoisyCircle_x_36_y_-12_r_57_d_0.40_sp_0.90_w_50_h_50.15.png",2,15)
-run("NoisyCircle_x_-15_y_-7_r_58_d_0.40_sp_0.90_w_50_h_50.14.png",2,15)
+#run("NoisyCircle_x_-15_y_-7_r_58_d_0.40_sp_0.90_w_50_h_50.14.png",2,15)
 
 
 
