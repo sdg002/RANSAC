@@ -10,6 +10,8 @@ from RANSAC.Common import Util
 from RANSAC.Common import CircleModel
 from RANSAC.Common import Point
 from RANSAC.Algorithm import RansacCircleHelper
+import traceback
+
 def run(filename,threshold,inlier,sampling_fraction=0.25):
     print("Going to process file:%s" % (filename))
     folder_script=os.path.dirname(__file__)
@@ -29,7 +31,10 @@ def run(filename,threshold,inlier,sampling_fraction=0.25):
         helper.threshold_inlier_count=inlier
         helper.add_points(lst_all_points)
         best_model=helper.run() 
-        print("RANSAC-complete")    
+        print("RANSAC-complete") 
+        if (best_model== None):
+            print("ERROR! Could not find a suitable model. Try altering ransac-threshold and min inliner count")
+            return
         #
         #Generate an output image with the model circle overlayed on top of original image
         #
@@ -45,7 +50,8 @@ def run(filename,threshold,inlier,sampling_fraction=0.25):
         print("Results saved to file:%s" % (file_result))
         print("------------------------------------------------------------")
     except Exception as e:
-        print("Error:%s while doing RANSAC on the file: %s" % (str(e),filename))
+        tb = traceback.format_exc()
+        print("Error:%s while doing RANSAC on the file: %s , stack=%s" % (str(e),filename,str(tb)))
         print("------------------------------------------------------------")
         pass
 
@@ -81,7 +87,8 @@ filename0="NoisyCircle-HandDrawn-001.png"
 #run("NoisyCircle_x_36_y_-12_r_57_d_0.40_sp_0.90_w_50_h_50.15.png",2,15)
 #run("NoisyCircle_x_-15_y_-7_r_58_d_0.40_sp_0.90_w_50_h_50.14.png",2,15)
 
-run("NoisyCircle_x_55_y_34_r_36_d_0.40_sp_0.85_w_50_h_50.2.png",2,20)
+#run("NoisyCircle_x_55_y_34_r_36_d_0.40_sp_0.85_w_50_h_50.2.png",2,20)
+run("NoisyCircle_x_61_y_67_r_42_d_0.40_sp_0.85_w_50_h_50.4.png",1,12)
 
 
 

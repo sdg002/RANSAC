@@ -118,6 +118,9 @@ class RansacCircleHelper(object):
         #Sort trigrams with lowest error
         #
         sorted_trigram_inliercount=sorted(lst_trigram_scores, key = lambda x: len(x[1]),reverse=True)
+        if (len(sorted_trigram_inliercount) ==0):
+            print("Finished building shortlist of trigrams. No trigrams found. Quitting")
+            return
         print("Finished building shortlist of trigrams. Count=%d, Max inlier count=%d" % (len(sorted_trigram_inliercount),len(sorted_trigram_inliercount[0][1])))
         lst_results_gdescent=list()
         jobs=[]
@@ -144,6 +147,8 @@ class RansacCircleHelper(object):
         if (len(lst_results_gdescent) == 0):
             return None
 
+        if (len(lst_results_gdescent) == 0):
+            return None
         lst_results_gdescent_sortedby_inlier_count=sorted(lst_results_gdescent,key= lambda x: len(x[1]),reverse=True)
         max_inliers=len(lst_results_gdescent_sortedby_inlier_count[0][1])
         lst_all_results_with_highest_inlier_count= list(filter(lambda x: len(x[1])>=max_inliers, lst_results_gdescent_sortedby_inlier_count))
