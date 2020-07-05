@@ -7,16 +7,20 @@ In this article, I will explore how to implement the RANSAC algorithm a circle m
 
 ![Human mind](images/Intro_HumanMind_SeesStraightLine.PNG)
 
-
-
-
-
-
-
-
 # Problem definition
 
 <<show a picture with dots arranged in a circle, show some noisy points, show the outcome when a little bit of noise is added>>
+
+## Fitting a noisy circle - before
+![Before gradient descent](circle-images/gradient-descent-NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.png.png)
+
+<img src="circle-images/NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.PNG" width="100" height="100"/>
+
+## Fitting a noisy circle - after
+![After gradient descent](circle-images/NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.PNG)
+<img src="circle-images/gradient-descent-NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.png.png" width="100" height="100"/>
+
+
 
 # Understanding the RANSAC algorithm for fitting a circle
 
