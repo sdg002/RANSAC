@@ -12,7 +12,7 @@ from RANSAC.Common import Util
 
 
 def run(filename):
-    print("Going to fit circl in the file:%s" % (filename))
+    print("Going to fit circle in the file:%s" % (filename))
     folder_script=os.path.dirname(__file__)
     absolute_path=os.path.join(folder_script,"./input/",filename)
     try:

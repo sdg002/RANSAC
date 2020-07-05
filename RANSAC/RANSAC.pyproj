@@ -142,6 +142,7 @@
     <Content Include="input\NoisyLine-Gaussian-sp-0.80.119.png" />
     <Content Include="input\NoisyLine-Gaussian-sp-0.80.121.png" />
     <Content Include="input\NoisyLine-Gaussian-sp-1.00.088.png" />
+    <Content Include="article\medium-circle.md" />
     <Content Include="out\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
