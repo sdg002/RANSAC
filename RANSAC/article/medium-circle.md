@@ -10,6 +10,16 @@
 
 <img src="RANSAC/article/images/Intro_HumanMind_SeesStraightLine.png" width="100%" height="100%" />
 
+100
+<img src="/RANSAC/article/images/Sample_Output_GenerateNoisyImage.66.png" width="100%" height="100%" />
+
+200
+<img src="RANSAC/article/images/Sample_Output_GenerateNoisyImage.66.png" width="100%" height="100%" />
+
+
+300
+<img src="images/Sample_Output_GenerateNoisyImage.66.png" width="100%" height="100%" />
+
 
 
 
