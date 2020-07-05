@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ExecRANSACCircle.py</StartupFile>
+    <StartupFile>GenerateNoisyCircle.py</StartupFile>
     <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="article\images\" />
+    <Folder Include="article\circle-images\" />
     <Folder Include="input\" />
     <Folder Include="final_results\" />
     <Folder Include="article\" />
@@ -47,6 +48,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="article\Book.xlsx" />
+    <Content Include="article\circle-images\NoisyCircle_x_-5_y_-9_r_24_d_0.40_sp_0.80_w_25_h_25.199.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_-5_y_-9_r_24_d_0.40_sp_0.80_w_25_h_25.199.result.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_-5_y_5_r_19_d_0.40_sp_0.80_w_25_h_25.197.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_-5_y_5_r_19_d_0.40_sp_0.80_w_25_h_25.197.result.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_16_y_35_r_20_d_0.40_sp_0.80_w_25_h_25.196.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_16_y_35_r_20_d_0.40_sp_0.80_w_25_h_25.196.result.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_20_y_2_r_22_d_0.40_sp_0.80_w_25_h_25.1.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_20_y_2_r_22_d_0.40_sp_0.80_w_25_h_25.1.results.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.results.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_36_y_15_r_21_d_0.40_sp_0.80_w_25_h_25.198.png" />
+    <Content Include="article\circle-images\NoisyCircle_x_36_y_15_r_21_d_0.40_sp_0.80_w_25_h_25.198.result.png" />
     <Content Include="article\demo.html" />
     <Content Include="article\images\Intro_HumanMind_SeesStraightLine.PNG" />
     <Content Include="article\images\Linear_Regression_Noise.PNG" />
@@ -85,8 +98,13 @@
     <Content Include="input\NoisyCircle_1.png" />
     <Content Include="input\NoisyCircle_2.png" />
     <Content Include="input\NoisyCircle_x_-10_y_-14_r_48_d_0.400000_sp_0.8.186.png" />
+    <Content Include="input\NoisyCircle_x_-5_y_-9_r_24_d_0.40_sp_0.80_w_25_h_25.199.png" />
+    <Content Include="input\NoisyCircle_x_-5_y_5_r_19_d_0.40_sp_0.80_w_25_h_25.197.png" />
     <Content Include="input\NoisyCircle_x_116_y_-15_r_133_d_0.500000_sp_0.5.177.png" />
     <Content Include="input\NoisyCircle_x_118_y_59_r_100_d_0.200000_sp_0.8.183.png" />
+    <Content Include="input\NoisyCircle_x_14_y_0_r_16_d_0.400000_sp_0.8.195.png" />
+    <Content Include="input\NoisyCircle_x_16_y_35_r_20_d_0.40_sp_0.80_w_25_h_25.196.png" />
+    <Content Include="input\NoisyCircle_x_36_y_15_r_21_d_0.40_sp_0.80_w_25_h_25.198.png" />
     <Content Include="input\NoisyCircle_x_60_y_143_r_103_d_0.400000_sp_0.8.182.png" />
     <Content Include="input\NoisyImage.5.png" />
     <Content Include="input\NoisyImage_1.png" />

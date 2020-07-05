@@ -18,8 +18,8 @@ import math
 #Create blank image
 #
 img_white_color=255
-img_width=50
-img_height=50
+img_width=25
+img_height=25
 salt_pepper_ratio=0.8 #lower this for lesser black pixels
 
 print("This script will create a monochrome image (%d X %d) consisting of a partial circle and salt-pepper noise",img_width,img_height)
@@ -61,7 +61,7 @@ folder_script=os.path.dirname(__file__)
 folder_results=os.path.join(folder_script,"./out/")
 count_of_files=len(os.listdir(folder_results))
 
-filename="NoisyCircle_x_%d_y_%d_r_%d_d_%f_sp_%.1f.%d.png" % (center_x,center_y,radius,circle_density,salt_pepper_ratio,count_of_files)
+filename="NoisyCircle_x_%d_y_%d_r_%d_d_%.2f_sp_%.2f_w_%d_h_%d.%d.png" % (center_x,center_y,radius,circle_density,salt_pepper_ratio,img_width,img_height,count_of_files)
 file_result=os.path.join(folder_script,"./out/",filename)
 skimage.io.imsave(file_result,image_result)
 print("Image saved to fileL%s" % (file_result))

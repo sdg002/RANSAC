@@ -79,7 +79,6 @@ class RansacCircleHelper(object):
         #generate trigrams of points - find some temporary model to hold this model
         #
         trigrams=self.generate_trigam_from_points()
-        learning_rate=0.1
         #
         #for ever triagram find circle model
         #   find the circle that passes through those points
@@ -93,10 +92,13 @@ class RansacCircleHelper(object):
         random_count=int(len(all_trigram_indices)*1/5)
         random_trigram_indices=random.sample(all_trigram_indices,random_count)
         #for trig_index in range(0,len(trigrams)):
+        progress_count=0
+        count_of_trigrams_with_poor_inliers=0
         for trig_index in random_trigram_indices:
+            progress_count+=1
             tri=trigrams[trig_index]
             if (trig_index%100 ==0):
-                print("Processing trigram %d of %d" % (trig_index,len(trigrams)))
+                print("PROGRESS:Processing trigram %d of %d, shortlisted=%d  poor inliers=%d" % (progress_count,len(random_trigram_indices),len(lst_trigram_scores),count_of_trigrams_with_poor_inliers))
             try:
                 temp_circle=CircleModel.GenerateModelFrom3Points(tri.P1,tri.P2,tri.P3)
             except Exception as e:
@@ -106,16 +108,17 @@ class RansacCircleHelper(object):
             inliers,goodness_score=self.get_inliers(temp_circle,[tri.P1,tri.P2,tri.P3])
             count_inliers=len(inliers)
             if (count_inliers < self.threshold_inlier_count):
-                print("Skipping because of poor inlier count=%d and this is less than threshold=%f)" % (count_inliers, self.threshold_inlier_count))
+                #print("Skipping because of poor inlier count=%d and this is less than threshold=%f)" % (count_inliers, self.threshold_inlier_count))
+                count_of_trigrams_with_poor_inliers+=1
                 continue
             result=(temp_circle,inliers,tri)
 
-            lst_trigram_scores.append(result)            
+            lst_trigram_scores.append(result)
         #
         #Sort trigrams with lowest error
         #
         sorted_trigram_inliercount=sorted(lst_trigram_scores, key = lambda x: len(x[1]),reverse=True)
-        
+        print("Finished building shortlist of trigrams. Count=%d, Max inlier count=%d" % (len(sorted_trigram_inliercount),len(sorted_trigram_inliercount[0][1])))
         lst_results_gdescent=list()
         jobs=[]
         for index in range(0,len(sorted_trigram_inliercount)):
