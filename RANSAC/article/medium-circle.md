@@ -2,7 +2,13 @@
 
 << Link to RANSAC on lines>>
 << Talk about previous article on lines , provide link. What motivated you to do this? >>
-<img src="images/Intro_HumanMind_SeesStraightLine.png"/>
+
+
+![Human mind](images/Intro_HumanMind_SeesStraightLine.png)
+
+
+
+
 
 
 # Problem definition
