@@ -5,7 +5,7 @@ The RANSAC (Random sample and consensus) algorithm is the "gold standard" in eli
 The RANSAC algorithm in its original form was developed around finding straight line models when presented with noisy visual data. In this article, I will explore how to implement the RANSAC algorithm a circle model in a noisy set of points. I hope that by the end of this article you will appreciate how beautiful RANSAC is. Sometimes, I get carried away and visualize that human brain is perhaps doing some sort of RANSAC deep inside. Enough!
 
 
-<img src="circle-images/HumanMind_StraightLine_Ransac.png" />
+<img src="circle-images/HumanMind_StraightLine_Ransac.PNG" />
 
 The example shown above exhibits how noise can impact the outcome of the least squares fitting algorithm. The human mind can easily spot the outlier, but the least squares algorithm cannot. This is where RANSAC steps in. RANSAC is a simple voting based algorithm that iteratively samples the population of points and find the subset of those lines which appear to conform.
 
