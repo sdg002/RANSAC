@@ -11,8 +11,9 @@ from RANSAC.Common import CircleModel
 from RANSAC.Common import Point
 from RANSAC.Algorithm import RansacCircleHelper
 import traceback
+from MatplotUtil import plot_new_points_over_existing_points
 
-def run(filename,threshold,inlier,sampling_fraction=0.25):
+def run(filename,threshold,inlier,sampling_fraction=0.25,matplot=False):
     print("Going to process file:%s" % (filename))
     folder_script=os.path.dirname(__file__)
     file_noisy_circle=os.path.join(folder_script,"./input/",filename)
@@ -49,6 +50,9 @@ def run(filename,threshold,inlier,sampling_fraction=0.25):
         skimage.io.imsave(file_result,np_superimposed)
         print("Results saved to file:%s" % (file_result))
         print("------------------------------------------------------------")
+        if (matplot==True):
+            plot_new_points_over_existing_points(lst_all_points,new_points,"Outcome of RANSAC algorithm","Original points", "RANSAC")
+
     except Exception as e:
         tb = traceback.format_exc()
         print("Error:%s while doing RANSAC on the file: %s , stack=%s" % (str(e),filename,str(tb)))
@@ -89,8 +93,11 @@ filename0="NoisyCircle-HandDrawn-001.png"
 
 #run("NoisyCircle_x_55_y_34_r_36_d_0.40_sp_0.85_w_50_h_50.2.png",2,20)
 #run("NoisyCircle_x_61_y_67_r_42_d_0.40_sp_0.85_w_50_h_50.4.png",1,12)
-run("NoisyCircle_x_34_y_-6_r_43_d_0.40_sp_0.85_w_50_h_50.9.png",1,12)
+#run("NoisyCircle_x_34_y_-6_r_43_d_0.40_sp_0.85_w_50_h_50.9.png",1,12)
 
+run("NoisyCircle-HandDrawn-002.png",20,5,matplot=True)
+
+#generate a full circle with some salt pepper noise
 
 
 

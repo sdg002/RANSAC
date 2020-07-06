@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ExecGradientDescentCircleFitting.py</StartupFile>
+    <StartupFile>ExecRANSACCircle.py</StartupFile>
     <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -37,6 +37,9 @@
     </Compile>
     <Compile Include="ExecRANSACCircle.py" />
     <Compile Include="ExecRANSACLine.py" />
+    <Compile Include="MatplotUtil.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -52,6 +55,7 @@
   <ItemGroup>
     <Content Include="article\Book.xlsx" />
     <Content Include="article\circle-images\gradient-descent-NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.png.png" />
+    <Content Include="article\circle-images\HumanMind_StraightLine_Ransac.PNG" />
     <Content Include="article\circle-images\NoisyCircle_x_-15_y_-7_r_58_d_0.40_sp_0.90_w_50_h_50.14.png" />
     <Content Include="article\circle-images\NoisyCircle_x_-15_y_-7_r_58_d_0.40_sp_0.90_w_50_h_50.14.results.png" />
     <Content Include="article\circle-images\NoisyCircle_x_-4_y_51_r_33_d_0.40_sp_0.90_w_50_h_50.16.png" />
@@ -76,6 +80,9 @@
     <Content Include="article\circle-images\NoisyCircle_x_55_y_34_r_36_d_0.40_sp_0.85_w_50_h_50.2.result.png" />
     <Content Include="article\circle-images\NoisyCircle_x_61_y_67_r_42_d_0.40_sp_0.85_w_50_h_50.4.png" />
     <Content Include="article\circle-images\NoisyCircle_x_61_y_67_r_42_d_0.40_sp_0.85_w_50_h_50.4.results.png" />
+    <Content Include="article\circle-images\Simple.png" />
+    <Content Include="article\circle-images\Simple_After_GradientDescent.png" />
+    <Content Include="article\circle-images\Simple_After_Ransac.png" />
     <Content Include="article\demo.html" />
     <Content Include="article\images\Intro_HumanMind_SeesStraightLine.PNG" />
     <Content Include="article\images\Linear_Regression_Noise.PNG" />
@@ -110,6 +117,7 @@
     <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.121.result.png" />
     <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.104.result.png" />
     <Content Include="final_results\NoisyLine-Gaussian-sp-0.80.111.result.png" />
+    <Content Include="input\NoisyCircle-HandDrawn-002.png" />
     <Content Include="input\NoisyCircle-HandDrawn-001.png" />
     <Content Include="input\NoisyCircle_1.png" />
     <Content Include="input\NoisyCircle_2.png" />
