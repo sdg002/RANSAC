@@ -11,7 +11,6 @@ The example shown above exhibits how noise can impact the outcome of the least s
 
 
 # Problem definition
-
 Consider the points shown below. It is not difficult to spot there is a nice circle that can be traced out of the points only if we exclude the 2 noisy points on the far right of the visual.
 
 ## Fitting a noisy circle - before
@@ -27,6 +26,15 @@ The output after using RANSAC to take into account the outliers. Notice that the
 
 
 # Understanding the RANSAC algorithm for fitting a circle
+
+## Key definitions
+<img src="circle-images/sketch.io.RANSAC-definitions.png"/>
+
+- **Model circle**: The candidate circle which we think fits the points
+- **Threshold distance**: Used for creating a doughnut like concentric circles withthe model circle in the middle
+- **Outlier point**: Any point outside the doughnut region
+- **Inlier point**: Any point within the doughnut region
+
 
 <<you will need some diagrams to explain how the algo works, show 3 points, fit a circle, how many outliers>>
 << do it via Power point>>

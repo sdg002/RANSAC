@@ -80,6 +80,7 @@
     <Content Include="article\circle-images\NoisyCircle_x_55_y_34_r_36_d_0.40_sp_0.85_w_50_h_50.2.result.png" />
     <Content Include="article\circle-images\NoisyCircle_x_61_y_67_r_42_d_0.40_sp_0.85_w_50_h_50.4.png" />
     <Content Include="article\circle-images\NoisyCircle_x_61_y_67_r_42_d_0.40_sp_0.85_w_50_h_50.4.results.png" />
+    <Content Include="article\circle-images\sketch.io.RANSAC-definitions.png" />
     <Content Include="article\circle-images\Simple.png" />
     <Content Include="article\circle-images\Simple_After_GradientDescent.png" />
     <Content Include="article\circle-images\Simple_After_Ransac.png" />
