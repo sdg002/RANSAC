@@ -61,11 +61,11 @@ The folder hierarchy is as follows:
 ## **UnitTests** 
 - **test_??.py** - These are unit test classes for all the algorithms
 
-## Configuring the Python environment
+# Configuring the Python environment
 If you are using Visual Studio 2019 as your Python IDE then you can configure the project properties of *RANSAC* and specify the *Search path* property
 For other environments, the PYTHONPATH environment variable should be set to the physical location of *Common* folder
 
-# RANSAC for Circle
+# RANSAC for Circle - example
 
 ## Data points
 Notice the outliers on the bottom right of the image
@@ -96,4 +96,3 @@ In the later stages I learnt of Randy Bullock's approach which reduces the non-l
 - Finding the maxima and minima (http://clas.sa.ucsb.edu/staff/lee/Max%20and%20Min's.htm)
 - Overview of various circle fitting algorithm (https://arxiv.org/pdf/cs/0301001.pdf)
 - Least squares circle fitting algorithm by Randy Bullock (http://www.dtcenter.org/sites/default/files/community-code/met/docs/write-ups/circle_fit.pdf) 
-- 
