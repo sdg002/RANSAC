@@ -65,7 +65,22 @@ The folder hierarchy is as follows:
 If you are using Visual Studio 2019 as your Python IDE then you can configure the project properties of *RANSAC* and specify the *Search path* property
 For other environments, the PYTHONPATH environment variable should be set to the physical location of *Common* folder
 
-## RANSAC implementation for Circles - Areas for improvement
+# RANSAC for Circle
+
+## Data points
+Notice the outliers on the bottom right of the image
+<img src="RANSAC/article/circle-images/Simple.png"/>
+
+## Outcome of Gradient descent
+The algorithm is agnostic of outliers and hence the circle is skewed towards the right
+<img src="RANSAC/article/circle-images/Simple_After_GradientDescent.png"/>
+
+## Outcome of RANSAC
+Notice how the algorithm has eliminated the outliers and found a nice fitting circle
+<img src="RANSAC/article/circle-images/Simple_After_Ransac.png"/>
+
+
+# RANSAC implementation for Circles - Areas for improvement
 RANSAC for straight lines relies on least squares algorithm to find the line which fits a set of points.
 When I started implementing RANSAC for circles, I was unsure of what would be the best mathematical approach to fit a circle to a set of points.
 Unlike the least squares method for lines, the equivalent approach for circles is non-linear and hard to solve without an interative approach
