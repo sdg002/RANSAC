@@ -13,7 +13,7 @@ The example shown above exhibits how noise can impact the outcome of the least s
 # Problem definition
 Consider the points shown below. It is not difficult to spot there is a nice circle that can be traced out of the points only if we exclude the 2 noisy points on the far right of the visual.
 
-## Fitting a noisy circle - before
+## Data points
 <img src="circle-images/Simple.png" />
 
 ## Fitting a circle - using Gradient descent algorithm
@@ -35,10 +35,32 @@ The output after using RANSAC to take into account the outliers. Notice that the
 - **Outlier point**: Any point outside the doughnut region
 - **Inlier point**: Any point within the doughnut region
 
+### Mean squared error
+mse = 1/N * (distance_of_point_i from center - radius)**2
 
-<<you will need some diagrams to explain how the algo works, show 3 points, fit a circle, how many outliers>>
+## Build a shortlist of candidate circles
 << do it via Power point>>
-# Formal definition of the RANSAC algorithm
+
+Consider the following arrangment of points
+- Select a threshold distance *threshold*
+- Select a count of inliners *min inlier count*
+- Select maximum number of samplings *max iterations*
+
+pic comes here
+
+- Select any 3 points
+- find the circle passing through these 3 points
+- Use *threshold* and find all points which lie in the doughnut. These are the inliers.
+- If the count is less than *min inlier count* then skip this model. 
+- Otherwise shortlist this model
+- Use all the inlier points and find the best fitting circle. Compute mean squared error
+- Repeat above steps for *max iterations* number of times
+
+## Find the best candidate
+ - Pick the circle with the max inliers
+ - If there are more than 1 circles which have the same max inliers then out of the pick the one with minimum squared error
+
+## How does the algorithm work?
 <<write the algo in a formal language, wee Wikipedia >>
 
 # Overview of the source code
