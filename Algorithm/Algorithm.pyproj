@@ -23,6 +23,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BullockCircleFitting.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GradientDescentCircleFitting.py" />
     <Compile Include="RansacCircleHelper.py" />
     <Compile Include="RansacLineHelper.py" />
