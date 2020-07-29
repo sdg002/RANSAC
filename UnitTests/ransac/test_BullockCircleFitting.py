@@ -44,5 +44,24 @@ class Test_test_BullockCircleFitting(unittest.TestCase):
         self.assertAlmostEquals(result.X, 0.0, delta=delta);
         self.assertAlmostEquals(result.Y, 0.0, delta=delta);
 
+    def test_5points_around_origin_unit_radius(self):
+        p1=Point(+1,0)
+        p2=Point(+0,1)
+        p3=Point(-1,0)
+        p4=Point(+0.707,+0.707)
+        p5=Point(-0.707,+0.707)
+        expected_list=list()
+        expected_list.append(p1)
+        expected_list.append(p2)
+        expected_list.append(p3)
+        expected_list.append(p4)
+        expected_list.append(p5)
+        helper=BullockCircleFitting(expected_list)
+        result:CircleModel =helper.FindBestFittingCircle()
+        delta=0.01
+        self.assertAlmostEquals(result.R, 1.0, delta=delta);
+        self.assertAlmostEquals(result.X, 0.0, delta=delta);
+        self.assertAlmostEquals(result.Y, 0.0, delta=delta);
+
 if __name__ == '__main__':
     unittest.main()
