@@ -97,9 +97,13 @@ filename0="NoisyCircle-HandDrawn-001.png"
 #run("NoisyCircle_x_34_y_-6_r_43_d_0.40_sp_0.85_w_50_h_50.9.png",1,12)
 
 #run("NoisyCircle-HandDrawn-002.png",20,5,matplot=True)
-run("NoisyCircle_x_212_y_-33_r_145_d_0.40_sp_0.85_w_200_h_200.16.png",5,50,sampling_fraction=0.01) #too long 1.6 mn trigrams
+run("NoisyCircle_x_212_y_-33_r_145_d_0.40_sp_0.85_w_200_h_200.16.png",5,50,sampling_fraction=0.01)
 #run("NoisyCircle_x_277_y_19_r_194_d_0.40_sp_0.95_w_200_h_200.18.png",5,100,matplot=True,sampling_fraction=0.2)
+#run("NoisyCircle_x_282_y_235_r_257_d_0.40_sp_0.70_w_200_h_200.2.png",5,50,sampling_fraction=0.01) #out of memory
+#run("NoisyCircle_x_32_y_293_r_145_d_0.40_sp_0.80_w_200_h_200.7.png",5,50,sampling_fraction=0.005) 
 
+#
+#
 
 #generate a full circle with some salt pepper noise
 
