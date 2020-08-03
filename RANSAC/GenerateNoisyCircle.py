@@ -18,9 +18,9 @@ import math
 #Create blank image
 #
 img_white_color=255
-img_width=50
-img_height=50
-salt_pepper_ratio=0.85 #lower this for lesser black pixels
+img_width=200
+img_height=200
+salt_pepper_ratio=0.95 #lower this for lesser black pixels
 
 print("This script will create a monochrome image (%d X %d) consisting of a partial circle and salt-pepper noise",img_width,img_height)
 img = np.zeros([img_height,img_width,1],dtype=np.uint8)

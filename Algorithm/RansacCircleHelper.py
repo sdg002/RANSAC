@@ -78,7 +78,9 @@ class RansacCircleHelper(object):
         #
         #generate trigrams of points - find some temporary model to hold this model
         #
+        print("Generating trigrams")
         trigrams=self.generate_trigam_from_points()
+        print("Generating trigrams complete. Count=%d" % (len(trigrams)))
         #
         #for ever triagram find circle model
         #   find the circle that passes through those points
@@ -89,11 +91,15 @@ class RansacCircleHelper(object):
         #
         all_trigram_indices=list(range(0,len(trigrams)))
         fraction=self.sampling_fraction
-        random_count=int(len(all_trigram_indices)*1/5)
+        random_count=int(len(all_trigram_indices)*fraction)
         random_trigram_indices=random.sample(all_trigram_indices,random_count)
         #for trig_index in range(0,len(trigrams)):
         progress_count=0
         count_of_trigrams_with_poor_inliers=0
+
+        #scope for improvement of performance by multithreading
+        #if you use a 200X200 image, with salt peper ration of 0.85 and sample fraction of 0.2 then you can generate ample load to test multi-threading
+        #
         for trig_index in random_trigram_indices:
             progress_count+=1
             tri=trigrams[trig_index]
@@ -163,6 +169,10 @@ class RansacCircleHelper(object):
     '''
     #def GenerateTrigamFromPoints(self,points:List[Point])->List[TrigramOfPoints]:
     def generate_trigam_from_points(self,):
+        #Scope for performance improvement. 
+        #No need to iterate over lists 3 times. We could simply create a 3d Numpy array , 
+        #the indices of the points along each of the 3 axis
+        #all 3d points in this Numpy array would be our desired trigrams (except for points on all the diagonals)
         lst=list()
         points=self._all_points
         for i in range(0,len(points)):

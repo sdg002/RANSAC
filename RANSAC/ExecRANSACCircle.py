@@ -31,6 +31,7 @@ def run(filename,threshold,inlier,sampling_fraction=0.25,matplot=False):
         helper.threshold_error=threshold
         helper.threshold_inlier_count=inlier
         helper.add_points(lst_all_points)
+        helper.sampling_fraction=sampling_fraction
         best_model=helper.run() 
         print("RANSAC-complete") 
         if (best_model== None):
@@ -95,7 +96,10 @@ filename0="NoisyCircle-HandDrawn-001.png"
 #run("NoisyCircle_x_61_y_67_r_42_d_0.40_sp_0.85_w_50_h_50.4.png",1,12)
 #run("NoisyCircle_x_34_y_-6_r_43_d_0.40_sp_0.85_w_50_h_50.9.png",1,12)
 
-run("NoisyCircle-HandDrawn-002.png",20,5,matplot=True)
+#run("NoisyCircle-HandDrawn-002.png",20,5,matplot=True)
+run("NoisyCircle_x_212_y_-33_r_145_d_0.40_sp_0.85_w_200_h_200.16.png",5,50,sampling_fraction=0.01) #too long 1.6 mn trigrams
+#run("NoisyCircle_x_277_y_19_r_194_d_0.40_sp_0.95_w_200_h_200.18.png",5,100,matplot=True,sampling_fraction=0.2)
+
 
 #generate a full circle with some salt pepper noise
 
