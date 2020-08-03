@@ -80,6 +80,13 @@ Notice how the algorithm has eliminated the outliers and found a nice fitting ci
 <img src="RANSAC/article/circle-images/Simple_After_Ransac.png"/>
 
 
+# Example 2
+## Original data points
+<img src="RANSAC/article/circle-images/NoisyCircle_x_277_y_19_r_194_d_0.40_sp_0.95_w_200_h_200.18.png"/>
+
+## After RANSAC
+<img src="RANSAC/article/circle-images/NoisyCircle_x_277_y_19_r_194_d_0.40_sp_0.95_w_200_h_200.18.results.png"/>
+
 # RANSAC implementation for Circles - Areas for improvement
 RANSAC for straight lines relies on least squares algorithm to find the line which fits a set of points.
 When I started implementing RANSAC for circles, I was unsure of what would be the best mathematical approach to fit a circle to a set of points.
