@@ -62,8 +62,6 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         self.assertTrue(p3 in inliers)
         self.assertFalse(p_outlier in inliers)
 
-
-
     def test_run_method_hand_drawn_circle(self):
         #
         #get a list of points
@@ -109,7 +107,6 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         np_superimposed=Util.superimpose_points_on_image(np_image,new_points,255,255,0)
         skimage.io.imsave(file_result,np_superimposed)
 
-    @unittest.skip("Skipping because it takes too long. Needs performance improvement. 18 minutes. Produces a nicely fitting circle.")
     def test_run_method_NoisyCircle2_99X50(self):
         #
         #get a list of points
@@ -134,17 +131,12 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         #
         #Assertions
         #
-        delta=15
-        self.assertGreater(best_model.X,0)
-        self.assertLess(best_model.X,0)
+        delta=10
+        self.assertAlmostEqual(best_model.X,61,delta=delta)
+        self.assertAlmostEqual(best_model.Y,129,delta=delta)
+        self.assertAlmostEqual(best_model.R,111,delta=delta)
 
-        self.assertGreater(best_model.Y,0)
-        self.assertLess(best_model.Y,0)
 
-        self.assertGreater(best_model.R,0)
-        self.assertLess(best_model.R,0)
-
-    @unittest.skip("Skipping because it takes too long. Needs performance improvement. 18 minutes. Produces a nicely fitting circle.")
     def test_run_method_NoisyCircle1_50X50(self):
         #
         #get a list of points
@@ -169,15 +161,10 @@ class Test_test_RansacCircleHelper(unittest.TestCase):
         #
         #Assertions
         #
-        delta=15
-        self.assertGreater(best_model.X,-30)
-        self.assertLess(best_model.X,-10)
-
-        self.assertGreater(best_model.Y,-35)
-        self.assertLess(best_model.Y,-15)
-
-        self.assertGreater(best_model.R,55)
-        self.assertLess(best_model.R,75)
+        delta=10
+        self.assertAlmostEqual(best_model.X,115,delta=delta)
+        self.assertAlmostEqual(best_model.Y,-64,delta=delta)
+        self.assertAlmostEqual(best_model.R,131,delta=delta)
 
 
     def test_run_method_LargeCircle1_50X50_NoNoise(self):

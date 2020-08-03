@@ -4,7 +4,7 @@ import statistics as stats
 import random
 from RANSAC.Common import Point
 from RANSAC.Common import CircleModel
-from RANSAC.Algorithm import GradientDescentCircleFitting 
+from RANSAC.Algorithm import BullockCircleFitting
 import threading
 import sys
 
@@ -226,7 +226,7 @@ class RansacCircleHelper(object):
     #
     def find_model_using_gradient_descent(self,modelhint:CircleModel, points:List[Point])->CircleModel:
         try:
-            gdhelper=GradientDescentCircleFitting.GradientDescentCircleFitting(modelhint,points, learningrate= self.learning_rate, iterations=2000)
+            gdhelper=BullockCircleFitting.BullockCircleFitting(points)
             new_model=gdhelper.FindBestFittingCircle()
             return new_model
         except Exception as e:
@@ -240,7 +240,7 @@ class RansacCircleHelper(object):
     def find_model_using_gradient_descent2(self,modelhint:CircleModel, points:List[Point],lst_results):
         new_model=None
         try:
-            gdhelper=GradientDescentCircleFitting.GradientDescentCircleFitting(modelhint,points, learningrate= self.learning_rate, iterations=self.gradient_descent_max_iterations)
+            gdhelper=BullockCircleFitting.BullockCircleFitting(points)
             new_model=gdhelper.FindBestFittingCircle()
         except Exception as e:
             #print("Error while Gradient descent: %s" % (str(e)))
