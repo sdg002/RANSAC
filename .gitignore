@@ -343,3 +343,4 @@ healthchecksdb
 RANSAC/out
 Common/out
 /UnitTests/out
+/NoisyCurve/out
