@@ -14,9 +14,9 @@ from RANSAC.Common import Util
 #Create blank image
 #
 img_back_color=255
-img_width=200
+img_width=500
 img_height=200
-salt_pepper_noise=.90
+salt_pepper_noise=.95
 max_distance_between_2_points=10
 #20 becomes too large with sp=0.95
 
