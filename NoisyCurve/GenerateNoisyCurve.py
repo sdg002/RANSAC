@@ -16,8 +16,10 @@ from RANSAC.Common import Util
 img_back_color=255
 img_width=200
 img_height=200
-salt_pepper_noise=.95
+salt_pepper_noise=.90
 max_distance_between_2_points=10
+#20 becomes too large with sp=0.95
+
 #
 #Generate Salt-Pepper noise
 #
@@ -61,7 +63,7 @@ def generate_xy_from_custom_function(image_array,max_distance):
     x_end=width
     y_origin=height/2
 
-    delta_x=10
+    delta_x=width*0.25 #an approx gap to being with
     x_last=x_start
     y_last=MyCustomParabola(x_last)+y_origin
     pts_new=list();
