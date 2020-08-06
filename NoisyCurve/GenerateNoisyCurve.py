@@ -18,8 +18,9 @@ img_back_color=255
 img_width=500
 img_height=200
 salt_pepper_noise=.95
-max_distance_between_2_points=10
-#20 becomes too large with sp=0.95
+max_distance_between_2_points=20
+#20 is a good upper limit with sp=0.95
+#10 is a good lower limit, anything less then it becomes crowded
 
 def create_new_absolute_filename(prefix):
     folder_script=os.path.dirname(__file__)
@@ -31,6 +32,8 @@ def create_new_absolute_filename(prefix):
 
 generator=GenericCurveGenerator(width=img_width,height=img_height)
 generator.saltpepper=salt_pepper_noise
-generator.output_file=create_new_absolute_filename("Sine")
+generator.max_consecutive_distance=max_distance_between_2_points
+prefix=generator.generate_filename_prefix()
+generator.output_file=create_new_absolute_filename("Sine-"+prefix)
 generator.generate_curve()
 pass

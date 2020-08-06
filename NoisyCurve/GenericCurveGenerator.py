@@ -29,7 +29,7 @@ class GenericCurveGenerator(object):
     def height(self):
         return self._height
 
-    @width.setter
+    @height.setter
     def height(self,value):
         self._height=value
 
@@ -48,6 +48,14 @@ class GenericCurveGenerator(object):
     @output_file.setter
     def output_file(self,value):
         self._output_file=value
+    
+    @property
+    def max_consecutive_distance(self):
+        return self._max_distance_consecutive_points
+
+    @max_consecutive_distance.setter
+    def max_consecutive_distance(self,value):
+        self._max_distance_consecutive_points=value
 
     def __generate_blankimage_with_saltpepper_noise(self):
         #width,height,saltpepper_noise
@@ -70,13 +78,13 @@ class GenericCurveGenerator(object):
 
         delta_x=width*0.25 #an approx gap to being with
         x_last=x_start
-        y_last=self.__MyCustomParabola(x_last ,width=width,height=height)+y_origin
+        y_last=self.__SineFunction(x_last ,width=width,height=height)+y_origin
         pts_new=list();
         while(x_last<x_end):
             gap=delta_x
             while(True):
                 x_new=x_last+gap
-                y_new=self.__MyCustomParabola(x_new,width=width,height=height)+y_origin
+                y_new=self.__SineFunction(x_new,width=width,height=height)+y_origin
                 dsquare=(x_new-x_last)**2 + (y_new-y_last)**2
                 d=dsquare**0.5
                 if (d <= max_distance):
@@ -92,7 +100,7 @@ class GenericCurveGenerator(object):
         return image_result
         pass
 
-    def __MyCustomParabola(self,x, width,height):
+    def __SineFunction(self,x, width,height):
         amplitude=height*0.5*0.9
         radians_to_pix=math.pi/2 / (height*0.25)
         theta=x*radians_to_pix
@@ -105,6 +113,15 @@ class GenericCurveGenerator(object):
         self.__save_image_to_disk(new_image,self.output_file)
         pass
 
+    #
+    #Generates a filename derived from the properties of the class
+    #Rationale - a simple way to visually trace back what was used
+    #
+    def generate_filename_prefix(self):
+        sp_ratio=round(self.saltpepper,2)
+        filename="W=%d.H=%d.MAXD=%d.SP=%.2f"%(self.width,self.height,self.max_consecutive_distance,sp_ratio)
+        return filename
+
     def __save_image_to_disk(self,image_array,filename):
         image_result=image_array
         folder_script=os.path.dirname(__file__)
@@ -114,3 +131,4 @@ class GenericCurveGenerator(object):
         file_result=os.path.join(folder_script,"./out/",new_filename)
         skimage.io.imsave(file_result,image_result)
         print("Image saved to fileL%s" % (file_result))
+    
