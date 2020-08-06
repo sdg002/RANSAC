@@ -23,6 +23,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GenerateNoisyCurve.py" />
+    <Compile Include="GenericCurveGenerator.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="in\" />
@@ -33,6 +36,7 @@
     <Content Include="in\SineWave-W=200.H=200.MAXD=10.SP=0.95.6.png" />
     <Content Include="in\SineWave-W=500.H=200.MAXD=10.SP=0.90.13.png" />
     <Content Include="in\SineWave-W=500.H=200.MAXD=10.SP=0.95.14.png" />
+    <Content Include="Readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
