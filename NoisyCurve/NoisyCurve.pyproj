@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>a38662b5-88f4-4734-adff-6708c02c76e0</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>GenerateNoisyCurve.py</StartupFile>
+    <StartupFile>ExecPatchRansac.py</StartupFile>
     <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ExecPatchRansac.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GenerateNoisyCurve.py" />
     <Compile Include="GenericCurveGenerator.py">
       <SubType>Code</SubType>
@@ -32,6 +35,7 @@
     <Folder Include="out\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="in\Sine-W=500.H=200.MAXD=20.SP=0.95.0.png" />
     <Content Include="in\SineWave-W=200.H=200.MAXD=10.SP=0.90.12.png" />
     <Content Include="in\SineWave-W=200.H=200.MAXD=10.SP=0.95.6.png" />
     <Content Include="in\SineWave-W=500.H=200.MAXD=10.SP=0.90.13.png" />

@@ -31,6 +31,9 @@
     <Compile Include="common\test_LineModel.py" />
     <Compile Include="common\test_Point.py" />
     <Compile Include="common\test_Util.py" />
+    <Compile Include="patchextractor\test_PatchExtractor.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ransac\test_BullockCircleFitting.py">
       <SubType>Code</SubType>
     </Compile>
@@ -43,6 +46,8 @@
   <ItemGroup>
     <Folder Include="common\" />
     <Folder Include="common\data\" />
+    <Folder Include="patchextractor\" />
+    <Folder Include="patchextractor\data\" />
     <Folder Include="ransac\" />
     <Folder Include="out\" />
     <Folder Include="ransac\data\" />
@@ -50,6 +55,9 @@
   <ItemGroup>
     <Content Include="common\data\Readme.txt" />
     <Content Include="common\data\Util_unittest.png" />
+    <Content Include="patchextractor\data\SimplePatchTest_W=4_H=4.png" />
+    <Content Include="patchextractor\data\SimplePatchTest_W=5_H=5.png" />
+    <Content Include="patchextractor\data\SimplePatchTest_W=7_H=10.png" />
     <Content Include="ransac\data\NoisyCircle-HandDrawn-001.png" />
     <Content Include="ransac\data\NoisyCircle_99_50.png" />
     <Content Include="ransac\data\NoisyCircle_x_-10_y_-14.png" />

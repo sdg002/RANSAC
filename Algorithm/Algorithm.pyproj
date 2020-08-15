@@ -27,6 +27,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GradientDescentCircleFitting.py" />
+    <Compile Include="ImagePatchExtractor.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PatchRansacHelper.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="RansacCircleHelper.py" />
     <Compile Include="RansacLineHelper.py" />
     <Compile Include="__init__.py">
