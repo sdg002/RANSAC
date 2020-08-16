@@ -17,8 +17,8 @@ from GenericCurveGenerator import GenericCurveGenerator
 img_back_color=255
 img_width=500
 img_height=200
-salt_pepper_noise=.95
-max_distance_between_2_points=20
+salt_pepper_noise=0.90 #.95
+max_distance_between_2_points= 20#15
 #20 is a good upper limit with sp=0.95
 #10 is a good lower limit, anything less then it becomes crowded
 
@@ -30,10 +30,25 @@ def create_new_absolute_filename(prefix):
     file_result=os.path.join(folder_script,"./out/",new_filename)
     return file_result
 
-generator=GenericCurveGenerator(width=img_width,height=img_height)
-generator.saltpepper=salt_pepper_noise
-generator.max_consecutive_distance=max_distance_between_2_points
-prefix=generator.generate_filename_prefix()
-generator.output_file=create_new_absolute_filename("Sine-"+prefix)
-generator.generate_curve()
+def generate_sine():
+    generator=GenericCurveGenerator(width=img_width,height=img_height)
+    generator.saltpepper=0.95
+    generator.curvetype="sine"
+    generator.max_consecutive_distance=20
+    prefix=generator.generate_filename_prefix()
+    generator.output_file=create_new_absolute_filename("Sine-"+prefix)
+    generator.generate_curve()
+    pass
+
+def generate_cubic():
+    generator=GenericCurveGenerator(width=img_width,height=img_height)
+    generator.saltpepper=0.90
+    generator.curvetype="cubic"
+    generator.max_consecutive_distance=15
+    prefix=generator.generate_filename_prefix()
+    generator.output_file=create_new_absolute_filename("Cubic-"+prefix)
+    generator.generate_curve()
+
+#generate_cubic()
+generate_sine()
 pass

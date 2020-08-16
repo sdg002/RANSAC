@@ -15,7 +15,22 @@ class GenericCurveGenerator(object):
         self._img_back_color=255
         self._output_file=None
         self._max_distance_consecutive_points=10
+        self.__curvetype=None
         pass
+
+    @property
+    def curvetype(self):
+        return self.__curvetype
+
+    @curvetype.setter
+    def curvetype(self,value):
+        if (value == "sine"):
+            self.__curvetype=value
+        elif (value == "cubic"):
+            self.__curvetype=value
+        else:
+            raise Exception("This curve type is not implemented")
+        
     
     @property
     def width(self):
@@ -78,13 +93,13 @@ class GenericCurveGenerator(object):
 
         delta_x=width*0.25 #an approx gap to being with
         x_last=x_start
-        y_last=self.__SineFunction(x_last ,width=width,height=height)+y_origin
+        y_last=self.__InvokeAnyFunction(x_last ,width=width,height=height)+y_origin #add a new private functoin and property to decide which type of curve
         pts_new=list();
         while(x_last<x_end):
             gap=delta_x
             while(True):
                 x_new=x_last+gap
-                y_new=self.__SineFunction(x_new,width=width,height=height)+y_origin
+                y_new=self.__InvokeAnyFunction(x_new,width=width,height=height)+y_origin
                 dsquare=(x_new-x_last)**2 + (y_new-y_last)**2
                 d=dsquare**0.5
                 if (d <= max_distance):
@@ -106,6 +121,18 @@ class GenericCurveGenerator(object):
         theta=x*radians_to_pix
         y=math.sin(theta)*amplitude
         return y
+
+    def __CubeFunction(self,x, width,height):
+        y=(x-width/2)**3
+        return y/100000
+
+    def __InvokeAnyFunction(self,x,width,height):
+        if (self.__curvetype == "sine"):
+            return self.__SineFunction(x,width,height)
+        elif (self.__curvetype == "cubic"):
+            return self.__CubeFunction(x,width,height)
+        else:
+            raise Exception("This curve type is not implemented")
 
     def generate_curve(self):
         blank_image=self.__generate_blankimage_with_saltpepper_noise()
