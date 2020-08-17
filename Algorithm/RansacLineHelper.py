@@ -11,11 +11,11 @@ class RansacLineHelper(object):
     def __init__ (self):
         pass
         self.__complete_list_of_points:list=list()
-        self.max_iterations:float=0
+        self.__max_iterations:float=0
         self.min_points_for_model:float=0
         # 'threshold_error' is the threshold distance from a line for a point to be classified as an inlier
-        self.threshold_error:float=0
-        self.threshold_inlier_count:float=0
+        self.threshold_error:float=0 #max distance of a point from the line to be considered as inlier
+        self.threshold_inlier_count:int=0 #minimum number of inliers for a model to be considered as good
 
     #
     #Should be called once to set the full list of data points
@@ -29,6 +29,14 @@ class RansacLineHelper(object):
     @property
     def points(self):
         return self.__complete_list_of_points
+
+    @property
+    def max_iterations(self):
+        return self.__max_iterations
+
+    @max_iterations.setter
+    def max_iterations(self,value):
+        self.__max_iterations=value
 
     #
     #Main algorithm
