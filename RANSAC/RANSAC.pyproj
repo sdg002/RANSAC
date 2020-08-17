@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>388abda0-050e-4126-b664-f46c318c1ecc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>GenerateNoisyCircle.py</StartupFile>
+    <StartupFile>ExecRANSACLine.py</StartupFile>
     <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -138,9 +138,7 @@
     <Content Include="input\NoisyCircle_x_20_y_2_r_22_d_0.40_sp_0.80_w_25_h_25.1.png" />
     <Content Include="input\NoisyCircle_x_212_y_-33_r_145_d_0.40_sp_0.85_w_200_h_200.16.png" />
     <Content Include="input\NoisyCircle_x_277_y_19_r_194_d_0.40_sp_0.95_w_200_h_200.18.png" />
-    <Content Include="input\NoisyCircle_x_282_y_235_r_257_d_0.40_sp_0.70_w_200_h_200.2.png" />
     <Content Include="input\NoisyCircle_x_32_y_28_r_25_d_0.40_sp_0.80_w_25_h_25.0.png" />
-    <Content Include="input\NoisyCircle_x_32_y_293_r_145_d_0.40_sp_0.80_w_200_h_200.7.png" />
     <Content Include="input\NoisyCircle_x_34_y_-6_r_43_d_0.40_sp_0.85_w_50_h_50.9.png" />
     <Content Include="input\NoisyCircle_x_36_y_-12_r_57_d_0.40_sp_0.90_w_50_h_50.15.png" />
     <Content Include="input\NoisyCircle_x_36_y_15_r_21_d_0.40_sp_0.80_w_25_h_25.198.png" />

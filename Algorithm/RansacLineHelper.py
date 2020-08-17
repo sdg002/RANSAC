@@ -70,7 +70,7 @@ class RansacLineHelper(object):
             average_distance=self.compute_average_distance(better_model,lst_new)
             if (average_distance < best_error):
                 print("    Taking better model. Error=%f, Best error=%f,   Count of models=%d Polar=%s" % (average_distance,best_error,count_of_better_models,temp_model.display_polar()))
-                best_model=temp_model
+                best_model=better_model
                 best_error=average_distance
                 count_of_better_models+=1
             else:
