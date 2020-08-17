@@ -18,7 +18,7 @@ class Test_test_1(unittest.TestCase):
         lst.append(Point(3,3))
         helper.add_points(lst)
         expected_count=len(lst)
-        actual_count=len(helper.get_points())
+        actual_count=len(helper.points)
         self.assertEqual(expected_count,actual_count)
         pass
 
@@ -37,7 +37,7 @@ class Test_test_1(unittest.TestCase):
         helper1.add_points(lst)
         print("displaying points after adding to collection")
         print("------------")
-        for p in helper1.get_points():
+        for p in helper1.points:
             print(p)
         print("------------")
         

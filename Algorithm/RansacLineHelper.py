@@ -10,7 +10,7 @@ class RansacLineHelper(object):
     """Encapsulates RANSAC logic"""
     def __init__ (self):
         pass
-        self._complete_list_of_points:list=list()
+        self.__complete_list_of_points:list=list()
         self.max_iterations:float=0
         self.min_points_for_model:float=0
         # 'threshold_error' is the threshold distance from a line for a point to be classified as an inlier
@@ -21,18 +21,21 @@ class RansacLineHelper(object):
     #Should be called once to set the full list of data points
     #
     def add_points(self,points:list):
-        self._complete_list_of_points.extend(points)
+        self.points.extend(points)
         pass
     #
     #Get the collection of points
     #
-    def get_points(self):
-        return self._complete_list_of_points
+    @property
+    def points(self):
+        return self.__complete_list_of_points
 
     #
     #Main algorithm
     #
     def run(self) -> LineModel:
+        if (len(self.points) <=2 ):
+            return None
         iter=0
         best_error=9999
         best_model=None
@@ -80,7 +83,7 @@ class RansacLineHelper(object):
     #
     def get_inliers_from_model(self,model:LineModel,points_old_inliers:list) -> list:
         lst_inliers=list()
-        for p in self._complete_list_of_points:
+        for p in self.points:
             if ((p in points_old_inliers) == True):
                 continue
             distance_from_model:float=model.compute_distance(p)
@@ -93,11 +96,11 @@ class RansacLineHelper(object):
     #
     def select_random_points(self,count:int):
         #Temporary implementation only
-        count_original=len(self._complete_list_of_points)
+        count_original=len(self.points)
         if (count >= count_original):
             message="The count of random points:%d canot exceed length of original list:%d" % (count,count_original)
             raise Exception(message)
-        lst=random.choices(population=self._complete_list_of_points,k=count)
+        lst=random.choices(population=self.points,k=count)
         return lst
     #
     #Find the best line which fits the specified points
