@@ -12,9 +12,9 @@ class LineModel:
         self.C=c
         self.__points:List[Point]=list() #Optional the points that were used to make this line
         pass
+
     def __str__(self):
         display= ("A=%f B=%f C=%f") % (self.A,self.B,self.C)
-
         return display
 
     @property

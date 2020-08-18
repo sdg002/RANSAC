@@ -26,22 +26,31 @@ class PatchRansacHelper(object):
         patch_results:PatchResults=xtractor.extract_patches();
         patchcount_x=patch_results.patch_indices.shape[1]
         patchcount_y=patch_results.patch_indices.shape[0]
+        good_patches:List[_PatchAnalysis]=list()
         for x in range(0,patchcount_x):
             for y in range(0,patchcount_y):
                 patchinfo:PatchInfo=patch_results.get_patch_xy(x,y)
                 img_patchregion=patchinfo.image
-                line=self.find_line_using_ransac(img_patchregion)
-                pass
-            pass
+                lst_all_points=Util.create_points_from_numpyimage(img_patchregion)
+                line=self.find_line_using_ransac(lst_all_points,img_patchregion)
+                if (line  == None):
+                    continue
+                print("Got a line X=%d Y=%d , line=%s" % (x,y, str(line)))
+                #add to a collection of patch regions+ransacline
+                patch_analysis_result=_PatchAnalysis(patchinfo,lst_all_points,line)
+                good_patches.append(patch_analysis_result)
         pass
+        print("Total interesting patches with lines found = %d" % (len(good_patches)))
+        #you have all the patches that yielded some lines, superimpose on the original
+        for good_patch in good_patches:
+            print(str(good_patch))
 
     #
+    #Look for a line using RANSAC within each patch region
     #
-    #
-
-    def find_line_using_ransac(self,np_patchregion:np.ndarray):
-        lst_all_points=Util.create_points_from_numpyimage(np_patchregion)
-        count_of_points_in_patch=len(lst_all_points)
+    def find_line_using_ransac(self,points_in_patch:List[Point],np_patchregion:np.ndarray):
+        
+        count_of_points_in_patch=len(points_in_patch)
         
 
         #create thresholds for RANSAC
@@ -53,8 +62,19 @@ class PatchRansacHelper(object):
         helper.min_points_for_model=2
         helper.threshold_error=ransac_threshold_distance
         helper.threshold_inlier_count=ransac_mininliers
-        helper.add_points(lst_all_points)
+        helper.add_points(points_in_patch)
         model=helper.run()
         return model 
         pass
 
+#Represents a dto class which holds the original PatchInfo,points in this patch and the RANSAC line
+class _PatchAnalysis(object):
+    def __init__(self,patchinfo:PatchInfo,points_in_patch:List[Point],line:LineModel):
+        self.patchinfo=patchinfo
+        self.points=points_in_patch
+        self.ransacline=line
+        pass
+
+    def __str__(self):
+        display= ("Line=%s Points in line=%d  Total points in patch=%d   PatchInfo=%s") % (self.ransacline,len(self.ransacline.points), len(self.points),self.patchinfo)
+        return display
