@@ -179,5 +179,16 @@ class Test_LineModel(unittest.TestCase):
             new_y=new_point.Y
             expected_y=slope*new_x + yintercept
             self.assertAlmostEqual(new_y,expected_y)
+
+    def test_add_points_to_line(self):
+        model=LineModel.create_line_from_2points(0,0,100,100)
+        test_point1=Point(1,0)
+        test_point2=Point(2,0)
+        model.points.append(test_point1)
+        model.points.append(test_point2)
+        self.assertTrue(test_point1 in model.points)
+        self.assertTrue(test_point2 in model.points)
+        self.assertTrue(len(model.points) == 2)
+
 if __name__ == '__main__':
     unittest.main()

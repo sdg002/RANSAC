@@ -10,11 +10,16 @@ class LineModel:
         self.A=a
         self.B=b
         self.C=c
+        self.__points:List[Point]=list() #Optional the points that were used to make this line
         pass
     def __str__(self):
         display= ("A=%f B=%f C=%f") % (self.A,self.B,self.C)
 
         return display
+
+    @property
+    def points(self)->List[Point]:
+        return self.__points
 
     #
     #Compute distance of the point from the model line

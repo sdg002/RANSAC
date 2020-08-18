@@ -73,6 +73,7 @@ class RansacLineHelper(object):
                 best_model=better_model
                 best_error=average_distance
                 count_of_better_models+=1
+                best_model.points.extend(lst_new)
             else:
                 print("    Skipping better model. This Error=%f, Best error=%f,    Count of models=%d" % (average_distance,best_error,count_of_better_models))
 
@@ -115,7 +116,7 @@ class RansacLineHelper(object):
     #Use the least squares best fit
     #https://www.varsitytutors.com/hotmath/hotmath_help/topics/line-of-best-fit
     #
-    def create_model(self,points:list):
+    def create_model(self,points:list)->LineModel:
 
         mean_x=0
         mean_y=0

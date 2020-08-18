@@ -145,7 +145,10 @@ class Test_test_1(unittest.TestCase):
         self.assertTrue ( x_intercept < 50,"X intercept above threshold")
         self.assertTrue ( y_intercept > 30,"Y intercept above threshold")
         self.assertTrue ( y_intercept < 45,"Y intercept below threshold")
-
+        self.assertTrue(len(result_model.points),5)
+        for pt in result_model.points:
+            distance_from_line=result_model.compute_distance(pt)
+            self.assertTrue(distance_from_line <= helper1.threshold_error)
 
 if __name__ == '__main__':
     unittest.main()
