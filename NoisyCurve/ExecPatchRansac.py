@@ -11,35 +11,14 @@ from skimage.transform import rescale, resize, downscale_local_mean
 import os
 
 
-def run(filename):
+def run(inputfilename):
     folder_script=os.path.dirname(__file__)
-    file_noisy_circle=os.path.join(folder_script,"./in/",filename)
+    file_noisy_circle=os.path.join(folder_script,"./in/",inputfilename)
     np_image=skimage.io.imread(file_noisy_circle,as_gray=True)
 
-    #####
-
-    #folder_script=os.path.dirname(__file__)
-    #folder_results=os.path.join(folder_script,"./out/")
-
-    #width=np_image.shape[1]
-    #height=np_image.shape[0]
-
-    #np_image_top_left=np_image[0:int(height/2),0:int(width/2)]
-    #file_result_top_left=os.path.join(folder_script,"./out/","top_left.png")
-    #skimage.io.imsave(file_result_top_left,np_image_top_left)
-
-    #np_image_top_right=np_image[0:int(height/2),int(width/2):width]
-    #file_result_top_right=os.path.join(folder_script,"./out/","top_right.png")
-    #skimage.io.imsave(file_result_top_right,np_image_top_right)
-
-
-    #####
-    #image_rescaled = rescale(np_image, 0.25, anti_aliasing=False)
-
     
-    #YOU WERE HERE, SAVE THE IMAGE AND SEE THE RESULTS
-    #BUT THIS IS NTO WHAT YOU WANT TO DO YOU WANT TO STRIDE ACROSS
     patcher=PatchRansacHelper()
+    patcher.OutputImageFile=create_new_absolute_filename(inputfilename)
     patcher.run(np_image)
     pass
 
@@ -47,6 +26,14 @@ def run(filename):
 def stride_across(image):
     pass
 
+def create_new_absolute_filename(inputfile):
+    prefix=os.path.splitext(inputfile)[0]
+    folder_script=os.path.dirname(__file__)
+    folder_results=os.path.join(folder_script,"./out/")
+    count_of_files=len(os.listdir(folder_results))
+    new_filename=("%s.%d.results.png" % (prefix,count_of_files))
+    file_result=os.path.join(folder_script,"./out/",new_filename)
+    return file_result
 
 run("Sine-W=500.H=200.MAXD=20.SP=0.95.0.png")
 

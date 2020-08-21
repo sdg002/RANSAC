@@ -73,10 +73,13 @@ class RansacLineHelper(object):
                 best_model=better_model
                 best_error=average_distance
                 count_of_better_models+=1
-                best_model.points.extend(lst_new)
             else:
                 print("    Skipping better model. This Error=%f, Best error=%f,    Count of models=%d" % (average_distance,best_error,count_of_better_models))
-
+        if (best_model == None):
+            return None
+        inliers_best_model=self.get_inliers_from_model(best_model,[])
+        best_model.points.clear()
+        best_model.points.extend(inliers_best_model)
         return best_model
         pass
 

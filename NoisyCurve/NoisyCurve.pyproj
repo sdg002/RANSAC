@@ -25,7 +25,7 @@
     <Compile Include="ExecPatchRansac.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GenerateNoisyCurve.py" />
+    <Compile Include="ExecGenericCurveGenerator.py" />
     <Compile Include="GenericCurveGenerator.py">
       <SubType>Code</SubType>
     </Compile>

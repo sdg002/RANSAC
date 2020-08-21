@@ -4,8 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>fda0bf78-58d2-487b-837f-73b9270ad9ae</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>
-    </StartupFile>
+    <StartupFile>ransac\test_RansacLineHelper.py</StartupFile>
     <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -58,6 +57,7 @@
     <Content Include="patchextractor\data\SimplePatchTest_W=4_H=4.png" />
     <Content Include="patchextractor\data\SimplePatchTest_W=5_H=5.png" />
     <Content Include="patchextractor\data\SimplePatchTest_W=7_H=10.png" />
+    <Content Include="ransac\data\Line_50x50_6pts.png" />
     <Content Include="ransac\data\NoisyCircle-HandDrawn-001.png" />
     <Content Include="ransac\data\NoisyCircle_99_50.png" />
     <Content Include="ransac\data\NoisyCircle_x_-10_y_-14.png" />
