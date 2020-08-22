@@ -17,6 +17,10 @@ class LineModel:
         display= ("A=%f B=%f C=%f") % (self.A,self.B,self.C)
         return display
 
+    def __repr__(self):
+        display= ("A=%f B=%f C=%f") % (self.A,self.B,self.C)
+        return display
+
     @property
     def points(self)->List[Point]:
         return self.__points
@@ -165,3 +169,12 @@ class LineModel:
             else:
                 pass
         return pts_result
+
+    #
+    #Determines the projection of the specified points on the given line
+    #Returns a list of projected Point objects
+    #
+    @classmethod
+    def compute_projection_of_points(cls,line,points:List[Point]):
+        return points #temp implementation
+        pass
