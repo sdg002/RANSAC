@@ -190,5 +190,24 @@ class Test_LineModel(unittest.TestCase):
         self.assertTrue(test_point2 in model.points)
         self.assertTrue(len(model.points) == 2)
 
+    def test_projection_of_points_on_line_with_slope_45degrees_through_origin(self):
+        line=LineModel(-1,1,0)
+        test_point1=Point(4,0)
+        expected_projected1=Point(2,2)
+
+        test_point2=Point(0,4)
+        expected_projected2=Point(2,2)
+
+        lst_inputs=[test_point1,test_point2]        
+        lst_expected=[expected_projected1,expected_projected2]
+
+        lst_actual=LineModel.compute_projection_of_points(line,lst_inputs)
+        
+        for index in range(0,len(lst_inputs)):
+            actual=lst_actual[index]
+            expected=lst_expected[index]
+            self.assertAlmostEqual(actual.X,expected.X,0.1)
+            self.assertAlmostEqual(actual.Y,expected.Y,0.1)
+
 if __name__ == '__main__':
     unittest.main()

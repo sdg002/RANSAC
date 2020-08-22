@@ -1,6 +1,8 @@
 from .Point import Point
 import math
 from typing import List, Set, Dict, Tuple, Optional
+import numpy as np
+from scipy import linalg
 
 
 class LineModel:
@@ -176,5 +178,17 @@ class LineModel:
     #
     @classmethod
     def compute_projection_of_points(cls,line,points:List[Point]):
-        return points #temp implementation
+        lst_projections=list()
+        for pt_input in points:
+            #determine equation in ax+by+c=0
+            a_perp=line.B
+            b_perp=-line.A
+            c_perp=-a_perp*pt_input.X - b_perp*pt_input.Y
+            line_perp=LineModel(a_perp,b_perp,c_perp)
+            #The intersection of line and line_perp is the projection of pt_input on the given line
+            arr_lhs=np.array([[line.A,line.B],[line_perp.A,line_perp.B]])
+            arr_rhs=np.array([-line.C,-line_perp.C])
+            intersection=np.linalg.solve(arr_lhs,arr_rhs)
+            lst_projections.append(Point(intersection[0],intersection[1]))
+        return lst_projections
         pass
