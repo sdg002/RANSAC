@@ -33,6 +33,10 @@ class PatchInfo(object):
         display= ("topleft=(%d,%d)  bottomright=(%d,%d") % (self.topleft.X,self.topleft.Y,self.bottomright.X,self.bottomright.Y)
         return display
 
+    def __repr__(self):
+        display= ("topleft=(%d,%d)  bottomright=(%d,%d") % (self.topleft.X,self.topleft.Y,self.bottomright.X,self.bottomright.Y)
+        return display
+
 #
 #Holds all the PatchInfo objects extracted from a single image
 #

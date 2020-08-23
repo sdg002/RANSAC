@@ -6,14 +6,16 @@ from RANSAC.Common import Util
 from RANSAC.Common import Point
 from RANSAC.Common import PatchInfo,PatchResults
 from .ImagePatchExtractor import ImagePatchExtractor
+import skimage
 
 class PatchRansacHelper(object):
     """description of class"""
     def __init__(self):
         self._image:np.ndarray=None
-        self._cropdimension=10 #the size of the patch square
+        self._cropdimension=50 #the size of the patch square
         self._dict_patchregions:Dict=dict()
-        self._stride=5 #the number of pixels to advance the patch window
+        self._stride=25 #the number of pixels to advance the patch window
+        self.OutputImageFile=None #The absolute path to the file where the overlaid image will be saved
         pass
     
     @property
@@ -22,7 +24,7 @@ class PatchRansacHelper(object):
 
     def run(self,image):
         self._image=image
-        xtractor=ImagePatchExtractor(self.image,self._cropdimension,self._stride);
+        xtractor=ImagePatchExtractor(self.image,self._cropdimension,self._stride)
         patch_results:PatchResults=xtractor.extract_patches();
         patchcount_x=patch_results.patch_indices.shape[1]
         patchcount_y=patch_results.patch_indices.shape[0]
@@ -44,6 +46,29 @@ class PatchRansacHelper(object):
         #you have all the patches that yielded some lines, superimpose on the original
         for good_patch in good_patches:
             print(str(good_patch))
+        self.__superimpose(good_patches)
+
+    def __superimpose(self,patches):
+        lst_allpoints_from_all_patches=list()
+        image_height=self.image.shape[0]
+        for patch in patches:
+            try:
+                ransac_points:List[Point]=patch.ransacline.points
+                plottable_points=Util.generate_plottable_points_from_projection_of_points(patch.ransacline,patch.ransacline.points)
+                for plottable_point in plottable_points:
+                    new_x=patch.patchinfo.topleft.X + plottable_point.X
+                    #new_y=patch.patchinfo.topleft.Y + plottable_point.Y
+                    #new_y=(image_height-patch.patchinfo.topleft.Y) + plottable_point.Y
+                    new_y=(image_height-patch.patchinfo.topleft.Y-self._cropdimension) + plottable_point.Y
+                    translated_point=Point(new_x,new_y)
+                    lst_allpoints_from_all_patches.append(translated_point)
+            except Exception  as e:
+                print("Exception while superimposing %s" % (patch.patchinfo))
+        pass
+        np_superimposed_patches=Util.superimpose_points_on_image(self._image,lst_allpoints_from_all_patches,100,255,100)
+        skimage.io.imsave(self.OutputImageFile,np_superimposed_patches)
+        pass
+
 
     #
     #Look for a line using RANSAC within each patch region
@@ -54,11 +79,11 @@ class PatchRansacHelper(object):
         
 
         #create thresholds for RANSAC
-        ransac_threshold_distance=(self._cropdimension)*1/5 #should be adaptive
-        ransac_mininliers=0.1 * count_of_points_in_patch #automatically try out various inliers
+        ransac_threshold_distance=(self._cropdimension)*1/10 #should be adaptive
+        ransac_mininliers=0.5 * count_of_points_in_patch #automatically try out various inliers
 
         helper=RansacLineHelper()
-        helper.max_iterations=(count_of_points_in_patch)*(count_of_points_in_patch-1)/2
+        helper.max_iterations=(count_of_points_in_patch)*(count_of_points_in_patch-1)/2 * 5 #mpy by 5
         helper.min_points_for_model=2
         helper.threshold_error=ransac_threshold_distance
         helper.threshold_inlier_count=ransac_mininliers
@@ -72,7 +97,7 @@ class _PatchAnalysis(object):
     def __init__(self,patchinfo:PatchInfo,points_in_patch:List[Point],line:LineModel):
         self.patchinfo=patchinfo
         self.points=points_in_patch
-        self.ransacline=line
+        self.ransacline:LineModel=line
         pass
 
     def __str__(self):

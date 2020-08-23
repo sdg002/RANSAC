@@ -113,9 +113,12 @@ def generate_plottable_points_from_projection_of_points(line:LineModel,points:Li
 #Given a list of colinear points, this function will return the 2 points which are farthest apart
 #
 def get_terminal_points_from_coliner_points(points:List[Point]):
-    if (len(points)<=2):
+    if (len(points)<2):
         raise Exception("Need 2 or more colinear points to determine sequence")
     
+    if (len(points)==2):
+        return (points[0],points[1])
+
     temp_results:List[_pairofpoints]=[]
     for i in range(0,len(points)):
         point_outer=points[i]
