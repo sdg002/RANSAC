@@ -15,7 +15,9 @@ class Point:
     def __repr__(self):
         s="ID=%d ('%d','%d')" % (self.ID,self.X,self.Y)
         return s
-    
+
+    def __hash__(self):
+        return self.ID
     #
     #Computes the euclidean distance between the 2 points
     #
