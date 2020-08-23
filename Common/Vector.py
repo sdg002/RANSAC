@@ -50,6 +50,10 @@ class Vector(object):
         v=Vector(point2.X-point1.X,point2.Y-point1.Y)
         return v
 
+    @classmethod
+    def dot_product(cls,vector1 , vector2):
+        dot=(vector1.X * vector2.X)  + (vector1.Y*vector2.Y)
+        return dot
 
     
 
