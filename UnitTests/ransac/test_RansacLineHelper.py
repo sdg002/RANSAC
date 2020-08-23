@@ -184,7 +184,10 @@ class Test_test_1(unittest.TestCase):
         x_upper=np_image.shape[1]-1
         y_lower=0
         y_upper=np_image.shape[0]-1
-        new_points=LineModel.generate_points_from_line(result_model,x_lower,y_lower,x_upper,y_upper)
+        #
+        #Superimpose a line over the inliers only
+        #
+        new_points=Util.generate_plottable_points_from_projection_of_points(result_model,result_model.points)
         np_superimposed=Util.superimpose_points_on_image(np_image,new_points,100,255,100)
         skimage.io.imsave(file_result,np_superimposed)
         pass

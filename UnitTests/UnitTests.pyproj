@@ -30,6 +30,7 @@
     <Compile Include="common\test_LineModel.py" />
     <Compile Include="common\test_Point.py" />
     <Compile Include="common\test_Util.py" />
+    <Compile Include="common\test_Vector.py" />
     <Compile Include="patchextractor\test_PatchExtractor.py">
       <SubType>Code</SubType>
     </Compile>
