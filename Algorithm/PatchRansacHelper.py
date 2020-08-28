@@ -10,19 +10,37 @@ import skimage
 
 class PatchRansacHelper(object):
     """description of class"""
-    def __init__(self):
+    def __init__(self,patchdimension,patchstride):
         self._image:np.ndarray=None
-        self._cropdimension=50 #the size of the patch square
-        self._dict_patchregions:Dict=dict()
-        self._stride=25 #the number of pixels to advance the patch window
+
+        if (patchdimension<=0):
+            raise Exception("The dimension of the patch should be a positive number")
+        else:
+            self._cropdimension=patchdimension #the size of the patch square
+
+        if (patchstride<=0):
+            raise Exception("The stride should be a positive number")
+        else:
+            self._stride=patchstride #the number of pixels to advance the patch window
+    
+        self._dict_patchregions:Dict=dict()        
         self.OutputImageFile=None #The absolute path to the file where the overlaid image will be saved
         pass
     
+    @property
+    def patchdimension(self):
+        return self._cropdimension
+
+    @property
+    def patchstride(self):
+        return self._stride
+
     @property
     def image(self):
         return self._image
 
     def run(self,image):
+        print(f"Going to run RANSAC on a patch square with dimension:{self.patchdimension}  and stride:{self.patchstride}")
         self._image=image
         xtractor=ImagePatchExtractor(self.image,self._cropdimension,self._stride)
         patch_results:PatchResults=xtractor.extract_patches();
