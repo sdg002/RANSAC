@@ -13,8 +13,6 @@ from RANSAC.Common import Util
 
 def run_ransac(filename):
     folder_script=os.path.dirname(__file__)
-    #Change the input file in the following line
-    filename="NoisyLine-Gaussian-sp-0.80.103.png"
 
 
     #Images which did not generate good results:
@@ -61,8 +59,9 @@ def run_ransac(filename):
     #
     #Generate an output image with the model line 
     #
+    filename_noextension=no_extension=os.path.splitext(filename)[0]
     now=datetime.datetime.now()
-    filename_result=("result-%s.png") % now.strftime("%Y-%m-%d-%H-%M-%S")
+    filename_result=("%s-%s.result.png") % (filename_noextension,now.strftime("%Y-%m-%d-%H-%M-%S"))
     file_result=os.path.join(folder_script,"./out/",filename_result)
     #Load input image into array
     np_image_result=skimage.io.imread(file_noisy_line,as_gray=True)
@@ -76,7 +75,9 @@ pass
 
 
 
-#run_ransac("NoisyLine-Gaussian-sp-0.80.103.png")
+run_ransac("NoisyLine-Gaussian-sp-0.80.103.png")
+run_ransac("NoisyLine-Gaussian-sp-0.80.111.png")
 run_ransac("NoisyLine-Gaussian-sp-0.80.118.png")
 run_ransac("NoisyLine-Gaussian-sp-0.80.119.png")
+run_ransac("NoisyLine-Gaussian-sp-0.80.121.png")
 run_ransac("NoisyLine-Gaussian-sp-0.80.104.png")

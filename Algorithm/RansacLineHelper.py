@@ -82,9 +82,9 @@ class RansacLineHelper(object):
         for model in models:
             better_model=self.create_model(model.points)
             inliers_better_model=self.get_inliers_from_model(better_model,[])
-            average_distance=self.compute_average_distance(better_model,inliers_better_model)
+            model_error=self.compute_mean_squared_distance(better_model,inliers_better_model)
             better_model.points.extend(inliers_better_model)
-            expanded_model=ExpandedModel(better_model,average_distance)
+            expanded_model=ExpandedModel(better_model,model_error)
             lst_results.append(expanded_model)
         return lst_results
 
@@ -92,10 +92,22 @@ class RansacLineHelper(object):
         model_with_maxinliers=max(models, key=lambda x: x.count_of_inliers)
         max_inlier_count=model_with_maxinliers.count_of_inliers
         lst_all_results_with_highest_inlier_count=list(filter(lambda x: x.count_of_inliers==max_inlier_count, models))
-        lst_sorted_results_with_highest_inlier_count=sorted(lst_all_results_with_highest_inlier_count,key=lambda  x: x.meansquarederror)
+        lst_sorted_results_with_highest_inlier_count=sorted(lst_all_results_with_highest_inlier_count,key=lambda  x: x.error)
         final_model=lst_sorted_results_with_highest_inlier_count[0]
         return final_model
 
+    #
+    #The mean of the squared distances. This will penalize points which are farther away
+    #
+    def compute_mean_squared_distance(self,model:LineModel,points:list) -> float:
+        lst_distances=list()
+        for p in points:
+            distance=model.compute_distance(p)
+            lst_distances.append(distance**2)
+        sum_of_squared_distances=sum(lst_distances)
+        sqroot=sum_of_squared_distances**0.5
+        mean=sqroot/len(lst_distances)
+        return mean
 
     def compute_average_distance(self,model:LineModel,points:list) -> float:
         lst_distances=list()
@@ -183,9 +195,9 @@ class RansacLineHelper(object):
 class ExpandedModel(object): 
     def __init__(self,line:LineModel,error:float):
         self.linemodel=line
-        self.meansquarederror=error
+        self.error=error
         self.count_of_inliers=len(self.linemodel.points)
             
         pass
     def __repr__(self):
-        return f"line={self.linemodel}  error={self.meansquarederror}   inlier_count={self.count_of_inliers}"
+        return f"line={self.linemodel}  error={self.error}   inlier_count={self.count_of_inliers}"
