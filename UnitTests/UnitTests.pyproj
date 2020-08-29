@@ -58,6 +58,7 @@
     <Content Include="patchextractor\data\SimplePatchTest_W=4_H=4.png" />
     <Content Include="patchextractor\data\SimplePatchTest_W=5_H=5.png" />
     <Content Include="patchextractor\data\SimplePatchTest_W=7_H=10.png" />
+    <Content Include="ransac\data\Line_100x100.png" />
     <Content Include="ransac\data\Line_50x50_6pts.png" />
     <Content Include="ransac\data\NoisyCircle-HandDrawn-001.png" />
     <Content Include="ransac\data\NoisyCircle_99_50.png" />
@@ -65,7 +66,7 @@
     <Content Include="ransac\data\NoisyCircle_x_-10_y_-14_r_48_d_0.400000_sp_0.8.186.png" />
     <Content Include="ransac\data\NoisyCircle_x_116_y_-15_r_133_d_0.500000_sp_0.5.177.png" />
     <Content Include="ransac\data\NoisyCircle_x_6_y_-30_r_118.162.png" />
-    <Content Include="ransac\data\Ransac_UnitTest.png" />
+    <Content Include="ransac\data\Line_50x30.png" />
     <Content Include="ransac\data\NoisyCircle_99_50.result.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

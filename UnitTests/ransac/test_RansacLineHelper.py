@@ -105,7 +105,7 @@ class Test_test_1(unittest.TestCase):
         #get a list of points
         #
         folder_script=os.path.dirname(__file__)
-        filename_input="Ransac_UnitTest.png"
+        filename_input="Line_50x30.png"
         file_noisy_line=os.path.join(folder_script,"./data/",filename_input)
         np_image=skimage.io.imread(file_noisy_line,as_gray=True)
         lst_points=Util.create_points_from_numpyimage(np_image)
@@ -127,7 +127,7 @@ class Test_test_1(unittest.TestCase):
         #
         folder_results=os.path.join(folder_script,"../out/")
         count_of_files=len(os.listdir(folder_results))
-        filename_results=("Ransac_UnitTest.Run.%d.png" % (count_of_files) )
+        filename_results=("Line_50x30.%d.png" % (count_of_files) )
         file_result=os.path.join(folder_results,filename_results)
         x_lower=0
         x_upper=np_image.shape[1]-1
@@ -207,6 +207,64 @@ class Test_test_1(unittest.TestCase):
         for inlier_pt in result_model.points:
             distance=result_model.compute_distance(inlier_pt)
             self.assertTrue(distance < helper1.threshold_error,"Distance of inlier from RANSAC line must be less than threshold")
+
+    def test_run_with_100x100_image(self):
+        #
+        #get a list of points
+        #
+        folder_script=os.path.dirname(__file__)
+        filename_input="Line_100x100.png"
+        file_noisy_line=os.path.join(folder_script,"./data/",filename_input)
+        np_image=skimage.io.imread(file_noisy_line,as_gray=True)
+        lst_points=Util.create_points_from_numpyimage(np_image)
+        #
+        #initialize RansalHelper
+        #
+        helper1=RansacLineHelper()
+        helper1.add_points(lst_points)
+        helper1.max_iterations=20
+        helper1.min_points_for_model=2
+        helper1.threshold_error=10
+        helper1.threshold_inlier_count=3
+        result_model=helper1.run()
+        print("RANSAC-complete")    
+        print("Found model %s , polar=%s" % (result_model,result_model.display_polar()))
+        #
+        #Superimpose the new line over the image
+        #
+        folder_results=os.path.join(folder_script,"../out/")
+        count_of_files=len(os.listdir(folder_results))
+        filename_results=("Ransac_UnitTest.Run.%d.png" % (count_of_files) )
+        file_result=os.path.join(folder_results,filename_results)
+        x_lower=0
+        x_upper=np_image.shape[1]-1
+        y_lower=0
+        y_upper=np_image.shape[0]-1
+        #
+        #Superimpose a line over the inliers only
+        #
+        new_points=Util.generate_plottable_points_from_projection_of_points(result_model,result_model.points)
+        np_superimposed=Util.superimpose_points_on_image(np_image,new_points,100,255,100)
+        skimage.io.imsave(file_result,np_superimposed)
+        #11 inlier points in total which give us the good model
+        self.assertEqual(len(result_model.points),11)
+        #
+        #No of detected inliers must be more than or equal to threshold
+        #
+        self.assertTrue(len(result_model.points) >= helper1.threshold_inlier_count,"Number of inliers should be >= threshold")
+        #
+        #There should be no-duplicates in the RANSAC inlier points
+        #
+        set_ids=set(map(lambda x: x.ID, result_model.points))
+        list_ids=list(map(lambda x: x.ID, result_model.points))
+        self.assertEqual(len(set_ids),len(list_ids),"Inliers should be unique")
+        #
+        #All the RANSAC linlier points must be within the threshold distance from the RANSAC line
+        #
+        for inlier_pt in result_model.points:
+            distance=result_model.compute_distance(inlier_pt)
+            self.assertTrue(distance < helper1.threshold_error,"Distance of inlier from RANSAC line must be less than threshold")
+
 
 if __name__ == '__main__':
     unittest.main()
