@@ -50,6 +50,9 @@ class RansacLineHelper(object):
             return None
         
         temporary_models_high_inliers=list(filter(lambda  m: len(m.points) >= self.threshold_inlier_count,temporary_models))
+        if (len(temporary_models_high_inliers) == 0):
+            return None
+
         expanded_models=self.__create_expanded_models(temporary_models_high_inliers)
         best_model=self.__get_model_with_maxinliers_and_lowest_error(expanded_models)
         return best_model.linemodel
