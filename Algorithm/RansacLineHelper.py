@@ -54,6 +54,8 @@ class RansacLineHelper(object):
             return None
 
         expanded_models=self.__create_expanded_models(temporary_models_high_inliers)
+        if (len(expanded_models) == 0):
+            return None
         best_model=self.__get_model_with_maxinliers_and_lowest_error(expanded_models)
         return best_model.linemodel
 
@@ -85,6 +87,8 @@ class RansacLineHelper(object):
         for model in models:
             better_model=self.create_model(model.points)
             inliers_better_model=self.get_inliers_from_model(better_model,[])
+            if (len(inliers_better_model) == 0):
+                continue
             model_error=self.compute_mean_squared_distance(better_model,inliers_better_model)
             better_model.points.extend(inliers_better_model)
             expanded_model=ExpandedModel(better_model,model_error)

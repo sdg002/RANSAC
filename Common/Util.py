@@ -155,11 +155,11 @@ def generate_plottable_points_between_twopoints(point1:[Point], point2:[Point]):
             lst_results.append(next_point)
             last_point=next_point
             continue
-        elif (distance < min_distance_between2points):
+        elif (distance <= min_distance_between2points):
             #too close
             delta=delta*1.5
             continue
-        elif (distance > max_distance_between2points):
+        elif (distance >= max_distance_between2points):
             #too far
             delta=delta*.5
             continue

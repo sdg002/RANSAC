@@ -234,7 +234,7 @@ class Test_test_1(unittest.TestCase):
         #
         folder_results=os.path.join(folder_script,"../out/")
         count_of_files=len(os.listdir(folder_results))
-        filename_results=("Ransac_UnitTest.Run.%d.png" % (count_of_files) )
+        filename_results=("%s.Run.%d.png" % (filename_input,count_of_files) )
         file_result=os.path.join(folder_results,filename_results)
         x_lower=0
         x_upper=np_image.shape[1]-1

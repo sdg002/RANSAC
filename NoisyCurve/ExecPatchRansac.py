@@ -36,5 +36,11 @@ def create_new_absolute_filename(inputfile,patchdimension,patchstride):
     file_result=os.path.join(folder_script,"./out/",new_filename)
     return file_result
 
-run("Sine-W=500.H=200.MAXD=20.SP=0.95.0.png",patchdimension=50,patchstride=25)
+#Sine
+#run("Sine-W=500.H=200.MAXD=20.SP=0.95.0.png",patchdimension=50,patchstride=25)
+run("Sine-W=500.H=200.MAXD=20.SP=0.95.0.png",patchdimension=25,patchstride=12)
+#Cubic
+#run("Cubic-W=500.H=200.MAXD=15.SP=0.90.6.png",patchdimension=25,patchstride=12)
+#run("Cubic-W=500.H=200.MAXD=15.SP=0.90.6.png",patchdimension=50,patchstride=25)
+#run("Cubic-W=500.H=200.MAXD=15.SP=0.90.6.png",patchdimension=100,patchstride=50)
 
