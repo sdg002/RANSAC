@@ -1,6 +1,8 @@
 from .Point import Point
 import math
 from typing import List, Set, Dict, Tuple, Optional
+import numpy as np
+from scipy import linalg
 
 
 class LineModel:
@@ -10,11 +12,20 @@ class LineModel:
         self.A=a
         self.B=b
         self.C=c
+        self.__points:List[Point]=list() #Optional the points that were used to make this line
         pass
+
     def __str__(self):
         display= ("A=%f B=%f C=%f") % (self.A,self.B,self.C)
-
         return display
+
+    def __repr__(self):
+        display= ("A=%f B=%f C=%f") % (self.A,self.B,self.C)
+        return display
+
+    @property
+    def points(self)->List[Point]:
+        return self.__points
 
     #
     #Compute distance of the point from the model line
@@ -160,3 +171,24 @@ class LineModel:
             else:
                 pass
         return pts_result
+
+    #
+    #Determines the projection of the specified points on the given line
+    #Returns a list of projected Point objects
+    #
+    @classmethod
+    def compute_projection_of_points(cls,line,points:List[Point]):
+        lst_projections=list()
+        for pt_input in points:
+            #determine equation in ax+by+c=0
+            a_perp=line.B
+            b_perp=-line.A
+            c_perp=-a_perp*pt_input.X - b_perp*pt_input.Y
+            line_perp=LineModel(a_perp,b_perp,c_perp)
+            #The intersection of line and line_perp is the projection of pt_input on the given line
+            arr_lhs=np.array([[line.A,line.B],[line_perp.A,line_perp.B]])
+            arr_rhs=np.array([-line.C,-line_perp.C])
+            intersection=np.linalg.solve(arr_lhs,arr_rhs)
+            lst_projections.append(Point(intersection[0],intersection[1]))
+        return lst_projections
+        pass

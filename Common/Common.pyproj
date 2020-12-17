@@ -30,8 +30,14 @@
     </Compile>
     <Compile Include="GenerateGaussianNoiseAtPoint.py" />
     <Compile Include="LineModel.py" />
+    <Compile Include="PatchInfo.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Point.py" />
     <Compile Include="Util.py" />
+    <Compile Include="Vector.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="__init__.py">
       <SubType>Code</SubType>
     </Compile>

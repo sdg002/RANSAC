@@ -61,9 +61,9 @@ class Test_test_GradientDescentCircleFitting(unittest.TestCase):
         helper=GradientDescentCircleFitting(None,expected_list)
         result:CircleModel =helper.FindBestFittingCircle()
         delta=0.01
-        self.assertAlmostEquals(result.R, 1.0, delta=delta);
-        self.assertAlmostEquals(result.X, 0.0, delta=delta);
-        self.assertAlmostEquals(result.Y, 0.0, delta=delta);
+        self.assertAlmostEquals(result.R, 1.0, delta=delta)
+        self.assertAlmostEquals(result.X, 0.0, delta=delta)
+        self.assertAlmostEquals(result.Y, 0.0, delta=delta)
         
     def test_5points_around_origin_unit_radius(self):
         p1=Point(+1,0)

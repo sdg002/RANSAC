@@ -2,15 +2,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>6c3f7b71-d6d9-4299-ae50-1563e0bc8824</ProjectGuid>
+    <ProjectGuid>a38662b5-88f4-4734-adff-6708c02c76e0</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>
-    </StartupFile>
-    <SearchPath>..\..\;..\</SearchPath>
+    <StartupFile>ExecGenericCurveGenerator.py</StartupFile>
+    <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>Algorithm</Name>
-    <RootNamespace>Algorithm</RootNamespace>
+    <Name>NoisyCurve</Name>
+    <RootNamespace>NoisyCurve</RootNamespace>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
@@ -23,21 +22,27 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BullockCircleFitting.py">
+    <Compile Include="ExecPatchRansac.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="GradientDescentCircleFitting.py" />
-    <Compile Include="ImagePatchExtractor.py">
+    <Compile Include="ExecGenericCurveGenerator.py" />
+    <Compile Include="GenericCurveGenerator.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="PatchRansacHelper.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="RansacCircleHelper.py" />
-    <Compile Include="RansacLineHelper.py" />
-    <Compile Include="__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="in\" />
+    <Folder Include="out\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="in\Cubic-W=500.H=200.MAXD=15.SP=0.90.6.png" />
+    <Content Include="in\Cubic-W=500.H=200.MAXD=15.SP=0.90.7.png" />
+    <Content Include="in\Sine-W=500.H=200.MAXD=20.SP=0.95.0.png" />
+    <Content Include="in\SineWave-W=200.H=200.MAXD=10.SP=0.90.12.png" />
+    <Content Include="in\SineWave-W=200.H=200.MAXD=10.SP=0.95.6.png" />
+    <Content Include="in\SineWave-W=500.H=200.MAXD=10.SP=0.90.13.png" />
+    <Content Include="in\SineWave-W=500.H=200.MAXD=10.SP=0.95.14.png" />
+    <Content Include="Readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

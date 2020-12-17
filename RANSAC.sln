@@ -17,6 +17,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Algorithm", "Algorithm\Algo
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "RANSAC", "RANSAC\RANSAC.pyproj", "{388ABDA0-050E-4126-B664-F46C318C1ECC}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "NoisyCurve", "NoisyCurve\NoisyCurve.pyproj", "{A38662B5-88F4-4734-ADFF-6708C02C76E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,8 @@ Global
 		{6C3F7B71-D6D9-4299-AE50-1563E0BC8824}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{388ABDA0-050E-4126-B664-F46C318C1ECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{388ABDA0-050E-4126-B664-F46C318C1ECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A38662B5-88F4-4734-ADFF-6708C02C76E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A38662B5-88F4-4734-ADFF-6708C02C76E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

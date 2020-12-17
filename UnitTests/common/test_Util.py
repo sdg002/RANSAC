@@ -4,6 +4,7 @@ import numpy as np
 import os
 import skimage
 from RANSAC.Common import Point
+from RANSAC.Common import Vector
 
 
 class Test_test_Util(unittest.TestCase):
@@ -66,6 +67,35 @@ class Test_test_Util(unittest.TestCase):
         pass
         self.assertGreater(len(new_points) , 1)
         #TODO We should verify that atleast some of the original points were re-drawn
+
+    def test_get_extreme_colinear_points(self):
+        pt1=Point(1,1)
+        pt2=Point(2,2)
+       
+        pt3=Point(3,3)
+        pt4=Point(4,4)
+        pt5=Point(5,5)
+        pt6=Point(6,6)
+
+        lst_randomsequence=[pt6,pt1,pt5,pt2,pt4,pt3]
+        (point1,point2)=Util.get_terminal_points_from_coliner_points(lst_randomsequence)
+        results=[point1,point2]
+        self.assertTrue(pt1 in results)
+        self.assertTrue(pt6 in results)
+        pass
+
+    def test_generate_plottable_linear_points_between_twopoints(self):
+        pt_start=Point(1,1)
+        pt_end=Point(20,20)
+        unit=Vector.create_vector_from_2points(pt_start,pt_end).UnitVector
+        new_points=Util.generate_plottable_points_between_twopoints(pt_start,pt_end)
+        distance_start_end=Point.euclidean_distance(pt_start,pt_end)
+        for new_point in new_points:
+            distance_from_start=Point.euclidean_distance(pt_start,new_point)
+            self.assertTrue(distance_from_start < distance_start_end)
+            new_unit=Vector.create_vector_from_2points(pt_start,new_point).UnitVector
+            dot_product=Vector.dot_product(new_unit,unit)
+            self.assertAlmostEquals(dot_product,1.0,delta=0.1)
 
 if __name__ == '__main__':
     unittest.main()

@@ -4,8 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>fda0bf78-58d2-487b-837f-73b9270ad9ae</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>
-    </StartupFile>
+    <StartupFile>ransac\test_RansacLineHelper.py</StartupFile>
     <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -31,6 +30,10 @@
     <Compile Include="common\test_LineModel.py" />
     <Compile Include="common\test_Point.py" />
     <Compile Include="common\test_Util.py" />
+    <Compile Include="common\test_Vector.py" />
+    <Compile Include="patchextractor\test_PatchExtractor.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ransac\test_BullockCircleFitting.py">
       <SubType>Code</SubType>
     </Compile>
@@ -43,6 +46,8 @@
   <ItemGroup>
     <Folder Include="common\" />
     <Folder Include="common\data\" />
+    <Folder Include="patchextractor\" />
+    <Folder Include="patchextractor\data\" />
     <Folder Include="ransac\" />
     <Folder Include="out\" />
     <Folder Include="ransac\data\" />
@@ -50,13 +55,18 @@
   <ItemGroup>
     <Content Include="common\data\Readme.txt" />
     <Content Include="common\data\Util_unittest.png" />
+    <Content Include="patchextractor\data\SimplePatchTest_W=4_H=4.png" />
+    <Content Include="patchextractor\data\SimplePatchTest_W=5_H=5.png" />
+    <Content Include="patchextractor\data\SimplePatchTest_W=7_H=10.png" />
+    <Content Include="ransac\data\Line_100x100.png" />
+    <Content Include="ransac\data\Line_50x50_6pts.png" />
     <Content Include="ransac\data\NoisyCircle-HandDrawn-001.png" />
     <Content Include="ransac\data\NoisyCircle_99_50.png" />
     <Content Include="ransac\data\NoisyCircle_x_-10_y_-14.png" />
     <Content Include="ransac\data\NoisyCircle_x_-10_y_-14_r_48_d_0.400000_sp_0.8.186.png" />
     <Content Include="ransac\data\NoisyCircle_x_116_y_-15_r_133_d_0.500000_sp_0.5.177.png" />
     <Content Include="ransac\data\NoisyCircle_x_6_y_-30_r_118.162.png" />
-    <Content Include="ransac\data\Ransac_UnitTest.png" />
+    <Content Include="ransac\data\Line_50x30.png" />
     <Content Include="ransac\data\NoisyCircle_99_50.result.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
