@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>a38662b5-88f4-4734-adff-6708c02c76e0</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ExecPatchRansac.py</StartupFile>
+    <StartupFile>ExecGenericCurveGenerator.py</StartupFile>
     <SearchPath>..\..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
